@@ -1,6 +1,7 @@
 .navbar{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .logo{
@@ -30,28 +31,19 @@
 
 .enlaces{
     display: grid;
+    align-items: center;
     width: 23%;
-    margin-top: 1%;
+    color: white;
+    gap: 20px;
 }
 
-.enlaces a:first-child{
-    padding-right: 15px;
-}
-.iniciar-sesion{
-    margin-right: 7%;
-}
 #searchButton {
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: 0;
 }
 @media (min-width: 1025px) {
     .enlaces{
         display: flex;
-        margin-top: 2.5%;
-    }
-    #searchButton {
-        margin-top: -15%;
     }
 }
