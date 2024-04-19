@@ -47,3 +47,8 @@
         display: flex;
     }
 }
+
+.registrarse, .iniciar-sesion{
+    color: white;
+    text-decoration: none;
+}
