@@ -1,0 +1,54 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo{
+    width: 80px;
+    height: 80px;
+}
+
+.titulo {
+    display: grid;
+    margin-left: 15%;
+}
+.titulo_game{
+    color: white;
+    margin-top: -10%;
+}
+.titulo_dino{
+    color: #57CC99;
+}
+@media (min-width: 768px) {
+    .titulo {
+        display: flex;
+    }
+    .titulo_game{
+        margin-top: 0;
+    }
+}
+
+.enlaces{
+    display: grid;
+    align-items: center;
+    width: 23%;
+    color: white;
+    gap: 20px;
+}
+
+#searchButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+@media (min-width: 1025px) {
+    .enlaces{
+        display: flex;
+    }
+}
+
+.registrarse, .iniciar-sesion{
+    color: white;
+    text-decoration: none;
+}
