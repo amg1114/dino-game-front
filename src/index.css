@@ -1,51 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap");
 
 body {
-  font-family: "Teko", sans-serif;
+    font-family: "Teko", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-  font-size: 16px;
+    font-size: 20px;
 }
 
 h1 {
-  font-weight: bold;
-  font-size: 36px;
+    font-weight: bold;
+    font-size: 36px;
 }
 
 h2 {
-  font-weight: 600;
-  font-size: 32px;
+    font-weight: 600;
+    font-size: 32px;
 }
 
 h3 {
-  font-weight: 500; 
-  font-size: 24px;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 h4 {
-  font-weight: 400;
-  font-size: 20px;
+    font-weight: 400;
+    font-size: 20px;
 }
 
-p{
-  font-weight: 400;
+p {
+    font-weight: 400;
 }
 
-a{
-  font-weight: 400;
-  color: #57CC99;
+a {
+    font-weight: 400;
+    color: #57cc99;
 }
 
-.contanier{
- min-height: 120vh;
- display: flex ;
- justify-content: center;
- align-items: center;
+.contanier {
+    min-height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.buttons{
-  display: flex;
-  flex-direction: column;
+.buttons {
+    display: flex;
+    flex-direction: column;
 }
 
 .btn{
@@ -54,38 +54,35 @@ a{
   font-size: 1.5rem;
   position: relative;
   margin: 32px;
-  padding: 16px;
 }
 
 /*bnt-1*/
 
-.btn-1{
-  background: #57CC99;
-  color: #ffffff;
-  border-radius: 10px;
-  transition: transform 0,3s ease;
-
+.btn-1 {
+    background: #57cc99;
+    color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0, 3s ease;
 }
 
-.btn-1::before{
-  content: "";
-  position: absolute;
-  opacity: 0.3;
-  background:#38A3A5;
-  border-radius: inherit;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-  transition: transform 0,3s ease;
- 
+.btn-1::before {
+    content: "";
+    position: absolute;
+    opacity: 0.3;
+    background: #38a3a5;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: transform 0, 3s ease;
 }
 
-.btn-1:hover{
-  transform: translate(-3px, -3px);
+.btn-1:hover {
+    transform: translate(-3px, -3px);
 }
 
 .btn-1:hover::before {
-  transform: translate(4px, 4px);
+    transform: translate(4px, 4px);
 }
