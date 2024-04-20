@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './Navbar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Navbar from './partials/navbar/Navbar'
+import { LayoutComponent } from './pages/LayoutComponent'
+import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-     <Navbar/>
+      <BrowserRouter>
+        <Routes >
+          <Route path='/' element={<LayoutComponent />}>
+            <Route path='style-guide' element={<StyleGuidePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

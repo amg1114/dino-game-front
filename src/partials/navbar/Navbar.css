@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    margin: auto;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+}
+
+.enlaces {
+    display: flex;
+    gap: 20px;
+}
+
+#searchButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.registrarse,
+.iniciar-sesion {
+    color: white;
+    text-decoration: none;
+}

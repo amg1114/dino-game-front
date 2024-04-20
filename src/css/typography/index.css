@@ -1,0 +1,50 @@
+body {
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 20px;
+    color: #fff;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 32px;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+h4 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+h1 > span,
+h2 > span,
+h3 > span,
+h4 > span {
+    color: #57cc99;
+}
+
+p {
+    line-height: 1.2;
+    letter-spacing: .5px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+a {
+    font-weight: 400;
+    color: #57cc99;
+}
+
+a:hover:not(.btn) {
+    text-decoration: underline;
+}
