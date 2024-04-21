@@ -1,3 +1,5 @@
+import AssetsForm from "../../components/assetsForm/AssetsForm";
+
 export function StyleGuidePage() {
     return (
         <>
@@ -16,6 +18,7 @@ export function StyleGuidePage() {
                     <a href="#" className="btn btn-5">DESCARTAR</a>
                 </div>
             </div>
+            <AssetsForm />
         </>
     )
 }

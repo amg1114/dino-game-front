@@ -1,4 +1,4 @@
-body {
+body, body * {
     font-family: "Teko", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;

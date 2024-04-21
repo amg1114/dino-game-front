@@ -1,35 +1,53 @@
-// En el componente donde desees subir un archivo
+import axios from "axios"
 import React, { useState } from 'react';
-import { uploadFileToFirebase } from '../../services/assets-service';
+import "./AssetsForm.css";
 
 const AssetsForm = () => {
-  const [file, setFile] = useState(null);
-  
+  const [previewFiles, setPreviewFiles] = useState([])
+
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    let parsedFiles = [];
+
+    for (let index = 0; index < e.target.files.length; index++) {
+      const newFile = e.target.files[index];
+      parsedFiles.push({
+        preUrl: URL.createObjectURL(newFile),
+        ...newFile
+      })
+    }
+    setPreviewFiles([...parsedFiles, ...previewFiles]);
   };
 
-  const handleUpload = () => {
-    if (file) {
-      uploadFileToFirebase(
-        file,
-        (downloadURL) => {
-          console.log('Archivo subido exitosamente:', downloadURL);
-          // Aquí puedes hacer algo con el URL del archivo subido, como guardarlo en una base de datos
-        },
-        (error) => {
-          console.error('Error al subir el archivo:', error);
-        }
-      );
-    } else {
-      console.error('No se ha seleccionado ningún archivo');
-    }
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    axios.post('http://localhost:3000/api/assets/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+      .then(res => console.log(res))
+      .catch(res => console.log(res))
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Subir archivo</button>
+    <div className='uploadAssetsForm'>
+      <h3>Subir Imágenes</h3>
+      <div className="preview-group">
+        {previewFiles.map((file, i) =>
+          <div className='box assetPreview' key={file.preUrl} >
+            <img src={file.preUrl} alt={file.name} />
+          </div>
+        )}
+      </div>
+      <div className='assetField'>
+        <form className="buttons-group" onSubmit={handleUpload}>
+          <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label>
+          {previewFiles.length > 0 ? <button className='btn btn-1' type="submit">Enviar Imagenes</button> : <></>}
+          <input type="file" name='assetInput' id="assetInput" onChange={handleFileChange} />
+        </form>
+      </div>
+
     </div>
   );
 };
