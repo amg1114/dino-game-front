@@ -18,7 +18,7 @@ export function StyleGuidePage() {
                     <a href="#" className="btn btn-5">DESCARTAR</a>
                 </div>
             </div>
-            <AssetsForm />
+            <AssetsForm ownerId={1} path={'video-games'} />
         </>
     )
 }

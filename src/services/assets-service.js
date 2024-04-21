@@ -1,6 +1,6 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBNRRLubiJMj03wnUD3YNs9zrbp_FUnVc0",
@@ -14,31 +14,56 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-const uploadFileToFirebase = (file, onComplete, onError) => {
-    // Crear una referencia al archivo en el almacenamiento de Firebase
-    const storageRef = ref(storage, `uploads/${file.name}`);
-    
-    // Subir el archivo a Firebase Storage
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    
-    // Manejar eventos de éxito y error
-    uploadTask.on('state_changed', 
-      (snapshot) => {
-        // Progreso de la carga (opcional)
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      }, 
-      (error) => {
-        // Error al cargar el archivo
-        onError(error);
-      }, 
-      () => {
-        // Éxito al cargar el archivo
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          onComplete(downloadURL);
-        });
-      }
-    );
-  };
-  
-  export { uploadFileToFirebase };
+/**
+ * Carga un archivo a Firebase
+ * @param {Object} asset - Objeto de información con el archivo que se va a cargar.
+ * @param {function} onProgress - Función de devolución de llamada que se llama cuando cambia el progreso de la carga.
+ * @param {function} onComplete - Función de devolución de llamada que se llama cuando la carga se completa con éxito.
+ * @param {function} onError - Función de devolución de llamada que se llama cuando ocurre un error durante la carga.
+ * @returns {Promise} Una promesa que se resuelve cuando la carga se completa con éxito o se rechaza si ocurre un error.
+ */
+const asyncUploadFile = (asset, onProgress, onComplete, onError) => {
+    return new Promise(function (resolve, reject) {
+        const storageRef = ref(storage, `uploads/${asset.path}/${asset.ownerId}/${asset.file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, asset.file);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                if (snapshot.metadata) {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(progress + "% of " + snapshot.metadata.name);
+                    onProgress(progress, snapshot.metadata.name);
+                }
+            },
+            (error) => {
+                onError({ error });
+            },
+            () => {
+                getDownloadURL(storageRef).then((url) => {
+                    registerFile(url, asset);
+                    onComplete(uploadTask.snapshot.metadata.name + " upload is done.");
+                });
+            }
+        );
+    });
+};
+
+const registerFile = (file_url, asset) => {
+    let data = {
+        title: asset.title,
+        url: file_url,
+    };
+
+    if (asset.path === "video-games") {
+        data.videoGameId = asset.ownerId;
+    } else {
+        data.noticiaId = asset.ownerId;
+    }
+
+    axios.post("http://localhost:3000/api/assets", data)
+        .then((res) => console.log("The asset was registered"))
+        .catch((err)=>console.error(err));
+};
+
+export { asyncUploadFile };
