@@ -1,0 +1,45 @@
+/* Estilos para el contenedor */
+.container {
+    max-width: 1280px;
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilos para el layout de contenido */
+.content-layout {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+/* Estilos para las columnas */
+.content-layout aside {
+    grid-column: 1 / span 3;
+}
+
+.content-layout main {
+    grid-column: 4 / span 12;
+}
+
+/* Estilos para resoluciones inferiores a desktop y mayores o iguales a tablet */
+@media (max-width: 1280px) {
+    .container {
+        width: 80%;
+    }
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding-right: 20px;
+    }
+    
+    /* Deshacer el grid layout */
+    .content-layout {
+        display: block;
+    }
+    
+    .content-layout aside,
+    .content-layout main {
+        grid-column: initial;
+    }
+}

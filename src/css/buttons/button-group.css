@@ -1,0 +1,12 @@
+.buttons-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 20px;
+}
+
+.buttons-group {
+    width: fit-content;
+}
