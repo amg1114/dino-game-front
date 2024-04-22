@@ -1,17 +1,24 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
 import { LayoutComponent } from './pages/LayoutComponent'
 import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '',
+      element: <LayoutComponent />,
+      children: [
+        {
+          path: '',
+          element: <StyleGuidePage />
+        }
+      ]
+    }
+  ])
+
   return (
     <>
-      <BrowserRouter>
-        <Routes >
-          <Route path='/' element={<LayoutComponent />}>
-            <Route path='style-guide' element={<StyleGuidePage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </>
   )
 }

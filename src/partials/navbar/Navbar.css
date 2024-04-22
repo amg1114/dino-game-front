@@ -1,4 +1,9 @@
-.navbar {
+header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+header .navbar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -6,21 +11,22 @@
     align-items: center;
 }
 
-.titulo {
+header .navbar  .titulo {
     margin: auto;
 }
 
-.logo {
+header .navbar .logo {
     width: 80px;
     height: 80px;
 }
 
-.enlaces {
+header .navbar .enlaces {
     display: flex;
     gap: 20px;
 }
 
-#searchButton {
+header .navbar #searchButton {
+    color: #fff;
     background: none;
     border: none;
     cursor: pointer;
