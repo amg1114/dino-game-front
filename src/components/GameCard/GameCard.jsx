@@ -1,18 +1,18 @@
-import './gameCard.css'
+import './GameCard.css'
 
-export function GameCard(props) {
+export function GameCard({ image, title, description, url}) {
     return (
         <div className='gameCardSection'>
             <img className="gameImage"
-                src={props.image}
+                src={image}
                 alt="videogame image"
             />
 
             <div className="urlGame">
-                <a href={props.gameUrl}>{props.gameTitle}</a>
+                <a href={url}>{title}</a>
             </div>
 
-            <div className='description'><p>{props.descriptionGame}</p></div>
+            <div className='description'><p>{description}</p></div>
         </div>
     )
 }

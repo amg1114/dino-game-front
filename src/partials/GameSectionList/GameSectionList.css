@@ -1,0 +1,10 @@
+.game-section {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.game-section .game-list {
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
