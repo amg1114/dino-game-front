@@ -1,11 +1,5 @@
-body{
-    background-color: #22577A;
-
-}
-
 .fullSection{
     display: inline-flex;
-
     padding: 20px;
 }
 .gameCardSection {
