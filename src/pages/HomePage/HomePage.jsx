@@ -1,5 +1,3 @@
-export function HomePage () {
-    return <>
-    
-    </>
+export function HomePage() {
+    return <h1>HomePage</h1>
 }
