@@ -13,7 +13,7 @@ export default function Navbar() {
                     <a href="" className="registrarse">REGISTRARSE</a>
                     <a href="" className="iniciar-sesion">INICIAR SESIÓN</a>
                     <button id="searchButton">
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             search
                         </span>
                     </button>
