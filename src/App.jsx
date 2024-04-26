@@ -53,10 +53,6 @@ function App() {
           path: 'style-guide',
           element: <StyleGuidePage />
         },
-        {
-          path: '/homepage',
-          element: <HomePage />
-        }
       ]
     }
   ])
