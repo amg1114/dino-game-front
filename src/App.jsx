@@ -1,12 +1,18 @@
-import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+// Componentes
 import { LayoutComponent } from './pages/LayoutComponent'
-import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
+
+// Paginas
 import { HomePage } from './pages/HomePage/HomePage'
 import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
-import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
+import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
+import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
+
+// Vistas
+import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
-import { PaginaCategorias } from './pages/Categorias/PaginaCatgeorias/PaginaCatgeorias'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 
 function App() {
