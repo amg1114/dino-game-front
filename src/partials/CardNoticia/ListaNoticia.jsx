@@ -1,4 +1,4 @@
-import { CardNotice } from '../../components/noticias/CardNotice';
+import { CardNotice } from '../../components/Noticias/CardNoticia';
 
 export function ListaNoticia({ noticias }) {
     return (

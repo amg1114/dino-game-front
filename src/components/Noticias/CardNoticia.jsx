@@ -1,4 +1,4 @@
-import './CardNotice.css'
+import './CardNoticia.css'
 
 export function CardNotice({ NoticePage, image, url, title, description }) {
     return (

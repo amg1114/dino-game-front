@@ -1,4 +1,4 @@
-h1{
+h1 {
     text-align: center;
 }
 
@@ -13,7 +13,7 @@ h1{
     background-color: #38a3a5;
 }
 
-.noticeImage{
+.noticeImage {
     height: auto;
     width: 100px;
     border-radius: 20%;

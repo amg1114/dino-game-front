@@ -1,8 +1,8 @@
 import { CarouselComponent } from "../../components/CarouselComponent/CarouselComponent";
 import AssetsForm from "../../components/assetsForm/AssetsForm";
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList";
-import { HomeListNotice } from "../../partials/HomeCardNotice/HomeListNotice";
-import { ListaNoticia } from "../../partials/CardNoticia/ListaNoticia";
+import { HomeListNotice } from "../../partials/HomeCardNoticia/HomeListNoticia";
+import { ListaNoticia } from "../../partials/CardNoticia/ListaNoticia"
 
 export function StyleGuidePage() {
     const slides = [
@@ -77,27 +77,27 @@ export function StyleGuidePage() {
     const noticias = [
         {
             image: "https://www.91-cdn.com/hub/wp-content/uploads/2021/12/ar88u.jpg",
-            title:"noticia 1",
-            url:"#",
-            description:"noticia..."
+            title: "noticia 1",
+            url: "#",
+            description: "noticia..."
         },
         {
             image: "https://cdn.akamai.steamstatic.com/steam/apps/2134770/capsule_616x353.jpg?t=1713431762",
-            title:"noticia 2",
-            url:"#",
-            description:"noticia..."
+            title: "noticia 2",
+            url: "#",
+            description: "noticia..."
         },
         {
             image: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/01/free-steam-games-collage.jpg",
-            title:"noticia 3",
-            url:"#",
-            description:"noticia..." 
+            title: "noticia 3",
+            url: "#",
+            description: "noticia..."
         },
         {
             image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/Best-coop-games-of-2012.jpg",
-            title:"noticia 4",
-            url:"#",
-            description:"noticia..." 
+            title: "noticia 4",
+            url: "#",
+            description: "noticia..."
         }
     ]
 
@@ -111,6 +111,7 @@ export function StyleGuidePage() {
                     <li>Catetegoria 2</li>
                     <li>Catetegoria 3</li>
                 </ul>
+                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'} />
             </aside>
             <main>
                 <h1>Main Content</h1>
@@ -136,11 +137,6 @@ export function StyleGuidePage() {
                 <AssetsForm ownerId={1} path={'video-games'} />
                 <ListaNoticia noticias={noticias} />
             </main>
-            <aside>
-                <h2>noticias</h2>
-                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'}/>
-            </aside>
-
         </div>
     )
 }
