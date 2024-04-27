@@ -1,29 +1,16 @@
 h1{
     text-align: center;
 }
-.containerNotice{
-    margin: auto;
-    max-width: 800px;;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    place-items: center;
-}
 
-.cardNotice{
+.noticeSectionCard{
+    position: relative;
     width: 230px;
     height: 100px;
-    background-color: #38a3a5;
     border-radius: 20px;
-    display:flex;
     overflow: hidden;
-    position: relative;
-    margin:20px;
-}
-
-.noticeSection{
     display: flex;
-
+    margin:20px;
+    background-color: #38a3a5;
 }
 
 .noticeImage{
@@ -33,17 +20,17 @@ h1{
     background-size: cover;
 }
 
+.urlNotice{
+    color: #fff;
+}
+
 .textNotice{
-    margin-top: 10px;
     padding-left: 10px;
     text-align: center;
 }
 
-.description{
-    color: #ffffff;
-}
 
-.enlace::after{
+.urlNotice::after{
     position: absolute;
     top: 0;
     left: 0;
@@ -51,9 +38,5 @@ h1{
     height: 100%;
     content: " ";
     cursor: pointer;
-}
-.enlace{
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
+    
 }

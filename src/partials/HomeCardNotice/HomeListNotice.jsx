@@ -7,7 +7,7 @@ export function HomeListNotice({notices, sectionTitle}) {
             <h2>{sectionTitle}</h2>
             <div className="notice-list">
                     {notices.map((notice) => (
-                            <HomeCardNoticia
+                            <HomeCardNoticia key={notice + "noticia"}
                                 image={notice.image}
                                 title={notice.title}
                                 url={notice.url}

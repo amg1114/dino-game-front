@@ -1,4 +1,5 @@
 .noticeSection{
+    width: 250px;
     display: flex;
     position: relative;
     padding-top: 20px;
@@ -15,7 +16,6 @@
 }
 
 .textNotice{
-    margin-top: 10px;
     padding-left: 10px;
     align-items: center;
 }
@@ -24,7 +24,7 @@
     color: #ffffff;
 }
 
-.urlNotice::after{
+.url::after{
     position: absolute;
     top: 0;
     left: 0;
@@ -33,7 +33,7 @@
     content: " ";
     cursor: pointer;
 }
-.urlNotice{
+.url{
     text-decoration: none;
     color: #57cc99;
     font-weight: bold;
