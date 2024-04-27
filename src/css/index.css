@@ -4,6 +4,7 @@
 @import "layouts";
 @import "typography";
 
+@import "./layouts/container.css";
 /* ---------- THEME ---------- */
 @import "buttons";
 

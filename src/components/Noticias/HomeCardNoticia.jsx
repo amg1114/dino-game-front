@@ -1,6 +1,6 @@
 import './HomeCardNoticia.css'
 
-export function HomeCardNoticia({ image, title, description, url }) {
+export function HomeCardNoticia({ image, title, description, url}) {
     return (
         <div className='noticeSection'>
             <img className="noticeImage"
