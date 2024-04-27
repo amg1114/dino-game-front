@@ -4,9 +4,11 @@ import { CarouselComponent } from "../../components/CarouselComponent/CarouselCo
 
 export function HomePage() {
 
-    const ENDPOINT_API = "https://dino-game-backend-production.up.railway.app/api/video-games"
+    const ENDPOINT_API = "https://dino-game-backend-production.up.railway.app/api/video-games?limit=5"
+    const ENDPOINT_CATEGORIAS = "https://dino-game-backend-production.up.railway.app/api/categorias"
 
     const [slides, setSlides] = useState([])
+    const [categorias, setCategorias] = useState([])
 
     useEffect(() => {
         axios.get(ENDPOINT_API)
@@ -23,27 +25,46 @@ export function HomePage() {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get(ENDPOINT_CATEGORIAS)
+            .catch(function (error) {
+                console.log(error)
+            })
+            .then(function (respuesta) {
+                setCategorias(respuesta.data)
+                console.log(categorias)
+            })
+            
+    }, [])
+
 
     return <>
 
         {slides === null ? <></> : (
-            < div className="container content-layout" >
-                <div className="home-container-layout">
+            <div className="container content-layout ">
 
-                    <div className="left-aside">
-
-                    </div>
-
-                    <div className="main">
-                        <CarouselComponent slides={slides} />
-                    </div>
-
-                    <div className="right-aside">
-
-                    </div>
-
+                <div className="left-aside">
+                    <ul>
+                        {
+                            categorias === null ? <></> : (
+                                categorias.map((elemento, index) => {
+                                    return <li><a href={"/categorias" + elemento.id} >{elemento.titulo}</a></li>
+                                })
+                            )
+                        }
+                    </ul>
                 </div>
-            </div >
+
+                <div className="main">
+                    <h1 className="recomendados"><span>Dino</span>Destacados y recomendados</h1>
+                    <CarouselComponent slides={slides} />
+                </div>
+
+                <div className="right-aside">
+                    <p>hola</p>
+                </div>
+
+            </div>
         )
         }
     </>
