@@ -3,14 +3,7 @@ import './CarouselComponent.css'
 
 export const CarouselComponent = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const intervalo = setInterval(() => {
-    nextSlide()
-  }, 2500);
-
-  useEffect(() => {
-    return () => clearInterval(intervalo);
-  }, [])
-
+ 
   const nextSlide = () => {
     const nextIndex = (currentSlide + 1) % slides.length;
     setCurrentSlide(nextIndex);

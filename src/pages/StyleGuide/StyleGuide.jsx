@@ -1,6 +1,7 @@
 import { CarouselComponent } from "../../components/CarouselComponent/CarouselComponent";
 import AssetsForm from "../../components/assetsForm/AssetsForm";
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList";
+import { HomeListNotice } from "../../partials/HomeCardNotice/HomeListNotice";
 
 export function StyleGuidePage() {
     const slides = [
@@ -39,6 +40,40 @@ export function StyleGuidePage() {
         }
     ]
 
+    const notices = [
+        {
+            image: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
+            title: "NEED FOR SPEED: DELUXE EDITION",
+            url: "#",
+            description: "juego #1",
+        },
+        {
+            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
+            title: "NEED FOR SPEED: HEAT",
+            url: "#",
+            description: "juego #2",
+        },
+        {
+            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
+            title: "NEED FOR SPEED: MOST WANTED",
+            url: "#",
+            description: "juego #3",
+        },
+        {
+            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
+            title: "NEED FOR SPEED: HEAT",
+            url: "#",
+            description: "juego #2",
+        },
+        {
+            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
+            title: "NEED FOR SPEED: MOST WANTED",
+            url: "#",
+            description: "juego #3",
+        }
+    ]
+
+
     return (
         <div className="container content-layout">
             <aside>
@@ -72,6 +107,10 @@ export function StyleGuidePage() {
                 <GameSectionList games={games} sectionTitle={'Categoria 3'} />
                 <AssetsForm ownerId={1} path={'video-games'} />
             </main>
+            <aside>
+                <h2>noticias</h2>
+                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'}/>
+            </aside>
 
         </div>
     )

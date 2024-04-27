@@ -1,0 +1,40 @@
+.noticeSection{
+    display: flex;
+    position: relative;
+    padding-top: 20px;
+}
+
+.noticeImage{
+
+    height: 100px;
+    width: 100px;
+    top: 0%;
+    left: 0%;
+    border-radius: 20%;
+    background-size: cover;
+}
+
+.textNotice{
+    margin-top: 10px;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.descriptionNews{
+    color: #ffffff;
+}
+
+.urlNotice::after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    cursor: pointer;
+}
+.urlNotice{
+    text-decoration: none;
+    color: #57cc99;
+    font-weight: bold;
+}
