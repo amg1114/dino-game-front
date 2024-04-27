@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 export function PaginaCategorias(){
     return <>
-        <h1>Catgeorias Page</h1>
+        <h1>Categorias Page</h1>
         <Outlet />
     </>
 }

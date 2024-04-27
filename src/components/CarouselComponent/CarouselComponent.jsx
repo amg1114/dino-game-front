@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import './CarouselComponent.css'
 
 export const CarouselComponent = ({ slides }) => {
@@ -7,12 +7,12 @@ export const CarouselComponent = ({ slides }) => {
 
   const nextSlide = () => {
     const nextIndex = (currentSlide + 1) % slides.length;
-    setCurrentSlide(nextIndex);
+    selectSlide(nextIndex);
   };
 
   const prevSlide = () => {
     const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-    setCurrentSlide(prevIndex);
+    selectSlide(prevIndex);
   };
 
   const selectSlide = (slide) => {
