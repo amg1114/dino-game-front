@@ -47,10 +47,8 @@ export const CarouselComponent = ({ slides }) => {
         <div className="imgWrapper">
           {
             slides.map((slide, index) => (
-
-              <img src={slide.url} alt={slide.titulo} className={index === currentSlide ? ("show animate__animated animate__fadeIn") : ""} />
-            )
-            )
+              <img src={slide.url} key={slide.titulo + '-slide-' + index} alt={slide.titulo} className={index === currentSlide ? ("show animate__animated animate__fadeIn") : ""} />
+            ))
           }
           <div className="controls">
             <button onClick={prevSlide} className="prev-button" type="button"> <span className="material-symbols-outlined">
