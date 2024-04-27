@@ -83,6 +83,7 @@ export function StyleGuidePage() {
                     <li>Catetegoria 2</li>
                     <li>Catetegoria 3</li>
                 </ul>
+                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'}/>
             </aside>
             <main>
                 <h1>Main Content</h1>
@@ -107,11 +108,6 @@ export function StyleGuidePage() {
                 <GameSectionList games={games} sectionTitle={'Categoria 3'} />
                 <AssetsForm ownerId={1} path={'video-games'} />
             </main>
-            <aside>
-                <h2>noticias</h2>
-                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'}/>
-            </aside>
-
         </div>
     )
 }

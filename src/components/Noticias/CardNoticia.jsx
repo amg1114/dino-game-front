@@ -1,6 +1,6 @@
-import './CardNotice.css'
+import './CardNoticia.css'
 
-export function CardNotice({NoticePage, image, url, title, description}) {
+export function CardNotice({ NoticePage, image, url, title, description }) {
     return (
         <div>
             <h1>{NoticePage}</h1>
@@ -11,7 +11,6 @@ export function CardNotice({NoticePage, image, url, title, description}) {
                         alt="notice image"
                     />
                     <div className="textNotice">
-
                         <div className="noticeTit">
                             <a className="urlNotice" href={url}>{title}</a>
                         </div>

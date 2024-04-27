@@ -1,11 +1,10 @@
-.noticeSection{
+.noticeSection {
     display: flex;
     position: relative;
     padding-top: 20px;
 }
 
-.noticeImage{
-
+.noticeImage {
     height: 100px;
     width: 100px;
     top: 0%;
@@ -14,17 +13,16 @@
     background-size: cover;
 }
 
-.textNotice{
-    margin-top: 10px;
+.textNotice {
     padding-left: 10px;
     align-items: center;
 }
 
-.descriptionNews{
+.descriptionNews {
     color: #ffffff;
 }
 
-.urlNotice::after{
+.urlNotice::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -33,7 +31,7 @@
     content: " ";
     cursor: pointer;
 }
-.urlNotice{
+.urlNotice {
     text-decoration: none;
     color: #57cc99;
     font-weight: bold;

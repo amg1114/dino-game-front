@@ -1,4 +1,4 @@
-import './HomeCardNotice.css'
+import './HomeCardNoticia.css'
 
 export function HomeCardNoticia({ image, title, description, url }) {
     return (
