@@ -6,9 +6,9 @@ import { HomeCardNoticia } from "../../components/Noticias/HomeCardNoticia"
 
 export function HomePage() {
 
-    const ENDPOINT_API = "https://dino-game-backend-production.up.railway.app/api/video-games?limit=5"
-    const ENDPOINT_CATEGORIAS = "https://dino-game-backend-production.up.railway.app/api/categorias"
-    const ENDPOINT_NOTICIAS = "https://dino-game-backend-production.up.railway.app/api/noticias?limit=3"
+    const ENDPOINT_API = "https://dinogame.up.railway.app/api/video-games?limit=5"
+    const ENDPOINT_CATEGORIAS = "https://dinogame.up.railway.app/api/categorias"
+    const ENDPOINT_NOTICIAS = "https://dinogame.up.railway.app/api/noticias?limit=3"
 
     const [slides, setSlides] = useState([])
     const [categorias, setCategorias] = useState([])
