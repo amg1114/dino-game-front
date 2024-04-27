@@ -7,6 +7,10 @@
 /* ---------- THEME ---------- */
 @import "buttons";
 
+
+/* ---------- COMPONENTS ---------- */
+@import "modal";
+
 body {
     background-color: #22577a;
 }

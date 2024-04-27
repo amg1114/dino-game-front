@@ -16,6 +16,7 @@ import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 
 function App() {
+  // /juegos/
   const router = createBrowserRouter([
     {
       path: '',
