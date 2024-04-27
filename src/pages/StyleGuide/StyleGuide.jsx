@@ -1,7 +1,7 @@
 import { CarouselComponent } from "../../components/CarouselComponent/CarouselComponent";
 import AssetsForm from "../../components/assetsForm/AssetsForm";
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList";
-import { HomeListNotice } from "../../partials/HomeCardNotice/HomeListNotice";
+import { HomeListNotice } from "../../partials/HomeCardNoticia/HomeListNoticia";
 
 export function StyleGuidePage() {
     const slides = [
