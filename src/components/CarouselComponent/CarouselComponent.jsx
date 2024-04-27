@@ -42,6 +42,7 @@ export const CarouselComponent = ({ slides }) => {
   }
 
   return <>
+<<<<<<<<< Temporary merge branch 1
     {slides.length ? (
       <div className="carousel">
         <div className="imgWrapper">
@@ -59,7 +60,23 @@ export const CarouselComponent = ({ slides }) => {
             </span> </button>
           </div>
         </div>
-  return <>
+
+        <div className="selectores">
+          {
+            slides.map(
+              (slide, index) => {
+                return (
+                  <button className={"selector " + (currentSlide === index ? 'active' : '')} key={'slide' + index} onClick={() => (selectSlide(index))} type="button">
+                  </button>
+                )
+              }
+            )
+          }
+        </div>
+      </div>
+    ) : <></>}
+  </>;
+=========
     {
       slides.length > 0 ? (
 
