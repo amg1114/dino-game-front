@@ -26,71 +26,89 @@ export function HomePage() {
                 game.map(juego => {
                     prevSlides.push(juego.assets[0])
                 })
-                setSlides(prevSlides)
+                axios.get(ENDPOINT_CATEGORIAS)
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                    .then(function (respuesta) {
+                        const category = respuesta.data
+                        let prevCategoria = []
+                        category.map((categoria) => {
+                            axios.get("https://dino-game-backend-production.up.railway.app/api/categorias/" + categoria.id)
+                                .catch(function (error) {
+                                    console.log(error)
+                                })
+                                .then(function (respuesta) {
+                                    prevCategoria.push(respuesta.data)
+                                    axios.get(ENDPOINT_NOTICIAS)
+                                        .catch(function (error) {
+                                            console.log(error)
+                                        })
+                                        .then(function (respuesta) {
+                                            setCategorias([...prevCategoria, respuesta.data])
+                                            setNoticias(respuesta.data)
+                                            setSlides(prevSlides)
+                                        })
+                                })
+                        })
+                    })
             })
 
-        axios.get(ENDPOINT_CATEGORIAS)
-            .catch(function (error) {
-                console.log(error)
-            })
-            .then(function (respuesta) {
-                const category = respuesta.data
-                setCategorias(category)
-            })
 
-        axios.get(ENDPOINT_NOTICIAS)
-            .catch(function (error) {
-                console.log(error)
-            })
-            .then(function (respuesta) {
-                setNoticias(respuesta.data)
-            })
-            console.log(noticias)
     }, [])
 
     return <>
         {slides === null ? <></> : (
-            categorias === null ? <></> : (
-                noticias === null ? <></> : (
+            <div className="container content-layout ">
+                <div className="left-aside">
+                    <h2>CATEGORIAS</h2>
+                    <ul>
+                        {
+                            categorias.map((elemento, index) => {
+                                return <li key={elemento.id + "left-aside"}><a href={"/categorias" + elemento.id} >{elemento.titulo}</a></li>
+                            })
+                        }
+                    </ul>
+                </div>
 
-                <div className="container content-layout ">
-                    <div className="left-aside">
-                        <ul>
-                            {
-                                categorias.map((elemento, index) => {
-                                    return <li><a href={"/categorias" + elemento.id} >{elemento.titulo}</a></li>
-                                })
-                            }
-                        </ul>
-                    </div>
+                <div className="main">
+                    <h2 className="recomendados"><span>DINO</span>DESTACADOS Y RECOMENDADOS</h2>
+                    <CarouselComponent slides={slides} />
+                    <>
+                        {
+                            categorias.slice(0, 3).map((elemento, index) => {
+                                return (
+                                    <GameSectionList
+                                        games={elemento.videoGames}
+                                        sectionTitle={elemento.titulo}
+                                        key={index}
+                                    />
+                                )
+                            })
+                        }
+                    </>
+                </div>
 
-                    <div className="main">
-                        <h1 className="recomendados"><span>Dino</span>Destacados y recomendados</h1>
-                        <CarouselComponent slides={slides} />
-                    </div>
-
-                    <div className="right-aside">     
-                        <ul>
-                            {
-                                noticias.map((elemento, index) => {
-                                    return(
-                                    <li>
-                                        <HomeCardNoticia 
+                <div className="right-aside">
+                    <h2>NOTICIAS</h2>
+                    <ul>
+                        {
+                            noticias.map((elemento, index) => {
+                                return (
+                                    <HomeCardNoticia
                                         image={elemento.assets[0].url}
                                         title={elemento.title}
-                                        description={elemento.descripcion}
+                                        description={elemento.descripcion.slice(0, 100)}
                                         url={"/noticias/" + elemento.id}
-                                        />
-                                    </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
-
+                                        key={index}
+                                    />
+                                )
+                            })
+                        }
+                    </ul>
                 </div>
-                )
-            )
+
+            </div>
         )
         }
     </>

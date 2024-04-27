@@ -22,22 +22,46 @@ export function StyleGuidePage() {
 
     const games = [
         {
-            image: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
-            title: "NEED FOR SPEED: DELUXE EDITION",
-            url: "#",
-            description: "juego #1",
+            precio: 20,
+            titulo: "The Legend of Zelda: Breath of the Wild",
+            descripcion: "Este juego de aventuras de mundo abierto desarrollado por Nintendo para la consola Nintendo Switch es aclamado por su vasto mundo y su libertad de exploración. Los jugadores asumen el papel de Link, quien despierta de un largo sueño para descubrir un Hyrule devastado por el mal. Con una narrativa no lineal y una mecánica de juego innovadora, Breath of the Wild redefine la experiencia de la serie The Legend of Zelda.",
+            fechaLanzamiento: "2017-05-03",
+            assets: [
+                {
+                    id: 4,
+                    title: "zelda_01.webp",
+                    url: "https://firebasestorage.googleapis.com/v0/b/dinogame-6bcaa.appspot.com/o/uploads%2Fvideo-games%2F2%2Fzelda_01.webp?alt=media&token=b0e19546-9ee2-41fb-8778-3536957b5454"
+                }
+            ]
         },
         {
-            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
-            title: "NEED FOR SPEED: HEAT",
-            url: "#",
-            description: "juego #2",
+            id: 4,
+            precio: 40,
+            titulo: "The Last of Us Part II",
+            descripcion: "Secuela del exitoso juego de Naughty Dog, The Last of Us Part II continúa la historia de Joel y Ellie en un mundo post-apocalíptico invadido por seres infectados. Los jugadores asumen principalmente el papel de Ellie, quien busca venganza en un viaje emocionalmente intenso y lleno de desafíos. Con una jugabilidad mejorada, una narrativa compleja y gráficos impresionantes, el juego ha sido elogiado por su profundidad y su tratamiento maduro de temas difíciles.",
+            fechaLanzamiento: "2020-06-19",
+            assets: [
+                {
+                    id: 10,
+                    title: "tof2_01",
+                    url: "https://firebasestorage.googleapis.com/v0/b/dinogame-6bcaa.appspot.com/o/uploads%2Fvideo-games%2F4%2Ftof2_01.png?alt=media&token=cf82a0ea-8b6b-4b7d-8aa3-2442df8daca2",
+                }
+            ]
         },
         {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
-            title: "NEED FOR SPEED: MOST WANTED",
-            url: "#",
-            description: "juego #3",
+            id: 5,
+            precio: 50,
+            titulo: "Cyberpunk 2077",
+            descripcion: "Desarrollado por CD Projekt Red, Cyberpunk 2077 es un juego de rol de acción ambientado en Night City, una metrópolis futurista obsesionada con el poder, la moda y la tecnología. Los jugadores asumen el papel de V, un mercenario en busca de un implante único que garantiza la inmortalidad. Con un vasto mundo abierto y una historia no lineal, el juego ofrece una experiencia inmersiva en un entorno cyberpunk.",
+            fechaLanzamiento: "2020-12-10",
+            assets: [
+                {
+
+                    id: 13,
+                    title: "cyberpunk_01",
+                    url: "https://firebasestorage.googleapis.com/v0/b/dinogame-6bcaa.appspot.com/o/uploads%2Fvideo-games%2F5%2Fcyberpunk_01.jpg?alt=media&token=ffd1ef40-4ce2-47dd-925f-d214c614fec7"
+                }
+            ]
         }
     ]
 
@@ -46,7 +70,7 @@ export function StyleGuidePage() {
             image: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
             title: "NEED FOR SPEED: DELUXE EDITION",
             url: "#",
-            description: "juego #1",
+            description: "juego #1 sdfskdjhfnskdfksjhdkfjshdkjfs ksjdhfksjhdfkjshdfk sdhfisudyfiusdf akisjndksdbfks sdhfjosidhfosihdfos siudhfisudhfisuhdf sdifhsjdfs natalia te quiero mucho",
         },
         {
             image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",

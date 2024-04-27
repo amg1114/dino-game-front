@@ -26,7 +26,8 @@ h1 {
 
 .textNotice{
     padding-left: 10px;
-    text-align: center;
+    text-align: left;
+    font-size: 15px;
 }
 
 

@@ -51,11 +51,11 @@
     grid-template-columns: repeat(12, 1fr);
 }
 .left-aside{
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 2;
 }
 
 .main{
-    grid-column: 4 / span 6; 
+    grid-column: 3 / span 7; 
 }
 
 .right-aside{

@@ -8,10 +8,10 @@ export function GameSectionList({games, sectionTitle}){
             <div className="game-list">
                 {games.map((game, index) => (< GameCard
                 key = {index}
-                image={game.image}
-                gameTitle={game.gameTitle}
-                gameUrl={game.gameUrl}
-                descriptionGame={game.descriptionGame}/>))
+                image={game.assets[0].url}
+                gameTitle={game.titulo}
+                gameUrl={"/juegos/" + game.id}
+                descriptionGame={game.descripcion.slice(0,100)}/>))
                 }
             </div>
         </div>
