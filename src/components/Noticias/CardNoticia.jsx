@@ -5,7 +5,7 @@ export function CardNotice({ NoticePage, image, url, title, description }) {
         <div>
             <h1>{NoticePage}</h1>
             <div className="CardNotice">
-                <div className='noticeSection'>
+                <div className='noticeSectionCard'>
                     <img className="noticeImage"
                         src={image}
                         alt="notice image"
@@ -14,8 +14,7 @@ export function CardNotice({ NoticePage, image, url, title, description }) {
                         <div className="noticeTit">
                             <a className="urlNotice" href={url}>{title}</a>
                         </div>
-                        <div className='description'><p>{description}</p></div>
-
+                        <div className='desc'><p>{description}</p></div>
                     </div>
                 </div>
             </div>
