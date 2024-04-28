@@ -20,13 +20,7 @@ export function PaginaNoticias() {
     return <>
         {noticias === null ? <></> : (
             <div>
-                {noticias.map((elemento, index) => {
-                    return (
-                        <ListaNoticia noticias={elemento}
-                            key={"noticia" + index} />
-                    )
-                })}
-                <ListaNoticia noticias={noticias}/>
+                <ListaNoticia noticias={noticias} />
                 <Outlet />
             </div>
         )
