@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { ListaNoticia } from "../../../partials/CardNoticia/ListaNoticia";
+import { ListaNoticia } from "../../../partials/ListaNoticia/ListaNoticia";
 
 export function PaginaNoticias() {
     const ENDPOINT_API = "https://dinogame.up.railway.app/api/noticias"
@@ -18,12 +18,12 @@ export function PaginaNoticias() {
 
     })
     return <>
-        {noticias === null ? <></> : (
+        {
             <div>
                 <ListaNoticia noticias={noticias} />
                 <Outlet />
             </div>
-        )
+        
         }
     </>
 }
