@@ -10,7 +10,7 @@ export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
                     alt="notice image"
                 />
                 <div className="textNotice">
-                    <Link to={``} className="noticeModal">
+                    <Link to={`/noticias/`+id} className="noticeModal">
                         <span><h3>{titulo} </h3>
                             <p>{descripcion}</p></span></Link>
                 </div>

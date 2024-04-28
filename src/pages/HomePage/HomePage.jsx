@@ -35,7 +35,7 @@ export function HomePage() {
                         const category = respuesta.data
                         let prevCategoria = []
                         category.map((categoria) => {
-                            axios.get("https://dino-game-backend-production.up.railway.app/api/categorias/" + categoria.id)
+                            axios.get("https://dinogame.up.railway.app/api/categorias/" + categoria.id)
                                 .catch(function (error) {
                                     console.log(error)
                                 })
