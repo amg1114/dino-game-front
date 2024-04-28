@@ -19,7 +19,10 @@
     max-width: 1200px;
     border-radius: 10px;
 }
-
+.modal-fade .modal-content .container {
+    display: flex;
+    gap: 20px;
+}
 .modal-fade .modal-content .modal-header {
     display: flex;
     justify-content: end;
@@ -29,12 +32,17 @@
     font-weight: bolder;
 }
 
+
 .izquierda {
     width: 70%;
     text-align: left;
     left: 0; right: 70%;
 }
-
+.derecha {
+    width: 30%;
+    text-align: right;
+    right: 0; left: 70%;
+}
 .imagen{
     width: 100%;
     text-align: left;

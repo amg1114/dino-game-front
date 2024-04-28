@@ -1,16 +1,20 @@
-import { Link } from "react-router-dom"
-import "../../../css/modal/index.css"
-import { useParams } from "react-router-dom"
 import axios from "axios"
-import { useEffect,  useState } from "react"
+import moment from 'moment';
 
+import { Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
+import "./VistaNoticia.css"
+import { ListaNoticia } from "../../../partials/ListaNoticia/ListaNoticia";
+import { HomeListaNoticia } from "../../../partials/HomeListaNoticia/HomeListaNoticia";
 
 export function VistaNoticia() {
 
     const { id } = useParams()
     const ENDPOINT = `https://dinogame.up.railway.app/api/noticias/${id}`
     const [noticia, setNoticia] = useState(null)
+    const [noticias, setNoticias] = useState([])
 
     useEffect(() => {
         axios.get(ENDPOINT)
@@ -18,11 +22,17 @@ export function VistaNoticia() {
                 console.log(error)
             })
             .then(function (response) {
-                setNoticia(response.data);
+                const noticia_data = response.data;
+                axios.get(`https://dinogame.up.railway.app/api/noticias`)
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                    .then(function (response) {
+                        setNoticias(response.data)
+                        setNoticia(noticia_data);
+                    })
             })
-    }
-
-    )
+    })
 
     return <>
         {
@@ -36,14 +46,17 @@ export function VistaNoticia() {
                                 </span>
                             </Link>
                         </div>
-                        <div className="izquierda">
-                            <img src={noticia.assets[0].url} alt="imagen_juego" className="imagen"/>
-                            <p className="fecha">{noticia.fecha}</p>
-                            <h2>{noticia.titulo}</h2>
-                            <p>{noticia.descripcion}</p>
-                        </div>
-                        <div className="derecha">
-
+                        <div className="container">
+                            <div className="izquierda">
+                                <h2>{noticia.titulo}</h2>
+                                <img src={noticia.assets[0].url} alt={noticia.assets[0].titulo} className="imagen-juego" />
+                                <p className="fecha">{moment(noticia.fecha, "YYY7-MM-DD").format("MMMM DD, YYYY")}</p>
+                                <p>{noticia.descripcion}</p>
+                            </div>
+                            <div className="derecha">
+                                <HomeListaNoticia notices={noticias} />
+                            
+                            </div>
                         </div>
                     </div>
                 </div>)
