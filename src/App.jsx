@@ -59,7 +59,7 @@ function App() {
         {
           path: 'style-guide',
           element: <StyleGuidePage />
-        }
+        },
       ]
     }
   ])
