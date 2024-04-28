@@ -1,5 +1,5 @@
 .noticeSection{
-    width: 250px;
+    width: auto;
     display: flex;
     position: relative;
     padding-top: 20px;
@@ -12,6 +12,7 @@
     left: 0%;
     border-radius: 20%;
     background-size: cover;
+    aspect-ratio: 1 / 1;
 }
 
 .textNotice{

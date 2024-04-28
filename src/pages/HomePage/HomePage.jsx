@@ -97,7 +97,7 @@ export function HomePage() {
                             return (
                                 <HomeCardNoticia
                                     image={elemento.assets[0].url}
-                                    title={elemento.titulo.slice(0,20)}
+                                    title={elemento.titulo}
                                     description={elemento.descripcion.slice(0,70)}
                                     url={"/noticias/" + elemento.id}
                                     key={index}
