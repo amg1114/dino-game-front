@@ -1,4 +1,4 @@
-.noticeSection {
+.home-notice-section {
     width: auto;
     display: flex;
     align-items: flex-start;
@@ -6,22 +6,22 @@
     margin-bottom: 20px;
 }
 
-.noticeSection:last-child {
+.home-notice-section:last-child {
     margin-bottom: 0;
 }
 
-.noticeImage {
+.home-notice-section .noticeImage {
     width: 120px;
     aspect-ratio: 1 / 1;
     border-radius: 10%;
 }
 
-.textNotice {
+.home-notice-section .textNotice {
     padding-left: 10px;
     text-align: left;
 }
 
-.url::after {
+.home-notice-section .url::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -30,7 +30,7 @@
     content: " ";
     cursor: pointer;
 }
-.url {
+.home-notice-section .url {
     text-decoration: none;
     color: #FFF;
     font-weight: bold;

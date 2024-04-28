@@ -1,4 +1,4 @@
-import './gameCard.css'
+import './GameCard.css'
 
 export function GameCard({ image, title, description, url}) {
     return (

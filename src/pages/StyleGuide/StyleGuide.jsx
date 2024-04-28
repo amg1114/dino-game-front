@@ -2,7 +2,7 @@ import { CarouselComponent } from "../../components/CarouselComponent/CarouselCo
 import AssetsForm from "../../components/assetsForm/AssetsForm";
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList";
 import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNoticia";
-import { ListaNoticia } from "../../partials/CardNoticia/ListaNoticia"
+import { ListaNoticia } from "../../partials/ListaNoticia/ListaNoticia"
 
 export function StyleGuidePage() {
     const slides = [
@@ -80,78 +80,33 @@ export function StyleGuidePage() {
         }
     ]
 
-    const notices = [
-        {
-            image: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
-            title: "NEED FOR SPEED: DELUXE EDITION",
-            url: "#",
-            description: "juego #1 sdfskdjhfnskdfksjhdkfjshdkjfs ksjdhfksjhdfkjshdfk sdhfisudyfiusdf akisjndksdbfks sdhfjosidhfosihdfos siudhfisudhfisuhdf sdifhsjdfs natalia te quiero mucho",
-        },
-        {
-            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
-            title: "NEED FOR SPEED: HEAT",
-            url: "#",
-            description: "juego #2",
-        },
-        {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
-            title: "NEED FOR SPEED: MOST WANTED",
-            url: "#",
-            description: "juego #3",
-        },
-        {
-            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
-            title: "NEED FOR SPEED: HEAT",
-            url: "#",
-            description: "juego #2",
-        },
-        {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
-            title: "NEED FOR SPEED: MOST WANTED",
-            url: "#",
-            description: "juego #3",
-        }
-    ]
-
     const noticias = [
         {
-            image: "https://www.91-cdn.com/hub/wp-content/uploads/2021/12/ar88u.jpg",
-            title: "noticia 1",
-            url: "#",
-            description: "noticia..."
+            assets: [{ url: "https://www.91-cdn.com/hub/wp-content/uploads/2021/12/ar88u.jpg" }],
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/2134770/capsule_616x353.jpg?t=1713431762",
-            title: "noticia 2",
-            url: "#",
-            description: "noticia..."
+            assets: [{ url: "https://cdn.akamai.steamstatic.com/steam/apps/2134770/capsule_616x353.jpg?t=1713431762" }],
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/01/free-steam-games-collage.jpg",
-            title: "noticia 3",
-            url: "#",
-            description: "noticia..."
+            assets: [{ url: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/01/free-steam-games-collage.jpg" }],
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/Best-coop-games-of-2012.jpg",
-            title: "noticia 4",
-            url: "#",
-            description: "noticia..."
+            assets: [{ url: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/Best-coop-games-of-2012.jpg" }],
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         }
     ]
 
 
     return (
-        <div className="container content-layout">
-            <aside>
-                <h2>Aside Content</h2>
-                <ul>
-                    <li>Catetegoria 1</li>
-                    <li>Catetegoria 2</li>
-                    <li>Catetegoria 3</li>
-                </ul>
-                <HomeListaNoticia notices={notices} sectionTitle={'DinoNoticias'} />
-            </aside>
+        <div className="container">
+
             <main>
                 <h1>Main Content</h1>
                 <CarouselComponent slides={slides} />

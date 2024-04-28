@@ -9,10 +9,11 @@ export function HomeListaNoticia({ notices, sectionTitle }) {
             <div className="notice-list">
                 {notices.map((elemento, index) => (
                     <HomeCardNoticia
-                        image={elemento.assets[0].url}
-                        title={elemento.titulo}
-                        description={elemento.descripcion.slice(0, 70)}
-                        url={"/noticias/" + elemento.id}
+                        id={elemento.id}
+                        titulo={elemento.titulo}
+                        fecha={elemento.fecha}
+                        imagen={elemento.assets[0].url}
+                        descripcion={elemento.descripcion}
                         key={index}
                     />
                 ))
