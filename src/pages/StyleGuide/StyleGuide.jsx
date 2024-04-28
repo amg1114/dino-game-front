@@ -62,6 +62,21 @@ export function StyleGuidePage() {
                     url: "https://firebasestorage.googleapis.com/v0/b/dinogame-6bcaa.appspot.com/o/uploads%2Fvideo-games%2F5%2Fcyberpunk_01.jpg?alt=media&token=ffd1ef40-4ce2-47dd-925f-d214c614fec7"
                 }
             ]
+        },
+        {
+            id: 6,
+            precio: 50,
+            titulo: "Cyberpunk 2077",
+            descripcion: "Desarrollado por CD Projekt Red, Cyberpunk 2077 es un juego de rol de acción ambientado en Night City, una metrópolis futurista obsesionada con el poder, la moda y la tecnología. Los jugadores asumen el papel de V, un mercenario en busca de un implante único que garantiza la inmortalidad. Con un vasto mundo abierto y una historia no lineal, el juego ofrece una experiencia inmersiva en un entorno cyberpunk.",
+            fechaLanzamiento: "2020-12-10",
+            assets: [
+                {
+
+                    id: 13,
+                    title: "cyberpunk_01",
+                    url: "https://firebasestorage.googleapis.com/v0/b/dinogame-6bcaa.appspot.com/o/uploads%2Fvideo-games%2F5%2Fcyberpunk_01.jpg?alt=media&token=ffd1ef40-4ce2-47dd-925f-d214c614fec7"
+                }
+            ]
         }
     ]
 
@@ -155,9 +170,9 @@ export function StyleGuidePage() {
                         <a href="#" className="btn btn-5">DESCARTAR</a>
                     </div>
                 </div>
-                <GameSectionList games={games} sectionTitle={'Categoria 1'} />
-                <GameSectionList games={games} sectionTitle={'Categoria 2'} />
-                <GameSectionList games={games} sectionTitle={'Categoria 3'} />
+                <GameSectionList games={games} sectionTitle={'Categoria 1'} id={1} />
+                <GameSectionList games={games} sectionTitle={'Categoria 2'} id={2} />
+                <GameSectionList games={games} sectionTitle={'Categoria 3'} id={3} />
                 <AssetsForm ownerId={1} path={'video-games'} />
                 <ListaNoticia noticias={noticias} />
             </main>

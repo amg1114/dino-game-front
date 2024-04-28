@@ -81,6 +81,7 @@ export function HomePage() {
                                     <GameSectionList
                                         games={elemento.videoGames}
                                         sectionTitle={elemento.titulo}
+                                        id={elemento.id}
                                         key={index}
                                     />
                                 )
@@ -91,21 +92,19 @@ export function HomePage() {
 
                 <div className="right-aside">
                     <h2>NOTICIAS</h2>
-                    <ul>
-                        {
-                            noticias.map((elemento, index) => {
-                                return (
-                                    <HomeCardNoticia
-                                        image={elemento.assets[0].url}
-                                        title={elemento.title}
-                                        description={elemento.descripcion.slice(0, 100)}
-                                        url={"/noticias/" + elemento.id}
-                                        key={index}
-                                    />
-                                )
-                            })
-                        }
-                    </ul>
+                    {
+                        noticias.map((elemento, index) => {
+                            return (
+                                <HomeCardNoticia
+                                    image={elemento.assets[0].url}
+                                    title={elemento.title}
+                                    description={elemento.descripcion.slice(0, 100)}
+                                    url={"/noticias/" + elemento.id}
+                                    key={index}
+                                />
+                            )
+                        })
+                    }
                 </div>
 
             </div>

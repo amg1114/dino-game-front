@@ -60,4 +60,5 @@
 
 .right-aside{
     grid-column: 10 / span 3;
+    margin-left: 20px;
 }

@@ -8,3 +8,13 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+
+.game-section-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-ver-mas{
+    height: 12px;
+    margin-right: 10px;
+}
