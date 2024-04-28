@@ -5,7 +5,7 @@
 }
 
 /* Estilos para el layout de contenido */
-.content-layout {
+.content-layout{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
 }
@@ -42,4 +42,24 @@
     .content-layout main {
         grid-column: initial;
     }
+}
+
+/* Estilos para el HomePage */
+
+.home-content-layout{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+.left-aside{
+    grid-column: 1 / span 1;
+    margin-right: 20px;
+}
+
+.main{
+    grid-column: 2 / span 7; 
+}
+
+.right-aside{
+    grid-column: 9 / span 4;
+    margin-left: 20px;
 }
