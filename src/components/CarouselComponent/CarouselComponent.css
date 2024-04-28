@@ -5,8 +5,11 @@
 
 .carousel .imgWrapper {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: fit-content;
+    height: 520px;
+    overflow: hidden;
 }
 .carousel .imgWrapper img {
     width: 100%;
