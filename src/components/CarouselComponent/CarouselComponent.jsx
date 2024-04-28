@@ -28,13 +28,17 @@ export const CarouselComponent = ({ slides }) => {
   }, [currentSlide])
 
   const nextSlide = () => {
-    const nextIndex = (currentSlide + 1) % slides.length;
-    selectSlide(nextIndex);
+    if (slides.length > 0) {
+      const nextIndex = (currentSlide + 1) % slides.length;
+      selectSlide(nextIndex);
+    }
   };
 
   const prevSlide = () => {
-    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-    selectSlide(prevIndex);
+    if (slides.length > 0) {
+      const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+      selectSlide(prevIndex);
+    }
   };
 
   const selectSlide = (slide) => {
@@ -44,6 +48,7 @@ export const CarouselComponent = ({ slides }) => {
   return <>
     {slides.length ? (
       <div className="carousel">
+        <h2><span>DINO</span>DESTACADOS Y RECOMENDADOS</h2>
         <div className="imgWrapper">
           {
             slides.map((slide, index) => (
@@ -76,3 +81,4 @@ export const CarouselComponent = ({ slides }) => {
     ) : <></>}
   </>;
 }
+

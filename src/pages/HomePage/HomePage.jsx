@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import { CarouselComponent } from "../../components/CarouselComponent/CarouselComponent"
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList"
 import { HomeCardNoticia } from "../../components/Noticias/HomeCardNoticia"
-
+import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNoticia"
+import "./HomePage.css"
 export function HomePage() {
 
     const ENDPOINT_API = "https://dinogame.up.railway.app/api/video-games?limit=5"
@@ -59,28 +60,32 @@ export function HomePage() {
 
     return <>
         {slides === null ? <></> : (
-            <div className="container content-layout ">
-                <div className="left-aside">
-                    <h2>CATEGORIAS</h2>
-                    <ul>
-                        {
-                            categorias.map((elemento, index) => {
-                                return <li key={elemento.id + "left-aside"}><a href={"/categorias" + elemento.id} >{elemento.titulo}</a></li>
-                            })
-                        }
-                    </ul>
-                </div>
-
+            <div className="container">
                 <div className="main">
-                    <h2 className="recomendados"><span>DINO</span>DESTACADOS Y RECOMENDADOS</h2>
-                    <CarouselComponent slides={slides} />
+                    <section className="banner">
+                        <CarouselComponent slides={slides} />
+                        <HomeListaNoticia notices={noticias} sectionTitle={<><span>DINO</span>NOTICIAS</>} />
+                    </section>
+
+                    
+                        <section className="seccion-categorias">
+                            <h2><span>DINO</span>CATEGORIAS</h2>
+                            <div className="lista-categorias">
+                                {
+                                    categorias.slice(0,6).map((elemento, index) => {
+                                        return <div className="categoria" key={elemento.id + "left-aside"}><a href={"/categorias" + elemento.id} >{elemento.titulo}</a></div>
+                                    })
+                                }
+                            </div>
+                        </section>
+                    
                     <>
                         {
                             categorias.slice(0, 3).map((elemento, index) => {
                                 return (
                                     <GameSectionList
                                         games={elemento.videoGames}
-                                        sectionTitle={elemento.titulo}
+                                        sectionTitle={elemento.titulo.toUpperCase()}
                                         id={elemento.id}
                                         key={index}
                                     />
@@ -90,22 +95,6 @@ export function HomePage() {
                     </>
                 </div>
 
-                <div className="right-aside">
-                    <h2>NOTICIAS</h2>
-                    {
-                        noticias.map((elemento, index) => {
-                            return (
-                                <HomeCardNoticia
-                                    image={elemento.assets[0].url}
-                                    title={elemento.titulo}
-                                    description={elemento.descripcion.slice(0,70)}
-                                    url={"/noticias/" + elemento.id}
-                                    key={index}
-                                />
-                            )
-                        })
-                    }
-                </div>
 
             </div>
         )

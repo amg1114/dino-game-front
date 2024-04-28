@@ -8,12 +8,9 @@ export function HomeCardNoticia({ image, title, description, url}) {
                 alt="notice image"
             />
             <div className="textNotice">
-
                 <div className="noticeTit">
-                   <a className="url" href={url}>{title}</a> 
+                   <a className="url" href={url}>{title.slice(0,100)}...</a> 
                 </div>
-                <div className="descriptionNews"><p>{description}</p></div>
-
             </div>
         </div>
     )

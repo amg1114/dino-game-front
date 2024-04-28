@@ -1,7 +1,7 @@
 import { CarouselComponent } from "../../components/CarouselComponent/CarouselComponent";
 import AssetsForm from "../../components/assetsForm/AssetsForm";
 import { GameSectionList } from "../../partials/GameSectionList/GameSectionList";
-import { HomeListNotice } from "../../partials/HomeCardNoticia/HomeListNoticia";
+import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNoticia";
 import { ListaNoticia } from "../../partials/CardNoticia/ListaNoticia"
 
 export function StyleGuidePage() {
@@ -150,7 +150,7 @@ export function StyleGuidePage() {
                     <li>Catetegoria 2</li>
                     <li>Catetegoria 3</li>
                 </ul>
-                <HomeListNotice notices={notices} sectionTitle={'DinoNoticias'} />
+                <HomeListaNoticia notices={notices} sectionTitle={'DinoNoticias'} />
             </aside>
             <main>
                 <h1>Main Content</h1>
