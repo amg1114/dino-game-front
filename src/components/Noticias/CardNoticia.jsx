@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './CardNoticia.css'
 
 export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
@@ -9,8 +10,9 @@ export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
                     alt="notice image"
                 />
                 <div className="textNotice">
-                    <h3>{titulo}</h3>
-                    <p>{descripcion}</p>
+                    <Link to={`/noticias/`+id} className="noticeModal">
+                        <span><h3>{titulo} </h3>
+                            <p>{descripcion}</p></span></Link>
                 </div>
             </div>
         </div>
