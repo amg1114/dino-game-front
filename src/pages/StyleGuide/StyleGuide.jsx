@@ -43,61 +43,52 @@ export function StyleGuidePage() {
 
     const notices = [
         {
-            image: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
-            title: "NEED FOR SPEED: DELUXE EDITION",
-            url: "#",
-            description: "juego #1",
+            imagen: "https://image.api.playstation.com/cdn/UP0006/CUSA01925_00/RxeNb9Ph1y2VhBGv5Ct0tuY6f5xC4t9f.png",
+            titulo: "NEED FOR SPEED: DELUXE EDITION",
+            descripcion: "Phasellus tincidunt nisl at metus vulputate molestie.",
         },
         {
-            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
-            title: "NEED FOR SPEED: HEAT",
-            url: "#",
-            description: "juego #2",
+            imagen: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
+            titulo: "NEED FOR SPEED: HEAT",
+            descripcion: "Phasellus tincidunt nisl at metus vulputate molestie.",
         },
         {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
-            title: "NEED FOR SPEED: MOST WANTED",
-            url: "#",
-            description: "juego #3",
+            imagen: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
+            titulo: "NEED FOR SPEED: MOST WANTED",
+            descripcion: "Phasellus tincidunt nisl at metus vulputate molestie.",
         },
         {
-            image: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
-            title: "NEED FOR SPEED: HEAT",
-            url: "#",
-            description: "juego #2",
+            imagen: "https://www.irrompibles.net/irrwp/wp-content/uploads/2019/11/NeedForSpeedHeat-head.jpg",
+            titulo: "NEED FOR SPEED: HEAT",
+            descripcion: "Phasellus tincidunt nisl at metus vulputate molestie.",
         },
         {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
-            title: "NEED FOR SPEED: MOST WANTED",
-            url: "#",
-            description: "juego #3",
+            imagen: "https://cdn.akamai.steamstatic.com/steam/apps/1262560/header.jpg?t=1605151411",
+            titulo: "NEED FOR SPEED: MOST WANTED",
+            descripcion: "Phasellus tincidunt nisl at metus vulputate molestie.",
         }
     ]
 
     const noticias = [
         {
-            image: "https://www.91-cdn.com/hub/wp-content/uploads/2021/12/ar88u.jpg",
-            title: "noticia 1",
-            url: "#",
-            description: "noticia..."
+            imagen: "https://www.91-cdn.com/hub/wp-content/uploads/2021/12/ar88u.jpg",
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://cdn.akamai.steamstatic.com/steam/apps/2134770/capsule_616x353.jpg?t=1713431762",
-            title: "noticia 2",
-            url: "#",
-            description: "noticia..."
+            imagen: "https://cdn.akamai.steamstatic.com/steam/apps/2134770/capsule_616x353.jpg?t=1713431762",
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/01/free-steam-games-collage.jpg",
-            title: "noticia 3",
-            url: "#",
-            description: "noticia..."
+            imagen: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/01/free-steam-games-collage.jpg",
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         },
         {
-            image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/Best-coop-games-of-2012.jpg",
-            title: "noticia 4",
-            url: "#",
-            description: "noticia..."
+            imagen: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/Best-coop-games-of-2012.jpg",
+            titulo: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            descripcion: "Mauris justo neque, feugiat in urna sed, iaculis commodo dolor. Nunc suscipit erat et augue sodales pulvinar. Maecenas turpis leo"
         }
     ]
 

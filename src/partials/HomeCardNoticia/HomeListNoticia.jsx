@@ -8,11 +8,11 @@ export function HomeListNotice({ notices, sectionTitle }) {
             <h2>{sectionTitle}</h2>
             <div className="notice-list">
                 {notices.map((notice) => ( 
-                    <HomeCardNoticia key={notice + "noticia"}
-                        image={notice.image}
-                        title={notice.title}
-                        url={notice.url}
-                        description={notice.description}
+                    <HomeCardNoticia
+                        imagen={notice.imagen}
+                        titulo={notice.titulo}
+                        descripcion={notice.descripcion}
+                        id={notice.id}
                     />
                 ))
                 }

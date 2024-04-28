@@ -1,0 +1,15 @@
+.tituloPagina{
+    text-align: center;
+}
+.contenedor{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    gap: 50px;
+    margin-right: 40px;
+}
+
+.noticeCard {
+    padding: 10px;
+  }

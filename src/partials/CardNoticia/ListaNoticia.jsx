@@ -1,20 +1,22 @@
 import { CardNotice } from '../../components/Noticias/CardNoticia';
+import './ListaNoticia.css'
 
 export function ListaNoticia({ noticias }) {
     return (
-        <div className="ListaNoticia ">
-            <h2> <span>DINO</span>-NOTICIAS</h2>
-            <div className="noticia-list">
-                {noticias.map((noticia) => (
-                    <CardNotice key={noticia + "noticia"}
-                        image={noticia.image}
-                        title={noticia.title}
-                        url={noticia.url}
-                        description={noticia.description}
-                    />
-                ))
-                }
+        <div >
+        <h2 className='tituloPagina'><span>Dino-</span>Noticias</h2>
+            <div className='contenedor'>
+                {noticias.map((noticia, index) => (
+                    <div key={index} className='noticeCard'>
+                        <CardNotice
+                            imagen={noticia.imagen}
+                            titulo={noticia.titulo}
+                            descripcion={noticia.descripcion}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
+
     )
 }
