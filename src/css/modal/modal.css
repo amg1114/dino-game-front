@@ -28,3 +28,26 @@
     color: #fff;
     font-weight: bolder;
 }
+
+.izquierda {
+    width: 70%;
+    text-align: left;
+    left: 0; right: 70%;
+}
+
+.imagen{
+    width: 100%;
+    text-align: left;
+    border-radius: 20px;
+}
+.fecha{
+    content: substring(attr(fecha), 0, 10); 
+    text-align: right;
+    width: -80px;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.derecha{
+    box-sizing: 30%;
+}

@@ -5,6 +5,7 @@ import axios from "axios"
 import { useEffect,  useState } from "react"
 
 
+
 export function VistaNoticia() {
 
     const { id } = useParams()
@@ -36,7 +37,8 @@ export function VistaNoticia() {
                             </Link>
                         </div>
                         <div className="izquierda">
-                            <img src={noticia.assets[0].url} alt="imagen_juego" />
+                            <img src={noticia.assets[0].url} alt="imagen_juego" className="imagen"/>
+                            <p className="fecha">{noticia.fecha}</p>
                             <h2>{noticia.titulo}</h2>
                             <p>{noticia.descripcion}</p>
                         </div>
