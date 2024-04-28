@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { CardNotice } from "../../../components/Noticias/CardNoticia";
+import { ListaNoticia } from "../../../partials/CardNoticia/ListaNoticia";
 
 export function PaginaNoticias() {
-    const ENDPOINT_API = "https://dino-game-backend-production.up.railway.app/api/noticias"
+    const ENDPOINT_API = "https://dinogame.up.railway.app/api/noticias"
     const [noticias, setNoticias] = useState([]);
 
     useEffect(() => {
@@ -17,28 +17,16 @@ export function PaginaNoticias() {
             })
 
     })
-
     return <>
         {noticias === null ? <></> : (
             <div>
-                <ul>
-                    {noticias.map((elemento, index) => {
-                        return (
-
-                            <li>
-                                    <CardNotice
-                                        image={elemento.assets[0].url}
-                                        title={elemento.titulo}
-                                        description={elemento.descripcion}
-                                        url={("/noticias/" + elemento.id)}
-                                        NoticePage={elemento.fecha}
-                                        key={index}
-                                    />
-
-                            </li>
-                        )
-                    })}
-                </ul>
+                {noticias.map((elemento, index) => {
+                    return (
+                        <ListaNoticia noticias={elemento}
+                            key={"noticia" + index} />
+                    )
+                })}
+                <ListaNoticia noticias={noticias}/>
                 <Outlet />
             </div>
         )
