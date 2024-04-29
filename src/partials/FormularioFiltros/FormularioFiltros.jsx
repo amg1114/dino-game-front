@@ -7,15 +7,29 @@ export function FormularioFiltros({ onSearch }) {
     const API_ENPOINT = process.env.REACT_APP_API + '/categorias'
     const [categorias, setCategorias] = useState([]);
 
+    const [search, setSearch] = useState('');
+    const [categoria, setCategoria] = useState(null);
+    const [precio, setPrecio] = useState(0);
+
     useEffect(() => {
+        if (!categorias.length) {
+            axios.get(API_ENPOINT).then((res) => {
+                setCategorias(res.data)
+            })
+        }
+        sendFormData()
+    }, [search, categoria, precio])
 
-        axios.get(API_ENPOINT).then((res) => {
-            setCategorias(res.data)
-        })
-    }, [])
-    const handleSearch = (e) => { }
+    const sendFormData = () => {
+        const data = {
+            search,
+            categoria,
+            precio
+        }
+        onSearch(data)
+    }
 
-    const CssTextField = styled(TextField)({
+    const CssTextField = ({
         fontFamily: "Teko",
         '& .MuiInputLabel-filled': {
             fontSize: "20px",
@@ -56,10 +70,19 @@ export function FormularioFiltros({ onSearch }) {
 
     return <>
         <h3>Formulario de búsqueda</h3>
-        <form onSubmit={handleSearch} className="filters-form">
-            <CssTextField label="Buscar" variant="filled" fullWidth />
+        <form onSubmit={sendFormData} className="filters-form">
+            <TextField
+                sx={CssTextField}
+                id="outlined-controlled"
+                label="Buscar Juego"
+                value={search}
+                fullWidth
+                variant="filled"
+                onChange={(event) => {
+                    setSearch(event.target.value);
+                }}
+            />
             <Autocomplete
-                disablePortal
                 id="combo-box-demo"
                 options={categorias}
                 filterOptions={createFilterOptions({
@@ -68,9 +91,13 @@ export function FormularioFiltros({ onSearch }) {
                 })}
                 getOptionLabel={(opt) => opt.titulo}
                 getOptionKey={(opt) => opt.id}
-                renderInput={(params) => <CssTextField {...params} label="Catgeoria" variant="filled" />}
+                value={categoria}
+                onChange={(event, value) => {
+                    setCategoria(value)
+                }}
+                renderInput={(params) => <TextField {...params} label="Catgeoria" variant="filled" sx={CssTextField} />}
             />
-            <CssTextField label="Precio" variant="filled" type="number" />
+            <TextField label="Precio" variant="filled" type="number" sx={CssTextField} value={precio} onChange={(event)=>setPrecio(event.target.value)}/>
         </form>
     </>
 }

@@ -6,7 +6,7 @@ import { FormularioFiltros } from "../../../partials/FormularioFiltros/Formulari
 export function PaginaJuegos() {
     return <>
         <div className="container">
-            <FormularioFiltros />
+            <FormularioFiltros onSearch={(data)=>console.log({data})} />
             <h1>Pagina Juegos</h1>
             <Outlet />
         </div>
