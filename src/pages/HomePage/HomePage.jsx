@@ -7,9 +7,9 @@ import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNotic
 import "./HomePage.css"
 export function HomePage() {
 
-    const ENDPOINT_API = "https://dinogame.up.railway.app/api/video-games?limit=5"
-    const ENDPOINT_CATEGORIAS = "https://dinogame.up.railway.app/api/categorias"
-    const ENDPOINT_NOTICIAS = "https://dinogame.up.railway.app/api/noticias?limit=3"
+    const ENDPOINT_API = process.env.REACT_APP_API + "/video-games?limit=5"
+    const ENDPOINT_CATEGORIAS = process.env.REACT_APP_API + "/categorias"
+    const ENDPOINT_NOTICIAS = process.env.REACT_APP_API + "/noticias?limit=3"
 
     const [slides, setSlides] = useState([])
     const [categorias, setCategorias] = useState([])
@@ -35,7 +35,7 @@ export function HomePage() {
                         const category = respuesta.data
                         let prevCategoria = []
                         category.map((categoria) => {
-                            axios.get("https://dinogame.up.railway.app/api/categorias/" + categoria.id)
+                            axios.get(process.env.REACT_APP_API + "/categorias/" + categoria.id)
                                 .catch(function (error) {
                                     console.log(error)
                                 })

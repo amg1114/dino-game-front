@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { ListaNoticia } from "../../../partials/ListaNoticia/ListaNoticia";
 
 export function PaginaNoticias() {
-    const ENDPOINT_API = "https://dinogame.up.railway.app/api/noticias"
+    const ENDPOINT_API = process.env.REACT_APP_API + "/noticias"
     const [noticias, setNoticias] = useState([]);
 
     useEffect(() => {
