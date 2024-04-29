@@ -1,0 +1,20 @@
+.game-section {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.game-section .game-list {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.game-section-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-ver-mas{
+    height: 12px;
+}
