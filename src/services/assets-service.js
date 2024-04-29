@@ -61,7 +61,7 @@ const registerFile = (file_url, asset) => {
         data.noticiaId = asset.ownerId;
     }
 
-    axios.post("http://localhost:3000/api/assets", data)
+    axios.post(process.env.REACT_APP_API + "/assets", data)
         .then((res) => console.log("The asset was registered"))
         .catch((err)=>console.error(err));
 };
