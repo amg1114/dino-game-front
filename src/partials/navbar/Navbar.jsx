@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Link to='/noticias' className="enlace">
                         NOTICIAS</Link>
                     <Link to='/profile' className="enlace">
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             person
                         </span></Link>
                     <button id="searchButton">
