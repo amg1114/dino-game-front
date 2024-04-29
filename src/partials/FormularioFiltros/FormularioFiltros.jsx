@@ -95,7 +95,7 @@ export function FormularioFiltros({ onSearch }) {
                 onChange={(event, value) => {
                     setCategoria(value)
                 }}
-                renderInput={(params) => <TextField {...params} label="Catgeoria" variant="filled" sx={CssTextField} />}
+                renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={CssTextField} />}
             />
             <TextField label="Precio" variant="filled" type="number" sx={CssTextField} value={precio} onChange={(event)=>setPrecio(event.target.value)}/>
         </form>
