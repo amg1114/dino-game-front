@@ -11,6 +11,10 @@ export default defineConfig((mode) => {
         plugins: [react()],
         css: {
             devSourcemap: true,
-        }
+        },
+        esbuild: {
+            target: "esnext",
+            platform: "linux",
+        },
     };
 });
