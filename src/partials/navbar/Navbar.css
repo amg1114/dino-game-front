@@ -15,6 +15,9 @@ header .navbar  .titulo {
     margin: auto;
 }
 
+header .navbar  .titulo h1 {
+    margin: 0;
+}
 header .navbar .logo {
     width: 80px;
     height: 80px;

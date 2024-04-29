@@ -1,0 +1,41 @@
+.banner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.banner h2 {
+    width: 100%;
+}
+
+.banner .carousel {
+    width: 70%;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.banner aside {
+    flex: 1;
+}
+
+.seccion-categorias {
+    width: 100%;
+}
+
+.seccion-categorias .lista-categorias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.seccion-categorias .lista-categorias .categoria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #57cc99;
+    border-radius: 4px;
+}
+
+.seccion-categorias .lista-categorias .categoria a{
+   font-size: 30px;
+   text-transform: uppercase;
+}

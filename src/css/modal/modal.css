@@ -19,7 +19,10 @@
     max-width: 1200px;
     border-radius: 10px;
 }
-
+.modal-fade .modal-content .container {
+    display: flex;
+    gap: 20px;
+}
 .modal-fade .modal-content .modal-header {
     display: flex;
     justify-content: end;
@@ -27,4 +30,32 @@
 .modal-fade .modal-content .modal-header .modal-closer {
     color: #fff;
     font-weight: bolder;
+}
+
+
+.izquierda {
+    width: 70%;
+    text-align: left;
+    left: 0; right: 70%;
+}
+.derecha {
+    width: 30%;
+    text-align: right;
+    right: 0; left: 70%;
+}
+.imagen{
+    width: 100%;
+    text-align: left;
+    border-radius: 20px;
+}
+.fecha{
+    content: substring(attr(fecha), 0, 10); 
+    text-align: right;
+    width: -80px;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.derecha{
+    box-sizing: 30%;
 }
