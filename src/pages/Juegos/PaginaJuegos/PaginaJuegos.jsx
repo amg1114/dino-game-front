@@ -3,7 +3,7 @@ import { FormularioFiltros } from "../../../partials/FormularioFiltros/Formulari
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GameCard } from "../../../components/GameCard/GameCard";
-
+import "./PaginaJuegos.css"
 // juegos 
 // juegos/1
 export function PaginaJuegos() {
@@ -27,14 +27,13 @@ export function PaginaJuegos() {
                 <div className="lista-juegos">
                     {
                         juegos.map((juego, index) => {
-                            <div className="juego" key={index}>
-                                <GameCard
-                                    image={juego.assets[0].url}
-                                    title={juego.titulo}
-                                    description={juego.description}
-                                    url={"/video-game/" + juego.id}
-                                />
-                            </div>
+                            return (
+                                <div className="juego" key={index}>
+                                    <GameCard
+                                        Game={juego}
+                                    />
+                                </div>
+                            )
                         })
                     }
                 </div>
