@@ -4,28 +4,21 @@ import './gameCard.css'
 export function GameCard({ Game }) {
     const { assets, titulo, descripcion, id, precio } = Game
     return (
-        <div className='contenedor-juegos'>
-            <div className='contenedor-imagen'>
-                <Link to={`/juegos/${id}`}>
-                    <div className='gameCardSection'>
-                        <img className="gameImage"
-                            src={assets[1].url}
-                            alt={titulo + " imagen"}
-                        />
+        <div className='gameCardSection'>
+            <figure>
+                <img className="gameImage"
+                    src={assets[0].url}
+                    alt={titulo + " imagen"}
+                />
+            </figure>
 
-
-                        <div className='description'><p>{descripcion.slice(0, 100)}</p></div>
-                    </div>
-                </Link>
-            </div>
+            <div className='description'><p>{descripcion.slice(0, 100)}</p></div>
 
             <div className="urlGame">
-                <p>{titulo}</p>
+                <Link>{titulo}</Link>
             </div>
-
-            <div className="btn btn-1 precio">
-                <p>${precio}</p>
-            </div>
+            
+            <span className="btn btn-1 precio">${precio}</span>
         </div>
     )
 }

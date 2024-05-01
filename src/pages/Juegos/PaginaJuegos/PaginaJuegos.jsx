@@ -22,17 +22,16 @@ export function PaginaJuegos() {
 
     return <>
         {juegos === null ? <></> : (
-            <div>
+            <div className="container">
                 <FormularioFiltros onSearch={(data) => console.log({ data })} />
                 <div className="lista-juegos">
                     {
                         juegos.map((juego, index) => {
                             return (
-                                <div className="juego" key={index}>
                                     <GameCard
                                         Game={juego}
+                                        key={index}
                                     />
-                                </div>
                             )
                         })
                     }
