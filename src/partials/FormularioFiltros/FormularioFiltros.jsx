@@ -74,22 +74,26 @@ export function FormularioFiltros({ onSearch }) {
                     setSearch(event.target.value);
                 }}
             />
-            <Autocomplete
-                id="combo-box-demo"
-                options={categorias}
-                filterOptions={createFilterOptions({
-                    matchFrom: 'start',
-                    stringify: (opt) => opt.titulo
-                })}
-                getOptionLabel={(opt) => opt.titulo}
-                getOptionKey={(opt) => opt.id}
-                value={categoria}
-                onChange={(event, value) => {
-                    setCategoria(value)
-                }}
-                renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={{...CssTextField, width: '40%'}} />}
-            />
-            <TextField label="Precio" variant="filled" type="number" sx={{...CssTextField, width: '40%'}} value={precio} onChange={(event)=>setPrecio(event.target.value)}/>
+                    <div className="field-wrapper">
+                        <TextField label="Precio" fullWidth variant="filled" type="number" sx={CssTextField} value={precio} onChange={(event) => setPrecio(event.target.value)} />
+                    </div>
+            <div className="field-wrapper">
+                <Autocomplete
+                    id="combo-box-demo"
+                    options={categorias}
+                    filterOptions={createFilterOptions({
+                        matchFrom: 'start',
+                        stringify: (opt) => opt.titulo
+                    })}
+                    getOptionLabel={(opt) => opt.titulo}
+                    getOptionKey={(opt) => opt.id}
+                    value={categoria}
+                    onChange={(event, value) => {
+                        setCategoria(value)
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={CssTextField} />}
+                />
+            </div>
         </form>
     </>
 }
