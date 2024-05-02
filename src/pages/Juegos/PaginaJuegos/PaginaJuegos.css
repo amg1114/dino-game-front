@@ -16,3 +16,6 @@
         grid-template-columns: repeat(4,  1fr);
     }   
 }
+.lista-juegos .gameCardSection .description{
+    font-size: 20px;
+}

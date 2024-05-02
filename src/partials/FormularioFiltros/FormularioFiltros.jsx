@@ -56,6 +56,14 @@ export function FormularioFiltros({ onSearch }) {
             '&:after': {
                 borderColor: '#57cc99',
                 borderWidth: '2px'
+            },
+            '&.MuiFormControl-fullWidth)': {
+                flex: 1,
+                width: 'auto'
+            },
+            '&:not(.MuiFormControl-fullWidth)': {
+                flexStroke: '0',
+                minWidth: '250px'
             }
         }
     })
@@ -87,9 +95,9 @@ export function FormularioFiltros({ onSearch }) {
                 onChange={(event, value) => {
                     setCategoria(value)
                 }}
-                renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={{...CssTextField, width: '40%'}} />}
+                renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={CssTextField} />}
             />
-            <TextField label="Precio" variant="filled" type="number" sx={{...CssTextField, width: '40%'}} value={precio} onChange={(event)=>setPrecio(event.target.value)}/>
+            <TextField label="Precio" variant="filled" type="number" sx={CssTextField} value={precio} onChange={(event)=>setPrecio(event.target.value)}/>
         </form>
     </>
 }

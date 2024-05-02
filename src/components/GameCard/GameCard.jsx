@@ -15,7 +15,7 @@ export function GameCard({ Game }) {
             <div className='description'><p>{descripcion.slice(0, 100)}</p></div>
 
             <div className="urlGame">
-                <Link>{titulo}</Link>
+                <Link to={"/juegos/" + id}>{titulo}</Link>
             </div>
             
             <span className="btn btn-1 precio">${precio}</span>
