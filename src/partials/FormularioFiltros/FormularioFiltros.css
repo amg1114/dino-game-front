@@ -1,5 +1,9 @@
 .filters-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
+}
+
+.filters-form .field-wrapper {
+    flex: 40%;
 }
