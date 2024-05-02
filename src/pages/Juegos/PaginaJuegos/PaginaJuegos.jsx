@@ -7,12 +7,12 @@ import "./PaginaJuegos.css"
 
 export function PaginaJuegos() {
 
-    const ENDPOINT = process.env.REACT_APP_API + "/video-games"
-    const [juegos, setJuegos] = useState([])
+    const ENDPOINT = process.env.REACT_APP_API + "/video-games";
+    const [juegos, setJuegos] = useState([]);
 
     useEffect(() => {
-        loadGames()
-    }, [])
+        loadGames();
+    }, []);
 
     const loadGames = (params = {}) => {
         axios.get(ENDPOINT, { params })
