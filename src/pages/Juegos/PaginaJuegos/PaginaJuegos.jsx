@@ -8,6 +8,7 @@ export function PaginaJuegos() {
         <div className="container">
             <FormularioFiltros onSearch={(data)=>console.log({data})} />
             <h1>Pagina Juegos</h1>
+            <button>descargame</button>
             <Outlet />
         </div>
     </>

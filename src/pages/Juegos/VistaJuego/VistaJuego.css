@@ -1,0 +1,130 @@
+.modal-fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-fade .modal-content {
+    background: #22577A;
+    padding: 20px;
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+    max-width: 1200px;
+    border-radius: 10px;
+}
+.modal-fade .modal-content .container {
+    display: flex;
+    gap: 20px;
+}
+.modal-fade .modal-content .modal-header {
+    display: flex;
+    justify-content: end;
+}
+.modal-fade .modal-content .modal-header .modal-closer {
+    color: #fff;
+    font-weight: bolder;
+}
+
+.vista-juego{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.vista-juego .info-izquierda{
+    grid-column: 1 ;
+}
+
+.vista-juego .info-derecha{
+    grid-column: 2;
+}
+.vista-juego .img1 {
+    
+    width: 600px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.vista-juego .mas-img{
+    width: 290px;
+    height: 150px;
+    margin: 5px;
+    border-radius: 20px;
+}
+
+.vista-juego .det-dev-size{
+    display: flex;
+    justify-content: start;
+    text-transform: uppercase;
+    color: #57cc99;
+}
+
+.vista-juego .size{
+    margin-left: 120px;
+}
+
+.vista-juego .det-nom-edit{
+    color: #fff;
+    font-size: medium;
+    margin-left: 5px;
+}
+
+.vista-juego .comentarios{
+    color: #57cc99;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.vista-juego .titulo-juego{
+    text-align: center;
+}
+
+.vista-juego .descripcion{
+    color: #57cc99;
+    text-transform: uppercase;
+}
+
+.vista-juego .version, .req{
+    color:#57cc99;
+    text-transform: uppercase;
+}
+
+.vista-juego .valor-comprar{
+    display: flex;
+    justify-content: end;
+    text-transform: uppercase;
+}
+
+.vista-juego .precio{
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.vista-juego .btn-comprar{
+    background-color:#57cc99;
+    width: 180px;
+    height: 60px;
+    color: #fff;
+    font-size: x-large;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-color: #57cc99;
+    border-bottom: none;
+    border-radius: 15px;
+}
+
+.vista-juego .btn-comprar:hover{
+    cursor: pointer;
+}
+
+
+
+
+
