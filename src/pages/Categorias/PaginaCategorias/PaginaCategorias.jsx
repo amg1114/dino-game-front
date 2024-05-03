@@ -34,7 +34,7 @@ export function PaginaCategorias() {
                             />)
                         })
                     }
-                    <Outlet />
+                    
                 </div>
             )
         }
