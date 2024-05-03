@@ -58,6 +58,15 @@ export function VistaJuego() {
                                 <div className="info-derecha">
                                     <h2 className="titulo-juego">{juego.titulo}</h2>
                                     <p> <span className="descripcion"> descripción <br /></span>  {juego.descripcion} </p>
+                                    
+                                    <p className="cat">categoria</p>
+
+                                    <div className="categoria">
+                                        {juego.categorias.map((index) => {
+                                            return ( <h3 className="categoria-juego">{index.titulo}</h3> )
+                                        })
+                                        }
+                                    </div>
 
                                     <p>
                                         <span className="version">información de la versión reciente</span> <br />
@@ -68,9 +77,7 @@ export function VistaJuego() {
                                         <h2 className="precio">precio: col${juego.precio}</h2>
                                         <button className="btn-comprar" type="button">comprar</button>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

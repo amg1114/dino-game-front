@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9;
 }
 
 .modal-fade .modal-content {
@@ -80,6 +81,7 @@
     color: #57cc99;
     text-transform: uppercase;
     margin-left: 5px;
+    font-size: xx-large
 }
 
 .vista-juego .titulo-juego{
@@ -89,6 +91,26 @@
 .vista-juego .descripcion{
     color: #57cc99;
     text-transform: uppercase;
+    font-size: x-large
+}
+
+.vista-juego .categoria{
+    display: flex;
+}
+
+.vista-juego .cat{
+    text-transform: uppercase;
+    color: #57cc99;
+    font-size: x-large
+}
+
+.vista-juego .categoria .categoria-juego{
+    width: 100x;
+    font-size: large;
+    margin-right: 10px;
+    background-color: #38a3a5;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .vista-juego .version, .req{
