@@ -1,13 +1,22 @@
-.fullSection{
-    display: inline-flex;
-    padding: 20px;
+.contenedor-juegos{
+    display: grid;
+    align-items: center;
 }
+
 .gameCardSection {
     position: relative;
     display: block;
     width: 100%;
     height: auto;
     max-height: 200px;
+}
+.gameCardSection figure {
+    display: flex;
+    align-items: center;
+    overflow:hidden;
+    width: 100%;
+    height: 200px;
+    margin: 0;
 }
 .gameImage{
     width: 100%;
@@ -26,29 +35,38 @@
     content: " ";
     cursor: pointer;
 }
-
-
 a {
     color: #ffffff;
     text-decoration: none;
 }
-
-.description{
+.gameCardSection .description{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     opacity: 0; /* Oculta el texto por defecto */
     color: #ffffff;
     font-size: 30px;
     font-weight: bolder;
     text-align: center;
-}
-
-.gameCardSection:hover{
-    filter:brightness(50%);
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 .gameCardSection:hover .description{
     opacity: 1;
+}
+.gameCardSection .precio{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+}
+.gameCardSection:hover .description .description-texto{
+    padding-left: 10px;
+    padding-right: 10px;
 }
