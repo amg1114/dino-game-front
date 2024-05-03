@@ -12,10 +12,10 @@ export function GameCard({ Game }) {
                 />
             </figure>
 
-            <div className='description'><p>{descripcion.slice(0, 100)}</p></div>
+            <div className='description'><p className='description-texto'>{descripcion.slice(0, 100)}</p></div>
 
             <div className="urlGame">
-                <Link to={"/juegos/" + id}>{titulo}</Link>
+                <Link to={"/juegos/" + id} className='stretched-link'>{titulo}</Link>
             </div>
             
             <span className="btn btn-1 precio">${precio}</span>

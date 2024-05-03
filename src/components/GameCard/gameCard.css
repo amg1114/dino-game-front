@@ -54,6 +54,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .gameCardSection:hover .description{
@@ -64,4 +65,8 @@ a {
     right: 5px;
     top: 5px;
 
+}
+.gameCardSection:hover .description .description-texto{
+    padding-left: 10px;
+    padding-right: 10px;
 }

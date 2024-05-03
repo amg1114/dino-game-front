@@ -17,7 +17,7 @@ export function PaginaJuegos() {
     const loadGames = (params = {}) => {
         axios.get(ENDPOINT, { params })
             .catch((error) => {
-                console.error(error)
+                error.code === "ERR_BAD_REQUEST" ? setJuegos(null):console.log(error)         
             })
             .then((respuesta) => {
                 setJuegos(respuesta.data)
@@ -36,7 +36,7 @@ export function PaginaJuegos() {
         <div className="container">
             <FormularioFiltros onSearch={Search} />
             {
-                juegos === null ? <></> : (
+                juegos === null ? <><h1>Game was not found</h1></> : (
                     <div className="lista-juegos">
                         {juegos.map((juego, index) => (
                             <GameCard key={index} Game={juego} />
