@@ -20,7 +20,7 @@ export function VistaJuego() {
             .then(function (respuesta) {
                 setJuego(respuesta.data);
             })
-    }
+    }, []
     )
 
     return <>
@@ -41,8 +41,8 @@ export function VistaJuego() {
                                 <div className="info-izquierda">
                                     <div> <img className="img1" src={juego.assets[0].url} alt={juego.assets[0].titulo} /></div>
                                     <div>
-                                        {juego.assets.slice(1, 3).map((img) => {
-                                            return (<img className="mas-img" src={img.url} alt={img.title} />)
+                                        {juego.assets.slice(1, juego.assets.length).map((img, index) => {
+                                            return (<img className="mas-img" key={index} src={img.url} alt={img.title} />)
                                         })
                                         }
                                     </div>
