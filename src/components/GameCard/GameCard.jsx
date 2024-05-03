@@ -1,18 +1,24 @@
+import { Link } from 'react-router-dom'
 import './gameCard.css'
 
-export function GameCard({ image, title, description, url}) {
+export function GameCard({ Game }) {
+    const { assets, titulo, descripcion, id, precio } = Game
     return (
         <div className='gameCardSection'>
-            <img className="gameImage"
-                src={image}
-                alt="videogame image"
-            />
+            <figure>
+                <img className="gameImage"
+                    src={assets[0].url}
+                    alt={titulo + " imagen"}
+                />
+            </figure>
+
+            <div className='description'><p className='description-texto'>{descripcion.slice(0, 100)}</p></div>
 
             <div className="urlGame">
-                <a href={url}>{title}</a>
+                <Link to={"/juegos/" + id} className='stretched-link'>{titulo}</Link>
             </div>
-
-            <div className='description'><p>{description}</p></div>
+            
+            <span className="btn btn-1 precio">${precio}</span>
         </div>
     )
 }
