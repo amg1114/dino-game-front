@@ -1,0 +1,21 @@
+.lista-juegos{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,  1fr);
+    gap: 20px;
+    margin-top: 60px;
+    height: auto;
+    row-gap: 40px;
+}
+.lista-juegos .juego {
+    height: auto;
+}
+
+@media (min-width: 1009px) {
+    .lista-juegos{
+        grid-template-columns: repeat(4,  1fr);
+    }   
+}
+.lista-juegos .gameCardSection .description{
+    font-size: 20px;
+}
