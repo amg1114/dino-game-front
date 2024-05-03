@@ -8,7 +8,7 @@ export function GameSectionList({ games, sectionTitle, id}) {
     return (
         <div className="game-section">
             <div className="game-section-title">
-                <h2>{sectionTitle}</h2>
+                <h2><span>DINO</span>{sectionTitle}</h2>
                 {
                     showLink ? <a href={(`/categorias/${id}`)} className="btn btn-1 btn-ver-mas">Ver mas</a> : <></>
                 }
