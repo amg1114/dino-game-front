@@ -50,7 +50,7 @@ export function VistaNoticia() {
                             <div className="izquierda">
                                 <h2>{noticia.titulo}</h2>
                                 <img src={noticia.assets[0].url} alt={noticia.assets[0].titulo} className="imagen-juego" />
-                                <p className="fecha">{moment(noticia.fecha, "YYY7-MM-DD").format("MMMM DD, YYYY")}</p>
+                                <p className="fecha">{moment(noticia.fecha, "YYYY-MM-DD").format("MMMM, DD, YYYY")}</p>
                                 <p>{noticia.descripcion}</p>
                             </div>
                             <div className="derecha">
