@@ -4,17 +4,18 @@ import './CardNoticia.css'
 export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
     return (
         <div className="CardNotice">
-            <div className='noticeSectionCard'>
-                <img className="noticeImage"
-                    src={imagen}
-                    alt="notice image"
-                />
-                <div className="textNotice">
-                    <Link to={`/noticias/`+id} className="noticeModal">
+            <Link to={`/noticias/` + id}>
+                <div className='noticeSectionCard'>
+                    <img className="noticeImage"
+                        src={imagen}
+                        alt="notice image"
+                    />
+                    <div className="textNotice">
                         <span><h3>{titulo} </h3>
-                            <p>{descripcion}</p></span></Link>
+                            <p>{descripcion}</p></span>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </Link>
+        </div >
     )
 }

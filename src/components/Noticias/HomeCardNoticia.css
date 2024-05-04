@@ -1,4 +1,4 @@
-.home-notice-section {
+.home-notice-section{
     width: auto;
     display: flex;
     align-items: flex-start;
@@ -7,7 +7,7 @@
 }
 
 .home-notice-section:last-child {
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 .home-notice-section .noticeImage {
