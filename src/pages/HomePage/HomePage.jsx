@@ -67,18 +67,24 @@ export function HomePage() {
                         <HomeListaNoticia notices={noticias} sectionTitle={<><span>DINO</span>NOTICIAS</>} />
                     </section>
 
-                    
-                        <section className="seccion-categorias">
-                            <h2><span>DINO</span>CATEGORIAS</h2>
-                            <div className="lista-categorias">
-                                {
-                                    categorias.slice(0,6).map((elemento, index) => {
-                                        return <div className="categoria" key={elemento.id + "left-aside"}><a href={"/categorias/" + elemento.id} >{elemento.titulo}</a></div>
-                                    })
-                                }
-                            </div>
-                        </section>
-                    
+
+                    <section className="seccion-categorias">
+                        <h2><span>DINO</span>CATEGORIAS</h2>
+                        <div className="lista-categorias">
+                            {
+                                categorias.slice(0, 6).map((elemento, index) => {
+                                    return (
+                                        <a href={"/categorias/" + elemento.id} >
+                                            <div className="categoria" key={elemento.id + "left-aside"}>
+                                                {elemento.titulo}
+                                            </div>
+                                        </a>
+                                    )
+                                })
+                            }
+                        </div>
+                    </section>
+
                     <>
                         {
                             categorias.slice(0, 3).map((elemento, index) => {
@@ -94,8 +100,6 @@ export function HomePage() {
                         }
                     </>
                 </div>
-
-
             </div>
         )
         }

@@ -39,12 +39,10 @@ function App() {
         {
           path: 'categorias',
           element: <PaginaCategorias />,
-          children: [
-            {
-              path: ':id',
-              element: <VistaCategoria />
-            }
-          ]
+        },
+        {
+          path: 'categorias/:id',
+          element: <VistaCategoria />
         },
         {
           path: 'noticias',

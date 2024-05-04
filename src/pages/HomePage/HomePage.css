@@ -35,7 +35,7 @@
     border-radius: 4px;
 }
 
-.seccion-categorias .lista-categorias .categoria a{
+.seccion-categorias .lista-categorias a .categoria{
    font-size: 30px;
    text-transform: uppercase;
 }
