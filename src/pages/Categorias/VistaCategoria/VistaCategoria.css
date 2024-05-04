@@ -1,0 +1,27 @@
+.tituloCategoria{
+   color: #ffff ;
+   text-align: center; 
+   text-transform: uppercase;
+}
+
+.listaSeccion  {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+    height: auto;
+    row-gap: 40px;
+}
+
+.listaSeccion .juegosCard{
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    position:relative;
+
+}
+
+
+
+
