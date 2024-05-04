@@ -34,14 +34,10 @@ export function VistaCategoria() {
                 <div className="listaSeccion">
                     {juego.map((elemento, index) => {
                         return (
-                            <div key={index} className="juegosCard">
-                                <GameCard
-                                    image={elemento.assets[0].url}
-                                    title={elemento.titulo}
-                                    description={"#"}
-                                    url={"/juegos/" + elemento.id}
-                                />
-                            </div>
+                            <GameCard
+                                key={index}
+                                Game={elemento}
+                            />
                         )
                     })
                     }
