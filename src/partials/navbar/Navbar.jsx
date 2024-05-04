@@ -13,6 +13,8 @@ export default function Navbar() {
                     </h1>
                 </Link>
                 <div className="enlaces">
+                    <Link to="/categorias" className="enlace">
+                        CATEGORIAS</Link> 
                     <Link to='/juegos' className="enlace">
                         JUEGOS</Link>
                     <Link to='/noticias' className="enlace">
