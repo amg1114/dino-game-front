@@ -18,10 +18,7 @@ export function GameSectionList({ games, sectionTitle, id}) {
                     games.slice(0, 3).map((game, index) => (
                         <GameCard
                             key={index}
-                            image={game.assets[0].url}
-                            gameTitle={game.titulo}
-                            gameUrl={"/juegos/" + game.id}
-                            descriptionGame={game.descripcion.slice(0, 100)} />))
+                            Game={game} />))
                 }
             </div>
         </div>
