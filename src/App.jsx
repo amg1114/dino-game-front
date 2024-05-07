@@ -58,6 +58,20 @@ function App() {
           path: 'style-guide',
           element: <StyleGuidePage />
         },
+        {
+          path: 'perfil',
+          element: <></>,
+          children: [
+            {
+              path: 'biblioteca',
+              element: <></>
+            }
+          ]
+        },
+        {
+          path: 'solicitud-desarrollador',
+          element: <></>
+        },
       ]
     }
   ])
