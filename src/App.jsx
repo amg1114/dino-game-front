@@ -14,6 +14,7 @@ import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
 import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
+import { Perfil } from './pages/User/Perfil/Perfil'
 
 function App() {
   // /juegos/
@@ -60,7 +61,7 @@ function App() {
         },
         {
           path: 'perfil',
-          element: <></>,
+          element: <Perfil />,
           children: [
             {
               path: 'biblioteca',
