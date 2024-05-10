@@ -9,6 +9,7 @@ import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
 import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
+import {ErrorElement} from './pages/ErrorElement'
 
 // Vistas
 import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
@@ -57,6 +58,10 @@ function App() {
         {
           path: 'style-guide',
           element: <StyleGuidePage />
+        },
+        {
+          path: '404',
+          element: <ErrorElement />
         },
       ]
     }
