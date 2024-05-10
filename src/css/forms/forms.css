@@ -6,11 +6,11 @@
     width: 100%;
 }
 
-.form .fiel-wraper {
+.form .field-wrapper {
     width: 40%;
 
 }
 
-.form .fiel-wraper.full-width{
+.form .field-wrapper.full-width{
     width: 100%;
 }
