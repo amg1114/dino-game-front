@@ -1,4 +1,4 @@
-.informacion-usuario form .botones{
-    display: flex;
+.informacion-usuario .buttons-group{
+    justify-content: flex-end;
     gap: 20px;
 }

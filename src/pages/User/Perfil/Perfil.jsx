@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { TextField } from "@mui/material"
-
+import { MenuItem, Select, TextField } from "@mui/material"
+import { InputFilledStyle } from "../../../utils/mui.styles"
+import { Link } from "react-router-dom"
+import "./Perfil.css"
 
 export function Perfil() {
 
@@ -10,13 +12,15 @@ export function Perfil() {
         nombre: '',
         fechaNacimiento: '',
         correo: '',
-        pais: ''
+        pais: '',
+        sexo: ''
     });
     const [datosOriginales, setDatosOriginales] = useState({
         nombre: '',
         fechaNacimiento: '',
         correo: '',
-        pais: ''
+        pais: '',
+        sexo: ''
     });
 
     useEffect(() => {
@@ -27,30 +31,20 @@ export function Perfil() {
             .then((respuesta) => {
                 setValidacion(false)
                 const user = respuesta.data
-                setDatos({
-                    nombre: user.nombre,
-                    fechaNacimiento: user.fechaNacimiento,
-                    correo: user.correo,
-                    pais: user.pais
-                });
-                setDatosOriginales({
-                    nombre: user.nombre,
-                    fechaNacimiento: user.fechaNacimiento,
-                    correo: user.correo,
-                    pais: user.pais
-                });
+                setDatos(user);
+                setDatosOriginales(user);
             })
     }, []);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setDatos(prevDatos => ({...prevDatos, [name]: value}));
+        setDatos(prevDatos => ({ ...prevDatos, [name]: value }));
     };
 
     const handleActualizar = (event) => {
         event.preventDefault();
-        
-        // AQUI DEBO HACER UNA PETICION PATCH
+
+        // AQUI DEBO HACER UNA PETICION PATCH y otro get y mostrar un error si no se actualizo con alert
         console.log('Datos enviados:', datos);
     };
 
@@ -64,61 +58,99 @@ export function Perfil() {
                 <div className="container">
                     <div className="content-layout informacion-usuario">
                         <aside className="botones-perfil">
-                            <a href="/perfil">Informacion Personal</a> <br />
-                            <a href="/perfil/biblioteca">Biblioteca</a> <br />
-                            <a href="#">Perfil Programador</a> <br />
+                            <Link to="/perfil">Informacion Personal</Link> <br />
+                            <Link to="/perfil/biblioteca">Biblioteca</Link> <br />
+                            <Link to="#">Perfil Programador</Link> <br />
                         </aside>
                         <main>
-                            <form>
-                                <TextField
-                                    id="nombre"
-                                    name="nombre"
-                                    label="Nombre"
-                                    value={datos.nombre}
-                                    onChange={handleChange}
-                                /><br /><br />
+                            <form className="form">
 
-                                <TextField
-                                    id="fecha"
-                                    label='Fecha de Nacimiento'
-                                    name="fechaNacimiento"
-                                    type="date"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    value={datos.fechaNacimiento}
-                                    onChange={handleChange} />
-                                <br /><br />
+                                <div className="field-wrapper full-width">
+                                    <TextField
+                                        id="nombre"
+                                        name="nombre"
+                                        label="Nombre"
+                                        value={datos.nombre}
+                                        onChange={handleChange}
+                                        sx={InputFilledStyle}
+                                        variant="filled"
+                                        fullWidth
+                                    />
+                                </div>
 
-                                <TextField
-                                    id="correo"
-                                    label='Correo electronico'
-                                    name="correo"
-                                    value={datos.correo}
-                                    onChange={handleChange} />
-                                <br /><br />
+                                <div className="field-wrapper full-width">
+                                    <TextField
+                                        id="fecha"
+                                        label='Fecha de Nacimiento'
+                                        name="fechaNacimiento"
+                                        type="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={datos.fechaNacimiento}
+                                        onChange={handleChange}
+                                        sx={InputFilledStyle}
+                                        variant="filled"
+                                        fullWidth
+                                    />
+                                </div>
 
-                                <TextField
-                                    id="pais"
-                                    label="Pais"
-                                    name="pais"
-                                    value={datos.pais}
-                                    onChange={handleChange}
-                                />
-                                <br /><br />
+                                <div className="field-wrapper full-width">
+                                    <TextField
+                                        id="correo"
+                                        label='Correo electronico'
+                                        name="correo"
+                                        value={datos.correo}
+                                        onChange={handleChange}
+                                        sx={InputFilledStyle}
+                                        variant="filled"
+                                        fullWidth
+                                    />
+                                </div>
 
-                                <div className="botones">
+                                <div className="field-wrapper full-width">
+                                    <TextField
+                                        id="pais"
+                                        label="Pais"
+                                        name="pais"
+                                        value={datos.pais}
+                                        onChange={handleChange}
+                                        sx={InputFilledStyle}
+                                        variant="filled"
+                                        fullWidth
+                                    />
+                                </div>
+                                <div className="field-wrapper full-width">
+                                    <Select
+                                        id="sexo"
+                                        label="sexo"
+                                        name="sexo"
+                                        value={datos.sexo}
+                                        onChange={handleChange}
+                                        sx={InputFilledStyle}
+                                        variant="filled"
+                                        fullWidth
+                                    >
+                                        <MenuItem value={'M'}>Masculino</MenuItem>
+                                        <MenuItem value={'F'}>Femenino</MenuItem>
+                                        <MenuItem value={'D'}>Dinosaurio</MenuItem>
+
+                                    </Select>
+                                </div>
+
+
+                                <div className="buttons-group">
                                     <button
                                         type="button"
                                         onClick={handleActualizar}
-                                        className='btn btn-1'
+                                        className='btn btn-4'
                                     >
                                         Actualizar
                                     </button>
                                     <button
                                         type="button"
                                         onClick={handleDescartar}
-                                        className='btn btn-1'
+                                        className='btn btn-3'
                                     >
                                         Descartar
                                     </button>
