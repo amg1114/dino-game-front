@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.form .fiel-wraper {
+    width: 40%;
+
+}
+
+.form .fiel-wraper.full-width{
+    width: 100%;
+}
