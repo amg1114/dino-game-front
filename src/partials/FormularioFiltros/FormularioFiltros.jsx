@@ -2,7 +2,7 @@ import { Autocomplete, TextField, createFilterOptions, styled } from "@mui/mater
 import "./FormularioFiltros.css"
 import { useEffect, useState } from "react"
 import axios from "axios";
-
+import { InputFilledStyle } from "../../utils/mui.styles"; 
 export function FormularioFiltros({ onSearch }) {
     const API_ENPOINT = process.env.REACT_APP_API + '/categorias'
     const [categorias, setCategorias] = useState([]);
@@ -29,50 +29,11 @@ export function FormularioFiltros({ onSearch }) {
         onSearch(data)
     }
 
-    const CssTextField = ({
-        fontFamily: "Teko",
-        '& .MuiInputLabel-filled': {
-            fontSize: "20px",
-            fontFamily: "Teko",
-            color: '#38A3A5',
-            '&.Mui-focused': {
-                color: '#57cc99'
-            },
-        },
-        '& .MuiFilledInput-root': {
-            color: '#fff',
-            fontSize: "18px",
-            fontFamily: "Teko",
-            "&:hover:not(.Mui-focused)": {
-                "&:before": {
-                    borderWidth: '2px',
-                    borderColor: "#57cc99",
-                },
-            },
-            '&:before': {
-                borderColor: '#38A3A5',
-                borderWidth: '2px'
-            },
-            '&:after': {
-                borderColor: '#57cc99',
-                borderWidth: '2px'
-            },
-            '&.MuiFormControl-fullWidth)': {
-                flex: 1,
-                width: 'auto'
-            },
-            '&:not(.MuiFormControl-fullWidth)': {
-                flexStroke: '0',
-                minWidth: '250px'
-            }
-        }
-    })
-
     return <>
         <h3>Formulario de búsqueda</h3>
         <form onSubmit={sendFormData} className="filters-form">
             <TextField
-                sx={CssTextField}
+                sx={InputFilledStyle}
                 id="outlined-controlled"
                 label="Buscar Juego"
                 value={search}
@@ -83,7 +44,7 @@ export function FormularioFiltros({ onSearch }) {
                 }}
             />
                     <div className="field-wrapper">
-                        <TextField label="Precio" fullWidth variant="filled" type="number" sx={CssTextField} value={precio} onChange={(event) => setPrecio(event.target.value)} />
+                        <TextField label="Precio" fullWidth variant="filled" type="number" sx={InputFilledStyle} value={precio} onChange={(event) => setPrecio(event.target.value)} />
                     </div>
             <div className="field-wrapper">
                 <Autocomplete
@@ -99,7 +60,7 @@ export function FormularioFiltros({ onSearch }) {
                     onChange={(event, value) => {
                         setCategoria(value)
                     }}
-                    renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={CssTextField} />}
+                    renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={InputFilledStyle} />}
                 />
             </div>
         </form>
