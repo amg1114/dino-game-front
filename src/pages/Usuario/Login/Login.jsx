@@ -12,7 +12,7 @@ import { useAuth } from "../../../providers/AuthProvider";
 export function Login() {
     const ENDPOINT = process.env.REACT_APP_API + "/auth/login";
     
-    const { updateToken } = useAuth();
+    const { usuario, updateToken } = useAuth();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
@@ -26,6 +26,12 @@ export function Login() {
         setPassword(e.target.value);
     };
 
+    useEffect(() => {
+        if (usuario) {
+            navigate("/")
+        }
+    }, [usuario]);
+
     const logueo = () => {
         axios.post(ENDPOINT, { correo: email, password })
             .then((respuesta) => {
@@ -37,17 +43,15 @@ export function Login() {
                 }).then(() => {
                     navigate("/")
                 })
-                //redirect("/")
             })
             .catch(function (error) {
-                console.log(error)
+                console.error(error)
                 Swal.fire({
                     icon: "error",
                     title: "Error al Iniciar sesión",
                     text: error.response.data.message
                 })
             })
-
     }
 
     return (
@@ -76,9 +80,7 @@ export function Login() {
                                     registrarse
                                 </Link>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
