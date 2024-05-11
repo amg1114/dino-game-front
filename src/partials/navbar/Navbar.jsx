@@ -23,9 +23,8 @@ export default function Navbar() {
     return (
         <header>
             <div className="navbar container">
-                <Link to='/'><img src={logo} alt="#" className="logo" /></Link>
-                <Link to='/' className="titulo">
-                    <h1 >
+                <Link to='/' className="brand"><img src={logo} alt="#" className="logo" />
+                    <h1>
                         <span>DINO</span>GAME
                     </h1>
                 </Link>
