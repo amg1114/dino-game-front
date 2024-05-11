@@ -41,7 +41,7 @@ export default function Navbar() {
                         </span> {/*</Link>*/}
                         <Menu id="basic-menu" anchorEl={menu} open={open} onClose={ocultarMenu} MenuListProps={{'aria-labelledby' : 'logIn', }} >
                             <MenuItem className="menuItem" onClick={ocultarMenu} component={Link} to='/login' >Iniciar Sesión</MenuItem>
-                            <MenuItem className="menuItem" onClick={ocultarMenu}>Registrarse</MenuItem>
+                            <MenuItem className="menuItem" onClick={ocultarMenu} component={Link} to='/register'>Registrarse</MenuItem>
                         </Menu>
                     <button id="searchButton">
                         <span className="material-symbols-outlined">

@@ -16,6 +16,7 @@ import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 import { Login } from './pages/Usuario/Login'
 import { Perfil } from './pages/User/Perfil/Perfil'
+import { Registro } from './pages/Usuario/Registro'
 
 function App() {
   // /juegos/
@@ -31,6 +32,10 @@ function App() {
             {
               path: 'login',
               element: <Login/>
+            },
+            {
+              path: 'register',
+              element: <Registro/>
             }
           ]
         },
