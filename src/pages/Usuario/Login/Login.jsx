@@ -1,18 +1,21 @@
 import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputFilledStyle } from "../../../utils/mui.styles";
 import axios from "axios";
 import './Login.css'
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useAuth } from "../../../providers/AuthProvider";
 
 
 
 export function Login() {
     const ENDPOINT = process.env.REACT_APP_API + "/auth/login";
+    
+    const { usuario, updateToken } = useAuth();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
 
     const handleEmail = (e) => {
@@ -23,25 +26,32 @@ export function Login() {
         setPassword(e.target.value);
     };
 
+    useEffect(() => {
+        if (usuario) {
+            navigate("/")
+        }
+    }, [usuario]);
+
     const logueo = () => {
         axios.post(ENDPOINT, { correo: email, password })
             .then((respuesta) => {
-            Swal.fire({
-                icon: "success",
-                title: "Logueado Correctamente",
-                text: "Su sesión ha sido iniciada correctamente"
+                updateToken(respuesta.data.access_token)
+                Swal.fire({
+                    icon: "success",
+                    title: "Logueado Correctamente",
+                    text: "Su sesión ha sido iniciada correctamente"
+                }).then(() => {
+                    navigate("/")
+                })
             })
-            setTimeout(window.location.href="/perfil", 2000);
-        })
             .catch(function (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Error al Iniciar sesión",
-                text: error.response.data.message
+                console.error(error)
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al Iniciar sesión",
+                    text: error.response.data.message
+                })
             })
-            console.log(error)
-        })
-
     }
 
     return (
@@ -70,9 +80,7 @@ export function Login() {
                                     registrarse
                                 </Link>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>

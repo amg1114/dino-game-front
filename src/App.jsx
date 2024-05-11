@@ -17,6 +17,7 @@ import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria
 import { Login } from './pages/Usuario/Login/Login'
 import { Perfil } from './pages/User/Perfil/Perfil'
 import { Registro } from './pages/Usuario/Registro/Registro'
+import AuthProvider from './providers/AuthProvider'
 
 function App() {
   // /juegos/
@@ -31,11 +32,11 @@ function App() {
           children: [
             {
               path: 'login',
-              element: <Login/>
+              element: <Login />
             },
             {
               path: 'register',
-              element: <Registro/>
+              element: <Registro />
             }
           ]
         },
@@ -90,9 +91,7 @@ function App() {
   ])
 
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <AuthProvider child={<RouterProvider router={router} />} />
   )
 }
 

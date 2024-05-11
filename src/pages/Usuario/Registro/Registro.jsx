@@ -1,28 +1,33 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { TextField, MenuItem } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import './Registro.css'
+import { useAuth } from "../../../providers/AuthProvider";
 
 
 export function Registro() {
 
     const ENDPOINT = process.env.REACT_APP_API + "/auth/register";
+    const { usuario, updateToken } = useAuth();
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
-
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
-
     const [date, setDate] = useState("");
-
     const [country, setCountry] = useState("");
-
     const [genero, setGenero] = useState("D");
+
+    useEffect(() => {
+        if (usuario) {
+            console.log("Usuario logueado", usuario);
+            navigate("/")
+        }
+    },[usuario]);
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -46,6 +51,7 @@ export function Registro() {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     };
+    
 
     const register = () => {
         axios.post(ENDPOINT, { nombre: name, fechaNacimiento: date, sexo: genero, pais: country, correo: email, password })
@@ -54,7 +60,10 @@ export function Registro() {
                     icon: "success",
                     title: "Registrado Correctamente",
                     text: "Usuario Registrado Correctamente"
-                })
+                }).then(() => {
+                    updateToken(response.data.access_token)
+                    navigate("/")
+                });
             })
             .catch(function (error) {
                 Swal.fire({
@@ -62,7 +71,7 @@ export function Registro() {
                     title: "Error en el registro",
                     text: error.response.data.message
                 })
-                console.log(error)
+               // console.log(error)
             })
     }
 
