@@ -4,21 +4,31 @@ import "./SolicitudDesarrollador.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export function SolicitudDesarrollador() {
     const { usuario } = useAuth()
-
+    const navigate = useNavigate()
     const [validacion, setValidacion] = useState(false)
     const [solicitud, setSolicitud] = useState({
-        asunto: '',
+        nombre: '',
         mensaje: ''
     })
 
     useEffect(() => {
         if (usuario) {
-            axios.get(process.env.REACT_APP_API + `/api/users/${usuario.id}/solicitud-desarrollador`)
+            axios.get(process.env.REACT_APP_API + `/users/${usuario.id}/solicitud-desarrollador`)
                 .then((respuesta) => {
                     setValidacion(true)
+                    Swal.fire({
+                        icon: "info",
+                        title: "Solicitud en proceso",
+                        text: "Ya has realizado una solicitud de desarrollador"
+                    }).then(() => {
+                        navigate("/perfil")
+                    })
+                    console.log(respuesta.data)
                 })
                 .catch((error) => {
                     console.log(error)
@@ -31,6 +41,31 @@ export function SolicitudDesarrollador() {
         setSolicitud(prevSolicitud => ({ ...prevSolicitud, [name]: value }));
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        axios.post((process.env.REACT_APP_API + `/users/${usuario.id}/solicitud-desarrollador`), solicitud)
+            .then((respuesta) => {
+                console.log(respuesta.data)
+                Swal.fire({
+                    icon: "success",
+                    title: "Solicitud enviada",
+                    text: "La solicitud fue enviada con exito"
+                }).then(() => {
+                    navigate("/perfil")
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+                Swal.fire({
+                    icon: "error",
+                    title: "Solicitud no enviada",
+                    text: "La solicitud no pudo ser enviada"
+                })
+            })
+        console.log('Datos enviados:', solicitud);
+    }
+
     return <>
         {validacion ? <><h2>YA HAS REALIZADO UNA SOLICITUD</h2></> : (
 
@@ -41,11 +76,11 @@ export function SolicitudDesarrollador() {
 
                     <h2>¡HOLA <span>DINO</span>AMIGO! AL LLENAR ESTE FORMULARIO, SE ENVIARÁ UNA SOLICITUD PARA CREAR UN PERFIL DE DESARROLLADOR EL CUAL TE PERMITE PUBLICAR JUEGOS.</h2>
 
-                    <form action="post" className="form">
+                    <form id="form-solicitud-desarrollador" className="form">
                         <div className="field-wrapper full-width">
                             <TextField
                                 id="asunto"
-                                name="asunto"
+                                name="nombre"
                                 label="Asunto"
                                 placeholder="ASUNTO"
                                 value={solicitud.asunto}
@@ -70,6 +105,15 @@ export function SolicitudDesarrollador() {
                                 variant="filled"
                                 fullWidth
                             />
+                        </div>
+                        <div className="buttons-group">
+                            <button
+                                type="button"
+                                onClick={handleSubmit}
+                                className='btn btn-4'
+                            >
+                                ENVIAR
+                            </button>
                         </div>
                     </form>
                 </div>

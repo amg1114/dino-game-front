@@ -4,10 +4,12 @@ import { MenuItem, Select, TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./InfoUser.css"
 import { useAuth } from "../../../providers/AuthProvider"
+import Swal from "sweetalert2"
 
 export function InfoUser() {
 
     const { usuario } = useAuth()
+
     const [validacion, setValidacion] = useState(true)
     const [datos, setDatos] = useState({
         nombre: '',
@@ -41,7 +43,23 @@ export function InfoUser() {
     const handleActualizar = (event) => {
         event.preventDefault();
 
-        // AQUI DEBO HACER UNA PETICION PATCH y otro get y mostrar un error si no se actualizo con alert
+        axios.patch((process.env.REACT_APP_API + "/users/" + usuario.id), datos)
+            .then((respuesta) => {
+                console.log(respuesta.data)
+                Swal.fire({
+                    icon: "success",
+                    title: "Actualizado Correctamente",
+                    text: "El usuario ha sido actualizado correctamente"
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al Actualizar los datos",
+                    text: error.response.data.message
+                })
+            })
         console.log('Datos enviados:', datos);
     };
 
