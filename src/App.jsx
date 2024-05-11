@@ -16,7 +16,6 @@ import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 import { Login } from './pages/Usuario/Login/Login'
-import { Perfil } from './pages/User/Perfil/Perfil'
 import { Registro } from './pages/Usuario/Registro/Registro'
 import AuthProvider from './providers/AuthProvider'
 
