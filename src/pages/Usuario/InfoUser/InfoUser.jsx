@@ -3,8 +3,11 @@ import axios from "axios"
 import { MenuItem, Select, TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./InfoUser.css"
+import { useAuth } from "../../../providers/AuthProvider"
 
 export function InfoUser() {
+
+    const { usuario } = useAuth()
     const [validacion, setValidacion] = useState(true)
     const [datos, setDatos] = useState({
         nombre: '',
@@ -13,26 +16,22 @@ export function InfoUser() {
         pais: '',
         sexo: ''
     });
-    const [datosOriginales, setDatosOriginales] = useState({
-        nombre: '',
-        fechaNacimiento: '',
-        correo: '',
-        pais: '',
-        sexo: ''
-    });
+    const [datosOriginales, setDatosOriginales] = useState(usuario);
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_API + "/users/1")
-            .catch((error) => {
-                console.log(error)
-            })
-            .then((respuesta) => {
-                setValidacion(false)
-                const user = respuesta.data
-                setDatos(user);
-                setDatosOriginales(user);
-            })
-    }, []);
+        if (usuario) {
+            axios.get(process.env.REACT_APP_API + "/users/" + usuario.id)
+                .catch((error) => {
+                    console.log(error)
+                })
+                .then((respuesta) => {
+                    const user = respuesta.data
+                    setDatos(user)
+                    setDatosOriginales(user)
+                    setValidacion(false)
+                })
+        }
+    }, [usuario]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;

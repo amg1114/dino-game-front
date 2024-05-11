@@ -3,12 +3,10 @@ import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./SolicitudDesarrollador.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../../providers/AuthProvider";
 
 export function SolicitudDesarrollador() {
-
-    const id = 1
-
-    const ENDPOINT = process.env.REACT_APP_API + `/api/users/${id}/solicitud-desarrollador`
+    const { usuario } = useAuth()
 
     const [validacion, setValidacion] = useState(false)
     const [solicitud, setSolicitud] = useState({
@@ -17,14 +15,16 @@ export function SolicitudDesarrollador() {
     })
 
     useEffect(() => {
-        axios.get(ENDPOINT)
-            .then((respuesta) => {
-                setValidacion(true)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }, [])
+        if (usuario) {
+            axios.get(process.env.REACT_APP_API + `/api/users/${usuario.id}/solicitud-desarrollador`)
+                .then((respuesta) => {
+                    setValidacion(true)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+    }, [usuario])
 
     const handleChange = (event) => {
         const { name, value } = event.target;

@@ -18,6 +18,9 @@ import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria
 import { Login } from './pages/Usuario/Login/Login'
 import { Registro } from './pages/Usuario/Registro/Registro'
 import AuthProvider from './providers/AuthProvider'
+import { InfoUser } from './pages/Usuario/InfoUser/InfoUser'
+import { Biblioteca } from './pages/Usuario/Biblioteca/Biblioteca'
+import { SolicitudDesarrollador } from './pages/Usuario/SolicitudDesarrollador/SolicitudDesarrollador'
 
 function App() {
   // /juegos/
