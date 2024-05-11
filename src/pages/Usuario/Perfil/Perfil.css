@@ -1,9 +1,8 @@
 .informacion-usuario .botones-perfil {
+    display: flex;
+    max-width: 280px;
+    flex-direction: column;
+    gap: 20px;
     list-style: none;
     padding: 0;
-}
-
-.informacion-usuario .botones-perfil .btn-3{
-    margin-top: 40px;
-    width: 50%;
 }
