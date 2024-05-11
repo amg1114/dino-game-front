@@ -9,12 +9,16 @@ import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
 import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
-import {ErrorElement} from './pages/ErrorElement'
+import { ErrorElement } from './pages/ErrorElement'
 
 // Vistas
 import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
+import { Login } from './pages/Usuario/Login/Login'
+import { Perfil } from './pages/User/Perfil/Perfil'
+import { Registro } from './pages/Usuario/Registro/Registro'
+import AuthProvider from './providers/AuthProvider'
 
 function App() {
   // /juegos/
@@ -25,7 +29,17 @@ function App() {
       children: [
         {
           path: '',
-          element: <HomePage />
+          element: <HomePage />,
+          children: [
+            {
+              path: 'login',
+              element: <Login />
+            },
+            {
+              path: 'register',
+              element: <Registro />
+            }
+          ]
         },
         {
           path: 'juegos',
@@ -56,21 +70,28 @@ function App() {
           ]
         },
         {
-          path: 'style-guide',
-          element: <StyleGuidePage />
+          path: 'perfil',
+          element: <Perfil />,
+          children: [
+            {
+              path: 'biblioteca',
+              element: <></>
+            }, {
+              path: 'solicitud-desarrollador',
+              element: <></>
+            }
+          ]
         },
         {
-          path: '404',
+          path: '*',
           element: <ErrorElement />
-        },
+        }
       ]
     }
   ])
 
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <AuthProvider child={<RouterProvider router={router} />} />
   )
 }
 

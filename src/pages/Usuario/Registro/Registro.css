@@ -1,0 +1,26 @@
+.container .form .registro-titulo{
+    text-transform: uppercase;
+    color: #57cc99
+    
+}
+
+.container .form  .date{
+    padding-top: 10px;
+}
+
+.container .form .botones-login-register .btn-registrarse{
+    background-color: #57cc99;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.container .form .botones-login-register .opc-inicio-sesion{
+    text-transform: uppercase;
+    margin-left: 13px;
+    margin-top: 10px;
+}

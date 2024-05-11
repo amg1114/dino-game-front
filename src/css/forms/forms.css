@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.form .field-wrapper {
+    width: 40%;
+
+}
+
+.form .field-wrapper.full-width{
+    width: 100%;
+}
