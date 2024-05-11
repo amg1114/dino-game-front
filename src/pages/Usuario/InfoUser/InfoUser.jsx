@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { MenuItem, Select, TextField } from "@mui/material"
+import { MenuItem, Select, TextField, FormControl, InputLabel } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./InfoUser.css"
 import { useAuth } from "../../../providers/AuthProvider"
@@ -8,7 +8,7 @@ import Swal from "sweetalert2"
 
 export function InfoUser() {
 
-    const { usuario } = useAuth()
+    const { usuario, getUsuario } = useAuth()
 
     const [validacion, setValidacion] = useState(true)
     const [datos, setDatos] = useState({
@@ -31,6 +31,7 @@ export function InfoUser() {
                     setDatos(user)
                     setDatosOriginales(user)
                     setValidacion(false)
+
                 })
         }
     }, [usuario]);
@@ -51,6 +52,7 @@ export function InfoUser() {
                     title: "Actualizado Correctamente",
                     text: "El usuario ha sido actualizado correctamente"
                 })
+                getUsuario()
             })
             .catch((error) => {
                 console.log(error)
@@ -129,21 +131,23 @@ export function InfoUser() {
                         />
                     </div>
                     <div className="field-wrapper full-width">
-                        <Select
-                            id="sexo"
-                            label="sexo"
-                            name="sexo"
-                            value={datos.sexo}
-                            onChange={handleChange}
-                            sx={InputFilledStyle}
-                            variant="filled"
-                            fullWidth
-                        >
-                            <MenuItem value={'M'}>Masculino</MenuItem>
-                            <MenuItem value={'F'}>Femenino</MenuItem>
-                            <MenuItem value={'D'}>Dinosaurio</MenuItem>
+                        <FormControl fullWidth variant="filled" sx={InputFilledStyle}>
+                            <InputLabel id="sexo">Sexo</InputLabel>
+                            <Select
+                                id="sexo"
+                                label="sexo"
+                                name="sexo"
+                                value={datos.sexo}
+                                onChange={handleChange}
+                                
+                                fullWidth
+                            >
+                                <MenuItem value={'M'}>Masculino</MenuItem>
+                                <MenuItem value={'F'}>Femenino</MenuItem>
+                                <MenuItem value={'D'}>Dinosaurio</MenuItem>
 
-                        </Select>
+                            </Select>
+                        </FormControl>
                     </div>
 
 
