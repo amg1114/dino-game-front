@@ -27,6 +27,14 @@ header .navbar .enlaces {
     display: flex;
     gap: 20px;
 }
+header .navbar .enlaces .enlace {
+    display: flex;
+    align-items: center;
+}   
+
+header .navbar .enlaces .enlace span {
+    margin-left: 5px;
+}
 
 header .navbar #searchButton {
     color: #fff;
@@ -40,3 +48,8 @@ header .navbar #searchButton {
     color: white;
     text-decoration: none;
 }
+
+header .navbar #logIn{
+    cursor: pointer;
+}
+
