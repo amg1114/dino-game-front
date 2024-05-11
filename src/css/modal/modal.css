@@ -20,6 +20,11 @@
     max-width: 1200px;
     border-radius: 10px;
 }
+
+.modal-fade .modal-content.modal-form{
+    max-width: 600px;
+}
+
 .modal-fade .modal-content .container {
     display: flex;
     gap: 20px;

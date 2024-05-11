@@ -40,3 +40,8 @@ header .navbar #searchButton {
     color: white;
     text-decoration: none;
 }
+
+header .navbar #logIn{
+    cursor: pointer;
+}
+

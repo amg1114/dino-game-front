@@ -5,6 +5,7 @@ import { GameSectionList } from "../../partials/GameSectionList/GameSectionList"
 import { HomeCardNoticia } from "../../components/Noticias/HomeCardNoticia"
 import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNoticia"
 import "./HomePage.css"
+import { Link, Outlet } from "react-router-dom"
 export function HomePage() {
 
     const ENDPOINT_API = process.env.REACT_APP_API + "/video-games?limit=5"
@@ -74,11 +75,11 @@ export function HomePage() {
                             {
                                 categorias.slice(0, 6).map((elemento, index) => {
                                     return (
-                                        <a href={"/categorias/" + elemento.id} >
-                                            <div className="categoria" key={elemento.id + "left-aside"}>
+                                        <Link href={"/categorias/" + elemento.id} key={elemento.id + "left-aside"}>
+                                            <div className="categoria" >
                                                 {elemento.titulo}
                                             </div>
-                                        </a>
+                                        </Link>
                                     )
                                 })
                             }
@@ -100,6 +101,7 @@ export function HomePage() {
                         }
                     </>
                 </div>
+                <Outlet />
             </div>
         )
         }
