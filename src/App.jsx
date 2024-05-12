@@ -9,15 +9,19 @@ import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
 import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
+import { ErrorElement } from './pages/ErrorElement'
+import { Perfil } from './pages/Usuario/Perfil/Perfil'
 
 // Vistas
 import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 import { Login } from './pages/Usuario/Login/Login'
-import { Perfil } from './pages/User/Perfil/Perfil'
 import { Registro } from './pages/Usuario/Registro/Registro'
 import AuthProvider from './providers/AuthProvider'
+import { InfoUser } from './pages/Usuario/InfoUser/InfoUser'
+import { Biblioteca } from './pages/Usuario/Biblioteca/Biblioteca'
+import { SolicitudDesarrollador } from './pages/Usuario/SolicitudDesarrollador/SolicitudDesarrollador'
 
 function App() {
   // /juegos/
@@ -69,23 +73,26 @@ function App() {
           ]
         },
         {
-          path: 'style-guide',
-          element: <StyleGuidePage />
-        },
-        {
           path: 'perfil',
           element: <Perfil />,
-          children: [
-            {
-              path: 'biblioteca',
-              element: <></>
-            }
+          children: [{
+            path: '',
+            element: <InfoUser />
+          },
+          {
+            path: 'biblioteca', element: <Biblioteca />
+
+          },
+          {
+            path: 'solicitud-desarrollador',
+            element: <SolicitudDesarrollador />
+          },
           ]
         },
         {
-          path: 'solicitud-desarrollador',
-          element: <></>
-        },
+          path: '*',
+          element: <ErrorElement />
+        }
       ]
     }
   ])

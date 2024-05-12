@@ -7,17 +7,19 @@ header .navbar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-header .navbar  .titulo {
-    margin: auto;
+header .navbar .brand {
+    display: flex;
+    align-items: center;
 }
 
-header .navbar  .titulo h1 {
+header .navbar .brand h1 {
     margin: 0;
 }
+
 header .navbar .logo {
     width: 80px;
     height: 80px;
@@ -30,7 +32,7 @@ header .navbar .enlaces {
 header .navbar .enlaces .enlace {
     display: flex;
     align-items: center;
-}   
+}
 
 header .navbar .enlaces .enlace span {
     margin-left: 5px;
@@ -49,7 +51,6 @@ header .navbar #searchButton {
     text-decoration: none;
 }
 
-header .navbar #logIn{
+header .navbar #logIn {
     cursor: pointer;
 }
-
