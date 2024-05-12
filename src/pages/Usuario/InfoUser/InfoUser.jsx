@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { MenuItem, Select, TextField } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./InfoUser.css"
 import { useAuth } from "../../../providers/AuthProvider"
@@ -122,21 +122,23 @@ export function InfoUser() {
                         />
                     </div>
                     <div className="field-wrapper full-width">
-                        <Select
-                            id="sexo"
-                            label="sexo"
-                            name="sexo"
-                            value={datos.sexo}
-                            onChange={handleChange}
-                            sx={InputFilledStyle}
-                            variant="filled"
-                            fullWidth
-                        >
-                            <MenuItem value={'M'}>Masculino</MenuItem>
-                            <MenuItem value={'F'}>Femenino</MenuItem>
-                            <MenuItem value={'D'}>Dinosaurio</MenuItem>
+                        <FormControl fullWidth sx={InputFilledStyle} variant="filled">
+                            <InputLabel id="sexo">Sexo</InputLabel>
+                            <Select
+                                id="sexo"
+                                label="sexo"
+                                name="sexo"
+                                value={datos.sexo}
+                                onChange={handleChange}
+                                sx={InputFilledStyle}
+                                variant="filled"
+                                fullWidth
+                            >
+                                <MenuItem value={'M'}>Masculino</MenuItem>
+                                <MenuItem value={'F'}>Femenino</MenuItem>
+                                <MenuItem value={'D'}>Dinosaurio</MenuItem>
 
-                        </Select>
+                            </Select></FormControl>
                     </div>
 
 
