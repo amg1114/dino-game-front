@@ -33,30 +33,19 @@ export function HomePage() {
                         console.log(error)
                     })
                     .then(function (respuesta) {
-                        const category = respuesta.data
-                        let prevCategoria = []
-                        category.map((categoria) => {
-                            axios.get(process.env.REACT_APP_API + "/categorias/" + categoria.id)
-                                .catch(function (error) {
-                                    console.log(error)
-                                })
-                                .then(function (respuesta) {
-                                    prevCategoria.push(respuesta.data)
-                                    axios.get(ENDPOINT_NOTICIAS)
-                                        .catch(function (error) {
-                                            console.log(error)
-                                        })
-                                        .then(function (respuesta) {
-                                            setCategorias([...prevCategoria, respuesta.data])
-                                            setNoticias(respuesta.data)
-                                            setSlides(prevSlides)
-                                        })
-                                })
-                        })
+                        const categorias = respuesta.data
+                        axios.get(ENDPOINT_NOTICIAS)
+                            .catch(function (error) {
+                                console.log(error)
+                            })
+                            .then(function (respuesta) {
+                                setCategorias(categorias)
+                                setNoticias(respuesta.data)
+                                setSlides(prevSlides)
+                            })
+
                     })
             })
-
-
     }, [])
 
     return <>
