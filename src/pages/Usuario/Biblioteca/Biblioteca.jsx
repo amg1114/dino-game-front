@@ -21,11 +21,13 @@ export function Biblioteca() {
 
     return <>{
         biblioteca === null ? <><h2>El usuario no tiene juegos descargados</h2></> : (
-            <div className="lista-juegos">
+            <div >
                 <h2><span>DINO</span>BIBLIOTECA</h2>
+                <div className="lista-juegos">
                 {biblioteca.map((juego, index) => (
                     <GameCard key={index} Game={juego.videoGame} />
                 ))}
+                </div>
             </div>
         )
     }</>
