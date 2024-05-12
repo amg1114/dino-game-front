@@ -9,6 +9,7 @@ import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
 import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
+import { ErrorElement } from './pages/ErrorElement'
 import { Perfil } from './pages/Usuario/Perfil/Perfil'
 
 // Vistas
@@ -72,29 +73,26 @@ function App() {
           ]
         },
         {
-          path: 'style-guide',
-          element: <StyleGuidePage />
-        },
-        {
           path: 'perfil',
           element: <Perfil />,
-          children: [
-            {
-              path: 'biblioteca',
-              element: <Biblioteca />
-            },
-            {
-              path: 'solicitud-desarrollador',
-              element: <SolicitudDesarrollador />
-            },
-            {
-              path: '',
-              element: <InfoUser />
-            }
+          children: [{
+            path: '',
+            element: <InfoUser />
+          },
+          {
+            path: 'biblioteca', element: <Biblioteca />
 
+          },
+          {
+            path: 'solicitud-desarrollador',
+            element: <SolicitudDesarrollador />
+          },
           ]
         },
-        
+        {
+          path: '*',
+          element: <ErrorElement />
+        }
       ]
     }
   ])

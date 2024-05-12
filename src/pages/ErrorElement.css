@@ -1,0 +1,32 @@
+
+
+.conte{
+    display: flex;
+}
+
+.conte .imagen {
+    width: 50%;
+    margin-right: 20px;
+}
+
+.conte .textoError{
+    margin-top: 180px;
+}
+
+.conte .textoError .texto404{
+    font-size: 80px;
+    margin-bottom: -20px;
+    
+}
+
+.conte .textoError .textoInfo{
+    margin-top: -20px;
+    font-size: 40px;
+  
+}
+
+.conte .textoError .url{
+    font-size: 20px;
+    color:#57CC99;
+}
+
