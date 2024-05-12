@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { MenuItem, Select, TextField } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import "./InfoUser.css"
+import { useAuth } from "../../../providers/AuthProvider"
+import Swal from "sweetalert2"
 
 export function InfoUser() {
+
+    const { usuario } = useAuth()
+
     const [validacion, setValidacion] = useState(true)
     const [datos, setDatos] = useState({
         nombre: '',
@@ -13,26 +18,15 @@ export function InfoUser() {
         pais: '',
         sexo: ''
     });
-    const [datosOriginales, setDatosOriginales] = useState({
-        nombre: '',
-        fechaNacimiento: '',
-        correo: '',
-        pais: '',
-        sexo: ''
-    });
+    const [datosOriginales, setDatosOriginales] = useState(usuario);
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_API + "/users/1")
-            .catch((error) => {
-                console.log(error)
-            })
-            .then((respuesta) => {
-                setValidacion(false)
-                const user = respuesta.data
-                setDatos(user);
-                setDatosOriginales(user);
-            })
-    }, []);
+        if (usuario) {
+            setDatos(usuario)
+            setDatosOriginales(usuario)
+            setValidacion(false)
+        }
+    }, [usuario]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,7 +36,23 @@ export function InfoUser() {
     const handleActualizar = (event) => {
         event.preventDefault();
 
-        // AQUI DEBO HACER UNA PETICION PATCH y otro get y mostrar un error si no se actualizo con alert
+        axios.patch((process.env.REACT_APP_API + "/users/" + usuario.id), datos)
+            .then((respuesta) => {
+                console.log(respuesta.data)
+                Swal.fire({
+                    icon: "success",
+                    title: "Actualizado Correctamente",
+                    text: "El usuario ha sido actualizado correctamente"
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al Actualizar los datos",
+                    text: error.response.data.message
+                })
+            })
         console.log('Datos enviados:', datos);
     };
 
@@ -112,21 +122,23 @@ export function InfoUser() {
                         />
                     </div>
                     <div className="field-wrapper full-width">
-                        <Select
-                            id="sexo"
-                            label="sexo"
-                            name="sexo"
-                            value={datos.sexo}
-                            onChange={handleChange}
-                            sx={InputFilledStyle}
-                            variant="filled"
-                            fullWidth
-                        >
-                            <MenuItem value={'M'}>Masculino</MenuItem>
-                            <MenuItem value={'F'}>Femenino</MenuItem>
-                            <MenuItem value={'D'}>Dinosaurio</MenuItem>
+                        <FormControl fullWidth sx={InputFilledStyle} variant="filled">
+                            <InputLabel id="sexo">Sexo</InputLabel>
+                            <Select
+                                id="sexo"
+                                label="sexo"
+                                name="sexo"
+                                value={datos.sexo}
+                                onChange={handleChange}
+                                sx={InputFilledStyle}
+                                variant="filled"
+                                fullWidth
+                            >
+                                <MenuItem value={'M'}>Masculino</MenuItem>
+                                <MenuItem value={'F'}>Femenino</MenuItem>
+                                <MenuItem value={'D'}>Dinosaurio</MenuItem>
 
-                        </Select>
+                            </Select></FormControl>
                     </div>
 
 

@@ -1,0 +1,35 @@
+.container .form .field-wrapper.full-width {
+    margin: 10px;
+}
+
+.container .form .botones-login-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container .form .login-titulo{
+    text-transform: uppercase;
+    color: #57cc99;
+    font-size: xx-large;
+    margin: 30px;
+}
+
+
+.container .form .botones-login-register .btn-inicio-sesion{
+    background-color: #57cc99;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.container .form .botones-login-register .opc-registro{
+    text-transform: uppercase;
+    color: #57cc99;
+    margin-top: 10px;
+    margin-left:22px;
+}
+
