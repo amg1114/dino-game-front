@@ -24,6 +24,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .seccion-categorias .lista-categorias .categoria {
