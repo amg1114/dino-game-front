@@ -26,7 +26,10 @@ export function HomePage() {
                 const game = respuesta.data
                 let prevSlides = []
                 game.map(juego => {
-                    prevSlides.push(juego.assets[0])
+                    if (juego.assets.length > 0) {
+                        const slide = juego.assets.length < 1 ? juego.assets[0] : juego.assets[1];
+                        prevSlides.push(slide)
+                    }
                 })
                 axios.get(ENDPOINT_CATEGORIAS)
                     .catch(function (error) {
