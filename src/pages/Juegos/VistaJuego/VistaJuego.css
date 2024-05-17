@@ -79,23 +79,54 @@
     border-radius: 15px;
 }
 
-.vista-juego .version, .req{
+.vista-juego .info, .req{
     color:#57cc99;
     text-transform: uppercase;
+}
+
+.vista-juego .info .version{
+    color: #ffff;
+    display: flex;
+}
+
+.vista-juego .requisitos{
+    color: #fff;
+    text-transform: uppercase;
+    display: grid;
 }
 
 .vista-juego .valor-comprar{
     display: flex;
     justify-content: end;
+    align-items: center;
+    
+    
+}
+
+.vista-juego .valor-comprar .comprar{
+    gap: 0;
     text-transform: uppercase;
+    
+
 }
 
-.vista-juego .precio{
+
+.vista-juego .valor-comprar .precio{
+    margin-right: 20px; 
+    margin-bottom: 0px;
+    text-decoration: line-through;
+    
+    
+   
+}
+
+.vista-juego .valor-comprar .descuento{
+    color:#fff;
+    margin-bottom: 0;
     margin-right: 20px;
-    margin-top: 10px;
 }
 
-.vista-juego .btn-comprar{
+.vista-juego .valor-comprar .btn-comprar{
     background-color:#57cc99;
     width: 180px;
     height: 60px;
@@ -106,6 +137,9 @@
     border-color: #57cc99;
     border-bottom: none;
     border-radius: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+    
 }
 
 .vista-juego .btn-comprar:hover{
