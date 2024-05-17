@@ -21,6 +21,16 @@
     border-radius: 10px;
 }
 
+.modal-fade .modal-content-admin {
+    background: lightgray;
+    padding: 20px;
+    min-width: 30%;
+    min-height: 30%;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+}
+
 .modal-fade .modal-content.modal-form{
     max-width: 600px;
 }

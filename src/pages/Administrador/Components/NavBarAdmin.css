@@ -1,0 +1,15 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.btn-admin {
+    background-color: black;
+}
+.titleAdmin{
+    color: black;
+}

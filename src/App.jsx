@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 // Componentes
 import { LayoutComponent } from './pages/LayoutComponent'
+import { AdminLayoutComponent } from './pages/Administrador/LayoutAdmin/AdminLayoutComponent'
 
 // Paginas
 import { HomePage } from './pages/HomePage/HomePage'
@@ -22,6 +23,11 @@ import AuthProvider from './providers/AuthProvider'
 import { InfoUser } from './pages/Usuario/InfoUser/InfoUser'
 import { Biblioteca } from './pages/Usuario/Biblioteca/Biblioteca'
 import { SolicitudDesarrollador } from './pages/Usuario/SolicitudDesarrollador/SolicitudDesarrollador'
+import { AdGames } from './pages/Administrador/Vistas/AdGames/AdGames'
+import { AdUsersDev } from './pages/Administrador/Vistas/AdUsersDev/AdUsersDev'
+import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdRequestDev'
+import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
+import { VistaUpdateGame } from './pages/Administrador/Vistas/AdGames/VistaUpdateGame/VistaUpdateGame'
 
 function App() {
   // /juegos/
@@ -93,6 +99,34 @@ function App() {
           path: '*',
           element: <ErrorElement />
         }
+      ]
+    },
+    {
+      path: 'admin',
+      element: <AdminLayoutComponent/>,
+      children: [
+        {
+          path: '',
+          element: <AdGames/>,
+          children: [
+            {
+              path:':id',
+              element: <VistaUpdateGame />
+            }
+          ]
+        },
+        {
+          path: 'users-dev',
+          element: <AdUsersDev/>
+        },
+        {
+          path: 'requests-dev',
+          element: <AdRequestDev/>
+        },
+        {
+          path: 'news',
+          element: <AdNews/>
+        },
       ]
     }
   ])
