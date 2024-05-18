@@ -27,7 +27,8 @@ export function HomePage() {
                 let prevSlides = []
                 game.map(juego => {
                     if (juego.assets.length > 0) {
-                        const slide = juego.assets.length < 1 ? juego.assets[0] : juego.assets[1];
+                        console.log({ juego });
+                        const slide = juego.assets.length >= 1 ? juego.assets[1] : juego.assets[0];
                         prevSlides.push(slide)
                     }
                 })
