@@ -18,7 +18,7 @@ export function SolicitudDesarrollador() {
 
     useEffect(() => {
         if (usuario) {
-            axios.get(process.env.REACT_APP_API + `/users/${usuario.id}/solicitud-desarrollador`)
+            axios.get(process.env.REACT_APP_API + `/users/developers/${usuario.id}/solicitud`)
                 .then((respuesta) => {
                     setValidacion(true)
                     Swal.fire({
@@ -44,7 +44,7 @@ export function SolicitudDesarrollador() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post((process.env.REACT_APP_API + `/users/${usuario.id}/solicitud-desarrollador`), solicitud)
+        axios.post((process.env.REACT_APP_API + `/users/developers/${usuario.id}/solicitud`), solicitud)
             .then((respuesta) => {
                 console.log(respuesta.data)
                 Swal.fire({
