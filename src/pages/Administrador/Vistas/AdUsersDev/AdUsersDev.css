@@ -1,0 +1,29 @@
+.usuariosDevsPage > :first-child{
+    text-align: center;
+}
+.usuariosDevsPage .cuadro-users{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 21% 37% 21% 21%;
+    text-align: center;
+}
+.usuariosDevsPage .cuadro-users .title{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    background-color: #38A3A5;
+}
+.usuariosDevsPage .cuadro-users .info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+}
+.usuariosDevsPage .cuadro-users .info-boton{
+    display: flex;
+    justify-content: center;
+}
+.usuariosDevsPage .cuadro-users .info .btn-eliminar-dev{
+    margin: 2px;
+}
