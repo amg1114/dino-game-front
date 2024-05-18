@@ -24,7 +24,7 @@ export function VistaCategoria() {
                 setJuego(respuesta.data.videoGames)
             })
 
-    })
+    }, [])
 
 
     return <>

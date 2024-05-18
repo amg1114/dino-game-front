@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,7 +9,7 @@ import { asyncUploadFile } from "../../services/assets-service";
 import { PreviewImage } from "./PreviewImage";
 import Swal from 'sweetalert2';
 
-const AssetsForm = ({ ownerId, path }) => {
+const AssetsForm = forwardRef((ref, { ownerId, path }) => {
   const [previewFiles, setPreviewFiles] = useState([])
   const [filesToUpload, setFilesToUpload] = useState([])
 
@@ -136,6 +136,10 @@ const AssetsForm = ({ ownerId, path }) => {
     }
   }
 
+  const test = () => {
+    console.log("Assets Form test")
+  }
+
   /**
    * Reinicia la lista de objetos y de archivos por subir a vacío.
    */
@@ -157,6 +161,10 @@ const AssetsForm = ({ ownerId, path }) => {
     });
   }
 
+  useImperativeHandle(ref, () => ({
+    test
+  }));
+
   return (
     <div className='uploadAssetsForm'>
       <h3>Subir Imágenes</h3>
@@ -176,11 +184,6 @@ const AssetsForm = ({ ownerId, path }) => {
           <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label>
           {
             filesToUpload.length ?
-              <button className='btn btn-1' type="submit">Enviar Imagenes</button>
-              : <></>
-          }
-          {
-            filesToUpload.length ?
               <button className='btn btn-3' type="button" onClick={reset}>Descartar</button>
               : <></>
           }
@@ -188,6 +191,6 @@ const AssetsForm = ({ ownerId, path }) => {
       </div>
     </div>
   );
-};
+});
 
 export default AssetsForm;
