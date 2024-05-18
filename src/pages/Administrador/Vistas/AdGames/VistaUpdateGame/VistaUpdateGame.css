@@ -4,6 +4,8 @@ align-items: center;
 row-gap: 20px;
 }
 .close-admin{
+    display: flex;
+    justify-content: end;
     color: black;
 }
 .modalGameAdmin{

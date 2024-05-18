@@ -105,37 +105,39 @@ function App() {
     },
     {
       path: 'admin',
-      element: <AdminLayoutComponent/>,
+      element: <AdminLayoutComponent />,
       children: [
         {
           path: '',
-          element: <AdGames/>,
+          element: <AdGames />,
           children: [
             {
-              path:':id',
+              path: ':id',
               element: <VistaUpdateGame />
             }
           ]
         },
         {
           path: 'users-dev',
-          element: <AdUsersDev/>
+          element: <AdUsersDev />
         },
         {
           path: 'requests-dev',
-          element: <AdRequestDev/>
+          element: <AdRequestDev />
         },
         {
           path: 'news',
-          element: <AdNews/>,
-          children: [{
-            path: ':id',
-            element: <VistaAdNews/>
-          },
-          {
-            path:'form',
-            element: <VistaFormNews/>
-          }]
+          element: <AdNews />,
+          children: [
+            {
+              path: 'form',
+              element: <VistaFormNews />
+            },
+            {
+              path: ':id',
+              element: <VistaAdNews />
+            }
+          ]
         },
       ]
     }

@@ -11,7 +11,7 @@ export function NavBarAdmin() {
             <h1 className="titleAdmin">PAGINA DE ADMINISTADOR</h1>
             {
                 usuario ?
-                    <Link to='' className="btn btn-admin">
+                    <Link to='/perfil' className="btn btn-admin">
                         {usuario.nombre}  <span className="material-symbols-outlined">
                             account_circle
                         </span>

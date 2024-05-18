@@ -29,7 +29,6 @@ export function FormularioFiltros({ onSearch }) {
         }
         onSearch(data)
     }
-    console.log(window.location.pathname)
     return <>
         <h3>Formulario de búsqueda</h3>
         <form onSubmit={sendFormData} className="filters-form">

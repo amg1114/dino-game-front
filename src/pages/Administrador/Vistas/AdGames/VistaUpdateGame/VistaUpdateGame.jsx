@@ -38,7 +38,7 @@ export function VistaUpdateGame() {
         }).then((result) => {
             if (result.isConfirmed) {
                 navigate('/admin')
-                
+                // Aqui se debe agregar la peticion delete
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire('Cancelado', 'El juego no fue eliminado', 'error');
             }

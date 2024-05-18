@@ -33,6 +33,7 @@ export function AdGames() {
 
     return (
         <div className="container container-admin">
+            <h2><span>ADMINISTRAR </span>JUEGOS</h2>
             <FormularioFiltros onSearch={Search} />
             {
                 juegos === null ? <><h1>Game was not found</h1></> : (
