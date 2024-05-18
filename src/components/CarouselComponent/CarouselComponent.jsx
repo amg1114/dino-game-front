@@ -25,7 +25,7 @@ export const CarouselComponent = ({ slides }) => {
       resetTimeout();
     };
 
-  }, [currentSlide])
+  }, [currentSlide, slides])
 
   const nextSlide = () => {
     if (slides.length > 0) {
