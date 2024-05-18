@@ -83,7 +83,7 @@ export function VistaJuego() {
 
                                     </p>
                                     <div className="det-dev-size">
-                                        <p className="size">tamaño: <span className="requisitos">100GB</span></p>
+                                        <p className="size">tamaño: <span className="requisitos">{juego.versions[0].size}</span></p>
                                     </div>
 
                                     <div className="valor-comprar">
