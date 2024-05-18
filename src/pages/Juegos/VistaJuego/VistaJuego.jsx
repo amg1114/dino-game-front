@@ -78,7 +78,7 @@ export function VistaJuego() {
 
                                         <p className="ver">
                                             información de la versión reciente:
-                                            <span className="version">{juego.assets[0].title}</span>
+                                            <span className="version">{juego.versions[0].version}</span>
                                         </p>
 
                                     </p>
@@ -90,7 +90,7 @@ export function VistaJuego() {
                                         <div className="comprar">
                                             {juego.descuentos[0] ? <>
 
-                                                <h2 className="precio">precio: col${juego.precio}</h2>
+                                                <h2 className="precio">${juego.precio}</h2>
                                                 <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
                                             </> :
 

@@ -55,6 +55,7 @@
 }
 
 .vista-juego .titulo-juego{
+    color:#57CC99;
     text-align: left;
     text-transform: uppercase;
     margin:0;
@@ -120,10 +121,11 @@
 }
 
 .vista-juego .comprar{
-    gap: 50px;
+    display: flex;
+    gap: 0px;
     text-transform: uppercase;
     justify-content: center;
-    font-size: xx-large;
+    font-size: x-large;
    
 
 }
