@@ -41,7 +41,6 @@ function AuthProvider({ child }) {
         return {
             token, 
             usuario,
-            getUsuario,
             updateToken,
             deleteToken
         };
