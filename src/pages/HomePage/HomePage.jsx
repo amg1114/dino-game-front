@@ -26,7 +26,11 @@ export function HomePage() {
                 const game = respuesta.data
                 let prevSlides = []
                 game.map(juego => {
-                    prevSlides.push(juego.assets[0])
+                    if (juego.assets.length > 0) {
+                        console.log({ juego });
+                        const slide = juego.assets.length >= 1 ? juego.assets[1] : juego.assets[0];
+                        prevSlides.push(slide)
+                    }
                 })
                 axios.get(ENDPOINT_CATEGORIAS)
                     .catch(function (error) {
@@ -64,7 +68,7 @@ export function HomePage() {
                             {
                                 categorias.slice(0, 6).map((elemento, index) => {
                                     return (
-                                        <Link href={"/categorias/" + elemento.id} key={elemento.id + "left-aside"}>
+                                        <Link to={"/categorias/" + elemento.id} key={elemento.id + "left-aside"}>
                                             <div className="categoria" >
                                                 {elemento.titulo}
                                             </div>

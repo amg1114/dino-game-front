@@ -5,12 +5,12 @@ import { useAuth } from "../../../providers/AuthProvider";
 
 export function Biblioteca() {
     const { usuario } = useAuth();
-    const ENDPOINT_BBLIOTECA = "https://dinogame.up.railway.app/api/video-games/user/"
+    const ENDPOINT_BIBLIOTECA =  process.env.REACT_APP_API + "/video-games/user/"
     const [biblioteca, setBiblioteca] = useState([]);
 
     useEffect(() => {
         if (usuario) {
-            axios.get(ENDPOINT_BBLIOTECA + usuario.id)
+            axios.get(ENDPOINT_BIBLIOTECA + usuario.id)
                 .catch(function (error) {
                     console.log(error);
                 }).then(function (respuesta) {
