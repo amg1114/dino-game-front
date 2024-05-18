@@ -79,3 +79,7 @@
 .btn-5::before {
     background: #a6a6a6;
 }
+
+.btn-admin {
+    background-color: black;
+}

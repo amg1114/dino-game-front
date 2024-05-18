@@ -1,0 +1,15 @@
+.noticiasPageAdmin .boton-agregar-noticia{
+    margin-top: 30px;
+    width: 100px;
+}
+.noticiasPageAdmin{
+    display: flex;
+    flex-direction: column;
+}
+
+.noticiasPageAdmin > :last-child{
+    align-self: center;
+}
+.noticiasPageAdmin > :first-child{
+    text-align: center;
+}

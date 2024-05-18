@@ -1,12 +1,23 @@
-.modalGameAdmin .opciones-admin{
-    margin: 0 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 80%;
+.valor-comprar-admin .opciones-admin{
+display: grid;
+align-items: center;
+row-gap: 20px;
 }
-
+.close-admin{
+    color: black;
+}
 .modalGameAdmin{
     text-align: center;
     margin-bottom: 40px;
+}
+.det-nom-admin-edit {
+    color: black;
+}
+.valor-comprar-admin{
+    display: flex;
+    justify-content: space-around;
+}
+.botones-admin{
+    display: flex;
+    column-gap: 20px;
 }

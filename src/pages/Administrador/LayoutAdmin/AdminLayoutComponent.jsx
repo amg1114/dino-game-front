@@ -7,6 +7,7 @@ export function AdminLayoutComponent() {
         <NavBarAdmin />
         <div className="container content-layout">
             <aside>
+                <h2><span>DINO</span>MENU</h2>
                 <ul className="content-Link-admin">
                     <li><Link className="Link-admin" to='/admin'>ADMINISTRAR JUEGOS</Link></li>
                     <li><Link className="Link-admin" to='/admin/users-dev'> ADMINISTRAR USUARIOS</Link></li>

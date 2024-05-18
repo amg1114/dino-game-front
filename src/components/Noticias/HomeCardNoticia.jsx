@@ -10,7 +10,7 @@ export function HomeCardNoticia({ id, imagen, titulo, descripcion, fecha, assets
                     src={imagen}
                     alt="notice image"
                 />
-                <div className="textNotice">
+                <div className={/^\/admin\/news\/[^/]+$/.test(window.location.pathname) ? "textNoticeBlack" : "textNotice"}>
                     {titulo}
                 </div>
             </Link>

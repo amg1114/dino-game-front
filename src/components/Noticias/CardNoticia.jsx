@@ -4,7 +4,7 @@ import './CardNoticia.css'
 export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
     return (
         <div className="CardNotice">
-            <Link to={`/noticias/` + id}>
+            <Link to={window.location.href +"/"+ id}>
                 <div className='noticeSectionCard'>
                     <img className="noticeImage"
                         src={imagen}

@@ -20,10 +20,11 @@ export function PaginaNoticias() {
     return <>
         {
             <div>
+                <h2><span>DINO</span>NOTICIAS</h2>
                 <ListaNoticia noticias={noticias} />
                 <Outlet />
             </div>
-        
+
         }
     </>
 }

@@ -7,9 +7,10 @@
     padding-top: 20px;
 }
 
-.btn-admin {
-    background-color: black;
-}
 .titleAdmin{
     color: black;
+}
+.logo{
+    width: 100px;
+    height: 100px;
 }

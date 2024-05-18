@@ -28,6 +28,8 @@ import { AdUsersDev } from './pages/Administrador/Vistas/AdUsersDev/AdUsersDev'
 import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdRequestDev'
 import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
 import { VistaUpdateGame } from './pages/Administrador/Vistas/AdGames/VistaUpdateGame/VistaUpdateGame'
+import { VistaAdNews } from './pages/Administrador/Vistas/AdNews/VistaAdNews/VistaAdNews'
+import { VistaFormNews } from './pages/Administrador/Vistas/AdNews/VistaFormNews/VistaFormNews'
 
 function App() {
   // /juegos/
@@ -125,7 +127,15 @@ function App() {
         },
         {
           path: 'news',
-          element: <AdNews/>
+          element: <AdNews/>,
+          children: [{
+            path: ':id',
+            element: <VistaAdNews/>
+          },
+          {
+            path:'form',
+            element: <VistaFormNews/>
+          }]
         },
       ]
     }

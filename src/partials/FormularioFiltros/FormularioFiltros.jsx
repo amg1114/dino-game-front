@@ -2,7 +2,8 @@ import { Autocomplete, TextField, createFilterOptions, styled } from "@mui/mater
 import "./FormularioFiltros.css"
 import { useEffect, useState } from "react"
 import axios from "axios";
-import { InputFilledStyle } from "../../utils/mui.styles"; 
+import { InputFilledStyle } from "../../utils/mui.styles";
+import { InputFilledStyleAdmin } from "../../utils/mui.styles-admin";
 export function FormularioFiltros({ onSearch }) {
     const API_ENPOINT = process.env.REACT_APP_API + '/categorias'
     const [categorias, setCategorias] = useState([]);
@@ -28,12 +29,12 @@ export function FormularioFiltros({ onSearch }) {
         }
         onSearch(data)
     }
-
+    console.log(window.location.pathname)
     return <>
         <h3>Formulario de búsqueda</h3>
         <form onSubmit={sendFormData} className="filters-form">
             <TextField
-                sx={InputFilledStyle}
+                sx={window.location.pathname === "/juegos"? InputFilledStyle: InputFilledStyleAdmin}
                 id="outlined-controlled"
                 label="Buscar Juego"
                 value={search}
@@ -43,9 +44,16 @@ export function FormularioFiltros({ onSearch }) {
                     setSearch(event.target.value);
                 }}
             />
-                    <div className="field-wrapper">
-                        <TextField label="Precio" fullWidth variant="filled" type="number" sx={InputFilledStyle} value={precio} onChange={(event) => setPrecio(event.target.value)} />
-                    </div>
+            <div className="field-wrapper">
+                <TextField
+                    label="Precio"
+                    fullWidth
+                    variant="filled"
+                    type="number"
+                    sx={window.location.pathname === "/juegos"? InputFilledStyle: InputFilledStyleAdmin}
+                    value={precio}
+                    onChange={(event) => setPrecio(event.target.value)} />
+            </div>
             <div className="field-wrapper">
                 <Autocomplete
                     id="combo-box-demo"
@@ -60,7 +68,7 @@ export function FormularioFiltros({ onSearch }) {
                     onChange={(event, value) => {
                         setCategoria(value)
                     }}
-                    renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={InputFilledStyle} />}
+                    renderInput={(params) => <TextField {...params} label="Categoria" variant="filled" sx={window.location.pathname === "/juegos"? InputFilledStyle: InputFilledStyleAdmin} />}
                 />
             </div>
         </form>
