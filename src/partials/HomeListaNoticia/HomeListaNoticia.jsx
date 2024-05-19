@@ -12,7 +12,7 @@ export function HomeListaNoticia({ notices, sectionTitle }) {
                         id={elemento.id}
                         titulo={elemento.titulo}
                         fecha={elemento.fecha}
-                        imagen={elemento.assets[0].url}
+                        imagen={elemento.assets[0] ? elemento.assets[0].url: ''}
                         descripcion={elemento.descripcion}
                         key={index}
                     />
