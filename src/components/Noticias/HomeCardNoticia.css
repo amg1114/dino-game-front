@@ -19,6 +19,12 @@
 .home-notice-section .textNotice {
     padding-left: 10px;
     text-align: left;
+    color: white;
+}
+.home-notice-section .textNoticeBlack {
+    padding-left: 10px;
+    text-align: left;
+    color: black;
 }
 
 .home-notice-section .url::after {

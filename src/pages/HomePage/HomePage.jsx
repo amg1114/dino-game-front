@@ -68,7 +68,7 @@ export function HomePage() {
                             {
                                 categorias.slice(0, 6).map((elemento, index) => {
                                     return (
-                                        <Link href={"/categorias/" + elemento.id} key={elemento.id + "left-aside"}>
+                                        <Link to={"/categorias/" + elemento.id} key={elemento.id + "left-aside"}>
                                             <div className="categoria" >
                                                 {elemento.titulo}
                                             </div>

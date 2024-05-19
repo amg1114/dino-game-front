@@ -15,7 +15,7 @@ export function GameCard({ Game }) {
             <div className='description'><p className='description-texto'>{descripcion.slice(0, 100)}</p></div>
 
             <div className="urlGame">
-                <Link to={"/juegos/" + id} className='stretched-link'>{titulo}</Link>
+                <Link to={window.location.href +"/"+ id} className='stretched-link'>{titulo}</Link>
             </div>
             
             <span className="btn btn-1 precio">${precio}</span>

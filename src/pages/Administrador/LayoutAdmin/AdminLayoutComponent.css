@@ -1,0 +1,27 @@
+.ContainerAdmin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffff;
+    color: black;
+    overflow-y: scroll;
+}
+
+.content-Link-admin{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    gap: 20px;
+    width: 90%;
+}
+.content-Link-admin .Link-admin{
+    color: black;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.content-Link-admin .Link-admin-cs{
+    margin-top: 20px;
+}

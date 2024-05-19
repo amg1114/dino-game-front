@@ -53,6 +53,7 @@ const registerFile = (file_url, asset) => {
     let data = {
         title: asset.title,
         url: file_url,
+        index: asset.index,
     };
 
     if (asset.path === "video-games") {

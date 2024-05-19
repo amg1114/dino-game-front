@@ -1,0 +1,16 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.titleAdmin{
+    color: black;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+}
