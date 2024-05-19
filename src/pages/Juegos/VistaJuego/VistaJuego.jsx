@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -10,6 +11,7 @@ export function VistaJuego() {
     const { id } = useParams()
     const ENDPOINT_API = `https://dinogame.up.railway.app/api/video-games/${id}`
     const [juego, setJuego] = useState(null);
+
 
     useEffect(() => {
 
@@ -22,6 +24,8 @@ export function VistaJuego() {
             })
     }, []
     )
+
+
 
     return <>
 
@@ -39,43 +43,60 @@ export function VistaJuego() {
                             </div>
                             <div className="vista-juego">
                                 <div className="info-izquierda">
-                                    <div> <img className="img1" src={juego.assets[0].url} alt={juego.assets[0].titulo} /></div>
+                                    <div> <img className="img1" src={juego.assets[0].url} alt={juego.assets[0].title} /></div>
                                     <div>
                                         {juego.assets.slice(1, juego.assets.length).map((img, index) => {
                                             return (<img className="mas-img" key={index} src={img.url} alt={img.title} />)
                                         })
                                         }
                                     </div>
-                                    <div className="det-dev-size">
-                                        <div>
-                                            <p>desarrollador <br /><span className="det-nom-edit">Nombre: <br /></span> <span className="det-nom-edit">Editor:</span></p>
-                                        </div>
-                                        <p className="size">tamaño</p>
-                                    </div>
-                                    <p className="comentarios">comentarios</p>
+
 
                                 </div>
                                 <div className="info-derecha">
                                     <h2 className="titulo-juego">{juego.titulo}</h2>
-                                    <p> <span className="descripcion"> descripción <br /></span>  {juego.descripcion} </p>
-                                    
-                                    <p className="cat">categoria</p>
 
                                     <div className="categoria">
                                         {juego.categorias.map((index) => {
-                                            return ( <h3 className="categoria-juego">{index.titulo}</h3> )
+                                            return (<h3 className="categoria-juego">{index.titulo}</h3>)
                                         })
                                         }
                                     </div>
 
                                     <p>
-                                        <span className="version">información de la versión reciente</span> <br />
+
+                                        <p> <span className="descripcion"> descripción <br /></span>  {juego.descripcion} </p>
+                                        <span className="desarrollador">Desarrollado por:<span className="det-nom-edit" >{juego.developer.user.nombre}</span></span>
+                                        <div className="separador"></div>
+
                                     </p>
 
-                                    <p><span className="req">requisitos</span><br /> </p>
+                                    <p className="info"><div className="req">requisitos:  {juego.versions[0].requisitos.map((req, index) => {
+                                        return (<span className="requisitos">{req.requisito} </span >)
+                                    })}
+                                    </div>
+
+                                        <p className="ver">
+                                            información de la versión reciente:
+                                            <span className="version">{juego.versions[0].version}</span>
+                                        </p>
+
+                                    </p>
+                                    <div className="det-dev-size">
+                                        <p className="size">tamaño: <span className="requisitos">{juego.versions[0].size}</span></p>
+                                    </div>
+
                                     <div className="valor-comprar">
-                                        <h2 className="precio">precio: col${juego.precio}</h2>
-                                        <button className="btn-comprar" type="button">comprar</button>
+                                        <div className="comprar">
+                                            {juego.descuentos[0] ? <>
+
+                                                <span className="precio">${juego.precio}</span>
+                                                <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
+                                            </> :
+
+                                                <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
