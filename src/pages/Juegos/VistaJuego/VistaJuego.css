@@ -35,7 +35,7 @@
 }
 
 .vista-juego .size{
-    
+   
     display: flex;
     margin-top: 0px;
     text-align: end;
@@ -95,12 +95,12 @@
 }
 
 .vista-juego .info .ver{
-    color: #fff;
+    color: #57cc99;
     margin-top: 0;
 }
 
 .vista-juego .info .version{
-    color: #57cc99;
+    color: #fff;
     display: flex;
     margin-top: 0;
 }
@@ -130,17 +130,16 @@
 
 }
 
-
-.vista-juego .valor-comprar .precio{
-    margin-right: 20px; 
-    margin-bottom: 0px;
+.vista-juego .valor-comprar .precio {
+    margin-right: 20px;
+    margin-bottom: 0px; 
     text-decoration: line-through;
 }
 
 .vista-juego .valor-comprar .descuento{
     color:#fff;
     margin-bottom: 0;
-    margin-right: 20px;
+    margin-right: 20px;   
 }
 
 .vista-juego .valor-comprar .btn-comprar{

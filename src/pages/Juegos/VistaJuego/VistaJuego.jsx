@@ -90,7 +90,7 @@ export function VistaJuego() {
                                         <div className="comprar">
                                             {juego.descuentos[0] ? <>
 
-                                                <h2 className="precio">${juego.precio}</h2>
+                                                <span className="precio">${juego.precio}</span>
                                                 <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
                                             </> :
 
