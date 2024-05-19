@@ -71,3 +71,41 @@ a:hover:not(.btn) {
     height: 100%;
     z-index: 9;
 }
+
+.rich-text h1,
+.rich-text h2,
+.rich-text h3,
+.rich-text h4,
+.rich-text h5,
+.rich-text h6 {
+    color: #38A3A5; /* Títulos */
+}
+
+.rich-text p {
+    color: #FFFFFF; /* Párrafos en blanco */
+}
+
+.rich-text a {
+    color: #57CC99; /* Enlaces */
+    text-decoration: none;
+}
+
+.rich-text a:hover {
+    color: #38A3A5; /* Enlaces al pasar el ratón */
+    text-decoration: underline;
+}
+
+.rich-text ul,
+.rich-text ol {
+    color: #FFFFFF; /* Listas en blanco */
+}
+
+.rich-text ul li,
+.rich-text ol li {
+    color: #FFFFFF; /* Elementos de listas en blanco */
+}
+.rich-text ul li strong,
+.rich-text ol li strong {
+    color: #57cc99; /* Elementos de listas en blanco */
+}
+

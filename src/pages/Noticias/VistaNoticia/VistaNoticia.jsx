@@ -54,7 +54,7 @@ export function VistaNoticia() {
                                         <img src={noticia.assets[0].url} alt={noticia.assets[0].titulo} className="imagen-juego" /> : <></>
                                 }
                                 <p className={noticia.assets[0] ? "fecha" : ''}>{moment(noticia.fecha, "YYYY-MM-DD").format("MMMM, DD, YYYY")}</p>
-                                <div dangerouslySetInnerHTML={{ __html: noticia.descripcion }}></div>
+                                <div className="rich-text" dangerouslySetInnerHTML={{ __html: noticia.descripcion }}></div>
                             </div>
                             <div className="derecha">
                                 <HomeListaNoticia notices={noticias} />
