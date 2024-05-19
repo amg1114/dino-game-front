@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import './VistaFormNews.css'
-import { FilledInput, TextField } from "@mui/material";
-import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
+import { TextField } from "@mui/material";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+
+import axios from "axios";
+import Swal from "sweetalert2";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
-import { createRef, useState } from "react";
-import Swal from "sweetalert2";
+
+import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
+import { useAuth } from "../../../../../providers/AuthProvider";
+
+import './VistaFormNews.css'
 
 export function VistaFormNews() {
     const editorConfiguration = {
@@ -30,7 +35,12 @@ export function VistaFormNews() {
         descripcion: '',
     })
 
-    const assetsRef = createRef()
+    const [assetsFormConfig, setAssetsFormConfig] = useState({
+        canSend: false,
+        ownerId: null,
+        path: 'noticias',
+        maxFiles: 1,
+    })
 
     const handleChange = (field, value) => {
         setNoticia({
@@ -41,7 +51,19 @@ export function VistaFormNews() {
 
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion) {
-            assetsRef.current.test();
+            axios.post(`${process.env.REACT_APP_API}/noticias`, {...noticia, fecha: new Date()})
+                .then((response) => {
+                    console.log("Se ha guardado la noticia correctamente")
+                    const id = response.data.id
+                    setAssetsFormConfig({
+                        ...assetsFormConfig,
+                        canSend: true,
+                        ownerId: id
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             return
         }else {
 
@@ -97,9 +119,7 @@ export function VistaFormNews() {
                                 </div>
                             </form>
                             <AssetsForm
-                                ref={assetsRef}
-                                ownerId={0}
-                                path={'noticias'}
+                                config={assetsFormConfig}
                             />
                             <div className="botones-opciones-admin">
                                 <button className="btn btn-4" onClick={()=>handleSave()}>
