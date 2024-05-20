@@ -87,7 +87,7 @@ export function Registro() {
                         </Link>
                     </div>
                     <div className="container">
-                        <form className="form">
+                        <form className="form register-form">
                             <h2 className="registro-titulo">registro</h2>
                             <div className="field-wrapper full-width">
                                 <TextField fullWidth type="input" id="filled-basic" label="Nombre" variant="filled" onChange={(event) => { handleName(event) }} value={name} sx={InputFilledStyle} />

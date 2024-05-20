@@ -66,7 +66,7 @@ export function Login() {
                         </Link>
                     </div>
                     <div className="container">
-                        <form className="form">
+                        <form className="form login-form">
                             <h2 className="login-titulo">login</h2>
                             <div className="field-wrapper full-width">
                                 <TextField fullWidth type="email" id="filled-basic" label="Correo electronico" variant="filled" onChange={(event) => { handleEmail(event) }} value={email} sx={InputFilledStyle} />
