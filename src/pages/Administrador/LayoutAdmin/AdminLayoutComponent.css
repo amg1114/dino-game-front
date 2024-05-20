@@ -25,7 +25,3 @@
 .content-Link-admin .Link-admin-cs{
     margin-top: 20px;
 }
-
-.admin-content :not(.btn) {
-    color: #535353 !important;
-}

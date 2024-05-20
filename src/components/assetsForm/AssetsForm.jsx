@@ -8,11 +8,12 @@ import { asyncUploadFile } from "../../services/assets-service";
 
 import { PreviewImage } from "./PreviewImage";
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const AssetsForm = ({ config }) => {
   const [previewFiles, setPreviewFiles] = useState([])
   const [filesToUpload, setFilesToUpload] = useState([])
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (config.canSend && filesToUpload.length > 0) {
       handleFileUpload()
@@ -139,10 +140,7 @@ const AssetsForm = ({ config }) => {
     if (completedFiles.length === previewFiles.length) {
       setPreviewFiles([])
       setFilesToUpload([])
-      Swal.fire({
-        title: 'Todas las imágenes se subieron con éxito',
-        icon: 'success'
-      })
+      navigate('/admin/noticias')  
     }
   }
 

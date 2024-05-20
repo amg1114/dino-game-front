@@ -1,7 +1,3 @@
-.container .form .field-wrapper.full-width {
-    margin: 10px;
-}
-
 .container .form .botones-login-register{
     display: flex;
     flex-direction: column;
@@ -21,7 +17,6 @@
     border: none;
     border-radius: 5px;
     padding: 10px;
-    color: #fff;
     margin: 10px;
     cursor: pointer;
 }

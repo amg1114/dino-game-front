@@ -24,9 +24,11 @@ export function AdNews() {
         {
             <div className="noticiasPageAdmin">
                 <h2><span>DINO</span>NOTICIAS</h2>
-                <Link className="btn btn-2 boton-agregar-noticia" to='/admin/news/form'>
-                    AGREGAR NOTICIA
-                </Link>
+                <div className="buttons-group">
+                    <Link className="btn btn-2 boton-agregar-noticia" to='/admin/noticias/form'>
+                        AGREGAR NOTICIA
+                    </Link>
+                </div>
                 <ListaNoticia noticias={noticias} />
                 <Outlet />
             </div>

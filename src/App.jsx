@@ -27,7 +27,6 @@ import { AdGames } from './pages/Administrador/Vistas/AdGames/AdGames'
 import { AdUsersDev } from './pages/Administrador/Vistas/AdUsersDev/AdUsersDev'
 import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdRequestDev'
 import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
-import { VistaUpdateGame } from './pages/Administrador/Vistas/AdGames/VistaUpdateGame/VistaUpdateGame'
 import { VistaAdNews } from './pages/Administrador/Vistas/AdNews/VistaAdNews/VistaAdNews'
 import { VistaFormNews } from './pages/Administrador/Vistas/AdNews/VistaFormNews/VistaFormNews'
 
@@ -110,12 +109,6 @@ function App() {
         {
           path: '',
           element: <AdGames />,
-          children: [
-            {
-              path: ':id',
-              element: <VistaUpdateGame />
-            }
-          ]
         },
         {
           path: 'desarrolladores',
