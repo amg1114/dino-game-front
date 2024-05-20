@@ -125,10 +125,6 @@ function App() {
             {
               path: 'form',
               element: <VistaFormNews />
-            },
-            {
-              path: ':id',
-              element: <VistaAdNews />
             }
           ]
         },

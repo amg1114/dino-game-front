@@ -7,3 +7,6 @@
     align-items: stretch;
     margin-bottom: 20px;
 }
+.buttons-group.align-end {
+    justify-content: flex-end;
+}

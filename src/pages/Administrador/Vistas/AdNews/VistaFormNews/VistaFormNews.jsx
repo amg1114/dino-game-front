@@ -9,7 +9,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
-import { useAuth } from "../../../../../providers/AuthProvider";
 
 import './VistaFormNews.css'
 
@@ -66,7 +65,6 @@ export function VistaFormNews() {
                 })
             return
         }else {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
