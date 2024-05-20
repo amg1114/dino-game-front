@@ -2,13 +2,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
     width: 100%;
 }
 
 .form .field-wrapper {
-    width: 40%;
-
+    width: 48%;
 }
 
 .form .field-wrapper.full-width{

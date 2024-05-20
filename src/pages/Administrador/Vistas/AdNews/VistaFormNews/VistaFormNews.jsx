@@ -9,7 +9,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
-import { useAuth } from "../../../../../providers/AuthProvider";
 
 import './VistaFormNews.css'
 
@@ -66,7 +65,6 @@ export function VistaFormNews() {
                 })
             return
         }else {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -80,9 +78,9 @@ export function VistaFormNews() {
 
     return <>
         <div className="modal-fade animate__animated animate__fadeIn">
-            <div className="modal-content-admin animate__animated animate__slideInDown">
+            <div className="modal-content modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link to="/admin/news" className="modal-closer">
+                    <Link to="/admin/noticias" className="modal-closer color-gray">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>

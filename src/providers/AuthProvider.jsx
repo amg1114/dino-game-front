@@ -5,10 +5,10 @@ const AuthContext = createContext();
 function AuthProvider({ child }) {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [usuario, setUsuario] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const updateToken = (newToken) => {
         setToken(newToken);
-        
     };
 
     const deleteToken = () => {
@@ -16,12 +16,14 @@ function AuthProvider({ child }) {
     }
 
     const getUsuario = () => {
+        setIsLoading(true);
         axios.get(process.env.REACT_APP_API + "/auth/profile")
             .then((response) => {
                 setUsuario(response.data)
+                setIsLoading(false);
             })
             .catch(function (error) {
-                console.log(error)
+                setIsLoading(false);
             })
     }
 
@@ -41,10 +43,11 @@ function AuthProvider({ child }) {
         return {
             token, 
             usuario,
+            isLoading,
             updateToken,
             deleteToken
         };
-    }, [token, usuario]);
+    }, [token, isLoading, usuario]);
 
     return <AuthContext.Provider value={contextValue}>{child}</AuthContext.Provider>;
 }

@@ -49,7 +49,6 @@
 
 
 .vista-juego .det-nom-edit{
-    color: #fff;
     text-transform: uppercase;
     margin-left: 5px;
 }
@@ -100,13 +99,11 @@
 }
 
 .vista-juego .info .version{
-    color: #fff;
     display: flex;
     margin-top: 0;
 }
 
 .vista-juego .requisitos{
-    color: #fff;
     text-transform: uppercase;
     display: grid;
 
@@ -152,7 +149,6 @@
     padding: 10px 16px;
     border: 0;
     outline: 0;
-    color: #ffffff;
     line-height: 1;
     cursor: pointer;
     border-radius: 10px;

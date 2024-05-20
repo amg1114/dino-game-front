@@ -109,3 +109,27 @@ a:hover:not(.btn) {
     color: #57cc99; /* Elementos de listas en blanco */
 }
 
+.color-white {
+    color: #FFFFFF !important;
+}
+
+.color-green {
+    color: #57CC99 !important;
+}
+
+.color-green-dark {
+    color: #38A3A5 !important;
+}
+
+.color-black {
+    color: #000000 !important;
+}
+
+.color-gray {
+    color: #707070 !important;
+}
+
+.color-light-gray {
+    color: #B0B0B0 !important;
+}
+
