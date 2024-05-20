@@ -118,15 +118,15 @@ function App() {
           ]
         },
         {
-          path: 'users-dev',
+          path: 'desarrolladores',
           element: <AdUsersDev />
         },
         {
-          path: 'requests-dev',
+          path: 'solicitudes',
           element: <AdRequestDev />
         },
         {
-          path: 'news',
+          path: 'noticias',
           element: <AdNews />,
           children: [
             {

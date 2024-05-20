@@ -37,7 +37,7 @@ export function AdGames() {
             <FormularioFiltros onSearch={Search} />
             {
                 juegos === null ? <><h1>Game was not found</h1></> : (
-                    <div className="lista-juegos">
+                    <div className="lista-juegos-admin">
                         {juegos.map((juego, index) => (
                             <GameCard key={index} Game={juego} />
                         ))}

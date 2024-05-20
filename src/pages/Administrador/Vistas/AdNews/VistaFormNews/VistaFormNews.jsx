@@ -8,7 +8,7 @@ export function VistaFormNews() {
         <div className="modal-fade animate__animated animate__fadeIn">
             <div className="modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link to="/admin/news" className="modal-closer">
+                    <Link to="/admin/noticias" className="modal-closer">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>

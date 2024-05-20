@@ -12,7 +12,7 @@ export function CardNotice({ id, imagen, titulo, descripcion, fecha, assets }) {
                     />
                     <div className="textNotice">
                         <span><h3>{titulo} </h3>
-                            <p>{descripcion}</p></span>
+                            <p>{ window.location.pathname ==="/admin/noticias"? descripcion.slice(0,100) + "...": descripcion}</p></span>
                     </div>
                 </div>
             </Link>
