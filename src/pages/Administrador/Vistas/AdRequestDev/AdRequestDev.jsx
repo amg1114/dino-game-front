@@ -1,29 +1,74 @@
 import { useEffect, useState } from 'react'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+
+import axios from 'axios'
+import Swal from 'sweetalert2'
+
 import './AdRequestDev.css'
-import axios, { Axios } from 'axios'
 import { useAuth } from '../../../../providers/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 export function AdRequestDev() {
     const ENDPOINT = process.env.REACT_APP_API + "/users/developers/solicitudes"
-    const [solicitudes, setSolicitudes] = useState([])
-    const { token } = useAuth()
+    const [solicitudes, setSolicitudes] = useState([]);
+
     useEffect(() => {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        if (!solicitudes.length) {
+            getSolicitudes()
+        }
+    }, [])
+
+    const getSolicitudes = () => {
         axios.get(ENDPOINT)
             .then((respuesta) => {
                 setSolicitudes(respuesta.data)
-                console.log(respuesta.data)
             })
             .catch((error) => {
                 console.log(error)
             })
-    }, [])
-    const handleAceptar = () => {
-        //AQUI DEBE IR UNA PETICION PARA ACEPTAR LA SOLICITUD DE DESARROLLADOR Y CREAR EL PERFIL
     }
-    const handleRechazar= () => {
-        //AQUI DEBE IR UNA PETICION PARA RECHAZAR LA SOLICITUD DE DESARROLLADOR
+
+    const handleAceptar = (id) => {
+        axios.patch(`${process.env.REACT_APP_API}/users/developers/${id}/solicitud`, {
+            estado: 1
+        }).then(() => {
+            Swal.fire({
+                title: 'Solicitud aceptada',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                getSolicitudes()
+            })
+        }).catch((error) => {
+            Swal.fire({
+                title: 'Error al aceptar la solicitud',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            })
+            console.log('Error al aceptar la solicitud', error)
+        })
     }
+
+    const handleRechazar = (id) => {
+        axios.patch(`${process.env.REACT_APP_API}/users/developers/${id}/solicitud`, {
+            estado: 2
+        }).then(() => {
+            Swal.fire({
+                title: 'Solicitud denegada',
+                icon: 'info',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                getSolicitudes()
+            })
+        }).catch(() => {
+            Swal.fire({
+                title: 'Error al denegar la solicitud',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            })
+        });
+    }
+
     return <>
         {
             solicitudes === null ? <></> : (
@@ -31,34 +76,49 @@ export function AdRequestDev() {
                 <div className="usuariosDevsPage">
                     <h2><span>SOLICITUDES DE </span>DESARROLLADOR</h2>
                     <h3><span>USUARIOS DESARROLLADORES ACTIVOS</span></h3>
-                    <div className='cuadro-users'>
-                        <h3 className='title'>ASUNTO</h3>
-                        <h3 className='title'>MENSAJE</h3>
-                        <h3 className='title'>USUARIO</h3>
-                        <div className='title'></div>
-                        {solicitudes.map((solicitud, index) => {
-                            return <>
-                                <div className='info' key={"nombre de la solicitud" +index}><p>{solicitud.nombre}</p></div>
-                                <div className='info' key={"mensaje de la solicitud"+index}><p>{solicitud.mensaje}</p></div>
-                                <div className='info' key={"nombre del usuario"+index}><p>{solicitud.user.nombre}</p></div>
-                                <div className='info info-boton botones-solicitudes' key={"boton eliminar usuario dev"+index}>
-                                    <button onClick={handleAceptar} key={"boton aceptar" + index}>
-                                        <span className="material-symbols-outlined" key={"boton aceptar icono" + index}>
-                                            check
-                                        </span>
-                                    </button>
-                                    <button onClick={handleRechazar} key={"boton rechazar" + index}>
-                                        <span className="material-symbols-outlined" key={"boton rechazar icono" + index}>
-                                            close
-                                        </span>
-                                    </button>
-                                </div>
-                            </>
-                        })
-                        }
-
-                    </div >
-                </div>
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><strong>Asunto</strong></TableCell>
+                                    <TableCell><strong>Mensaje</strong></TableCell>
+                                    <TableCell><strong>Usuario</strong></TableCell>
+                                    <TableCell><strong>Estado</strong></TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {solicitudes.map((solicitud) => {
+                                    return (
+                                        <TableRow
+                                            key={solicitud.id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell>{solicitud.nombre}</TableCell>
+                                            <TableCell><p>{solicitud.mensaje}</p></TableCell>
+                                            <TableCell><a href={"mailto:" + solicitud.user.correo} style={{ color: '#38a3a5' }}><strong>{solicitud.user.correo}</strong></a></TableCell>
+                                            <TableCell>{solicitud.estado === 0 ? 'Pendiente' : solicitud.estado === 1 ? 'Aceptada' : 'Rechazada'}</TableCell>
+                                            <TableCell>
+                                               {solicitud.estado === 0 ? <div className="buttons-group">
+                                                    <button className='btn btn-1' onClick={() => handleAceptar(solicitud.user.id)}>
+                                                        <span className="material-symbols-outlined">
+                                                            how_to_reg
+                                                        </span>
+                                                    </button>
+                                                    <button className='btn btn-3' onClick={() => handleRechazar(solicitud.user.id)}>
+                                                        <span className="material-symbols-outlined">
+                                                            delete
+                                                        </span>
+                                                    </button>
+                                                </div> : <></>}
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div >
             )
         }
     </>

@@ -18,7 +18,7 @@ export function AdminLayoutComponent() {
                     <li><Link to="/" className="btn btn-3 Link-admin Link-admin-cs" onClick={deleteToken}>CERRAR SESION</Link></li>
                 </ul>
             </aside>
-            <main>
+            <main className="admin-content">
                 <Outlet />
             </main>
         </div>
