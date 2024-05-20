@@ -16,10 +16,16 @@
     margin: 10px;
     cursor: pointer;
     text-transform: uppercase;
+    color: #fff;
 }
 
 .container .form .botones-login-register .opc-inicio-sesion{
     text-transform: uppercase;
     margin-left: 13px;
     margin-top: 10px;
+    color: #fff;
+}
+
+.register-form {
+    justify-content: center;
 }
