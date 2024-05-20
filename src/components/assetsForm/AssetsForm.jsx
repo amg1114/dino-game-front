@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,9 +9,15 @@ import { asyncUploadFile } from "../../services/assets-service";
 import { PreviewImage } from "./PreviewImage";
 import Swal from 'sweetalert2';
 
-const AssetsForm = ({ ownerId, path }) => {
+const AssetsForm = ({ config }) => {
   const [previewFiles, setPreviewFiles] = useState([])
   const [filesToUpload, setFilesToUpload] = useState([])
+
+  useEffect(() => {
+    if (config.canSend && filesToUpload.length > 0) {
+      handleFileUpload()
+    }
+  }, [config])
 
   /**
    * Procesa los archivos que se van a subir y genera el preview.
@@ -22,6 +28,10 @@ const AssetsForm = ({ ownerId, path }) => {
     let newFilesToUpload = [...filesToUpload];
 
     for (let index = 0; index < e.target.files.length; index++) {
+      if (index > config.maxFiles - 1) {
+        Swal.fire({ title: `Solo se pueden subir ${config.maxFiles} archivos`, icon: 'error' })
+        break;
+      }
       const file = e.target.files.item(index);
 
       const previewObject = {
@@ -45,18 +55,18 @@ const AssetsForm = ({ ownerId, path }) => {
 
   /**
    * Envía los archivos al servicio de subida y actualiza el estado de cada objeto
-   * @param {React.FormEvent<HTMLFormElement>} e 
+   * 
    */
-  const handleFileUpload = (e) => {
-    e.preventDefault();
+  const handleFileUpload = () => {
 
     for (let index = 0; index < filesToUpload.length; index++) {
       const file = filesToUpload[index];
       const previewObj = previewFiles[index];
       const assetData = {
         title: file.name,
-        ownerId,
-        path,
+        ownerId: config.ownerId,
+        path: config.path,
+        index: index,
         file
       }
       setPreviewObjectsInProgress()
@@ -171,14 +181,9 @@ const AssetsForm = ({ ownerId, path }) => {
               : <p>No hay imágenes para subir aún.</p>
           }
         </div>
-        <form className="buttons-group" onSubmit={handleFileUpload}>
+        <form className="buttons-group">
           <input type="file" name='assetInput' id="assetInput" multiple onChange={handleFileChange} />
-          <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label>
-          {
-            filesToUpload.length ?
-              <button className='btn btn-1' type="submit">Enviar Imagenes</button>
-              : <></>
-          }
+          {filesToUpload.length < config.maxFiles ? <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label> : <></>}
           {
             filesToUpload.length ?
               <button className='btn btn-3' type="button" onClick={reset}>Descartar</button>

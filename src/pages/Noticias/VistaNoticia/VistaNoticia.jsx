@@ -12,7 +12,7 @@ import { HomeListaNoticia } from "../../../partials/HomeListaNoticia/HomeListaNo
 export function VistaNoticia() {
 
     const { id } = useParams()
-    const ENDPOINT = `https://dinogame.up.railway.app/api/noticias/${id}`
+    const ENDPOINT = `${process.env.REACT_APP_API}/noticias/${id}`
     const [noticia, setNoticia] = useState(null)
     const [noticias, setNoticias] = useState([])
 
@@ -23,7 +23,7 @@ export function VistaNoticia() {
             })
             .then(function (response) {
                 const noticia_data = response.data;
-                axios.get(`https://dinogame.up.railway.app/api/noticias`)
+                axios.get(`${process.env.REACT_APP_API}/noticias`)
                     .catch(function (error) {
                         console.log(error)
                     })
@@ -32,7 +32,7 @@ export function VistaNoticia() {
                         setNoticia(noticia_data);
                     })
             })
-    })
+    }, [])
 
     return <>
         {
@@ -49,13 +49,16 @@ export function VistaNoticia() {
                         <div className="container">
                             <div className="izquierda">
                                 <h2>{noticia.titulo}</h2>
-                                <img src={noticia.assets[0].url} alt={noticia.assets[0].titulo} className="imagen-juego" />
-                                <p className="fecha">{moment(noticia.fecha, "YYYY-MM-DD").format("MMMM, DD, YYYY")}</p>
-                                <p>{noticia.descripcion}</p>
+                                {
+                                    noticia.assets[0] ?
+                                        <img src={noticia.assets[0].url} alt={noticia.assets[0].titulo} className="imagen-juego" /> : <></>
+                                }
+                                <p className={noticia.assets[0] ? "fecha" : ''}>{moment(noticia.fecha, "YYYY-MM-DD").format("MMMM, DD, YYYY")}</p>
+                                <div className="rich-text" dangerouslySetInnerHTML={{ __html: noticia.descripcion }}></div>
                             </div>
                             <div className="derecha">
                                 <HomeListaNoticia notices={noticias} />
-                     
+
                             </div>
                         </div>
                     </div>

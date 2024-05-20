@@ -19,18 +19,18 @@ export function AdNews() {
                 setNoticias(respuesta.data)
             })
 
-    })
+    }, [])
     return <>
         {
             <div className="noticiasPageAdmin">
                 <h2><span>DINO</span>NOTICIAS</h2>
-                <ListaNoticia noticias={noticias} />
-                <Link className="btn btn-2 boton-agregar-noticia" to='/admin/noticias/form'>
+                <Link className="btn btn-2 boton-agregar-noticia" to='/admin/news/form'>
                     AGREGAR NOTICIA
                 </Link>
+                <ListaNoticia noticias={noticias} />
                 <Outlet />
             </div>
-        
+
         }
     </>
 }

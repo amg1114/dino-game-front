@@ -16,7 +16,7 @@ export function PaginaNoticias() {
                 setNoticias(respuesta.data)
             })
 
-    })
+    }, [])
     return <>
         {
             <div>

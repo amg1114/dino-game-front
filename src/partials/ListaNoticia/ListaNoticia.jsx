@@ -9,7 +9,7 @@ export function ListaNoticia({ noticias }) {
                     <div key={index} className='noticeCard'>
                         <CardNotice
                             id={noticia.id}
-                            imagen={noticia.assets[0].url}
+                            imagen={noticia.assets[0] ? noticia.assets[0].url : ''}
                             titulo={noticia.titulo}
                             descripcion={noticia.descripcion.slice(0, 180) + '...'}
                         />

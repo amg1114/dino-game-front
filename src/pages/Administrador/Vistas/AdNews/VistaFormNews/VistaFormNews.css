@@ -1,4 +1,4 @@
-.formulario-agregar-noticia{
+.formulario-agregar-noticia {
     width: 100%;
     height: 100%;
     display: flex;
@@ -6,18 +6,47 @@
     justify-content: center;
     align-items: center;
 }
-.formulario-agregar-noticia .contenedor-form-modal{
+.formulario-agregar-noticia .contenedor-form-modal {
     width: 80%;
 }
-.formulario-agregar-noticia .contenedor-form-modal .boton-agregar-imagen{
+.formulario-agregar-noticia .contenedor-form-modal .boton-agregar-imagen {
     width: 100%;
     display: flex;
     justify-content: start;
 }
-.formulario-agregar-noticia .botones-opciones-admin{
+.formulario-agregar-noticia .botones-opciones-admin {
     width: 100%;
     column-gap: 30px;
     display: flex;
     justify-content: end;
     margin-top: 30px;
+}
+
+.ck-editor {
+    --ck-color-base-border: #38a3a5;
+    --ck-color-focus-border: #57cc99;
+    --ck-color-base-background: #f0f0f0;
+
+    --ck-color-toolbar-background: #38a3a5;
+    --ck-color-dropdown-panel-background: #38a3a5;
+}
+
+.ck-editor .ck-toolbar .ck-button  {
+    --ck-color-text: #fff;
+}
+
+.ck-editor .ck-toolbar .ck-button:hover {
+    --ck-color-text: #000;
+    
+}
+.ck-editor .ck-toolbar .ck-dropdown__panel {
+    --ck-color-list-background: var(--ck-color-dropdown-panel-background);
+    --ck-color-list-button-on-background: #57cc99;
+}
+.ck-editor .ck-sticky-panel__content {
+    border: 0 !important;
+}
+.ck-editor .ck-content {
+    min-height: 20vh;
+    border: 0 !important;
 }
