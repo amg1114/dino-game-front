@@ -29,6 +29,7 @@ import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdReques
 import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
 import { VistaAdNews } from './pages/Administrador/Vistas/AdNews/VistaAdNews/VistaAdNews'
 import { VistaFormNews } from './pages/Administrador/Vistas/AdNews/VistaFormNews/VistaFormNews'
+import { VistaDescuento } from './pages/Administrador/Vistas/AdGames/VistaDescuento/VistaDescuento'
 
 function App() {
   // /juegos/
@@ -109,6 +110,12 @@ function App() {
         {
           path: '',
           element: <AdGames />,
+          children: [
+            {
+              path: 'descuento/:id',
+              element: <VistaDescuento />
+            }
+          ]
         },
         {
           path: 'desarrolladores',
