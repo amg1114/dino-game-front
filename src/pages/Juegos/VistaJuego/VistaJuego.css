@@ -1,77 +1,71 @@
-.vista-juego{
+.vista-juego {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
-.vista-juego .info-izquierda{
+.vista-juego .info-izquierda {
     grid-column: 1;
 }
 
-.vista-juego .info-derecha{
+.vista-juego .info-derecha {
     grid-column: 2;
 }
 .vista-juego .img1 {
-    
     width: 600px;
     height: auto;
     border-radius: 20px;
 }
 
-.vista-juego .mas-img{
+.vista-juego .mas-img {
     width: 290px;
     height: 150px;
     margin: 5px;
     border-radius: 20px;
 }
 
-.vista-juego .det-dev-size{
+.vista-juego .det-dev-size {
     display: flex;
     justify-content: start;
     text-transform: uppercase;
     color: #57cc99;
     text-align: end;
-    
 }
 
-.vista-juego .size{
-   
+.vista-juego .size {
     display: flex;
     margin-top: 0px;
     text-align: end;
-    
 }
 
-.vista-juego .separador{
+.vista-juego .separador {
     border-top: 1px solid #fff;
-    margin: 10px 0 ;
+    margin: 10px 0;
 }
 
-
-.vista-juego .det-nom-edit{
+.vista-juego .det-nom-edit {
     text-transform: uppercase;
     margin-left: 5px;
 }
 
-.vista-juego .titulo-juego{
-    color:#57CC99;
+.vista-juego .titulo-juego {
+    color: #57cc99;
     text-align: left;
     text-transform: uppercase;
-    margin:0;
+    margin: 0;
 }
 
-.vista-juego .descripcion{
+.vista-juego .descripcion {
     color: #57cc99;
     text-transform: uppercase;
-    font-size: x-large
+    font-size: x-large;
 }
 
-.vista-juego .categoria{
+.vista-juego .categoria {
     display: flex;
-    
-} 
+}
 
-.vista-juego .categoria .categoria-juego{
+.vista-juego .categoria .categoria-juego {
     width: 100x;
     font-size: large;
     margin-right: 10px;
@@ -79,67 +73,83 @@
     padding: 8px;
     border-radius: 15px;
 }
-.vista-juego .info{
+.vista-juego .info {
     display: flex;
     gap: 150px;
-    
 }
-.vista-juego .desarrollador{
+.vista-juego .desarrollador {
     color: #57cc99;
 }
 
-.vista-juego .info, .req{
-    color:#57cc99;
+.vista-juego .info,
+.req {
+    color: #57cc99;
     text-transform: uppercase;
 }
 
-.vista-juego .info .ver{
+.vista-juego .info .ver {
     color: #57cc99;
     margin-top: 0;
 }
 
-.vista-juego .info .version{
+.vista-juego .info .version {
     display: flex;
     margin-top: 0;
 }
 
-.vista-juego .requisitos{
+.vista-juego .requisitos {
     text-transform: uppercase;
     display: grid;
-
 }
 
-.vista-juego .valor-comprar{
+.vista-juego .valor-comprar {
     display: flex;
     justify-content: end;
-   
-    
-    
 }
 
-.vista-juego .comprar{
+.vista-juego .comprar {
     display: flex;
     gap: 0px;
     text-transform: uppercase;
     justify-content: center;
     font-size: x-large;
-   
+}
 
+.vista-juego .info-video-game {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vista-juego .info-video-game div {
+    width: 50%;
+}
+.vista-juego .info-video-game .info-requisitos {
+    width: 40%;
+}
+
+.vista-juego .info-video-game .info-requisitos ul {
+    margin: 0;
+    padding: 0;
+}
+
+.vista-juego .info-video-game .info-requisitos li {
+    list-style: none;
+    margin: 0;
 }
 
 .vista-juego .valor-comprar .precio {
     margin-right: 20px;
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
     text-decoration: line-through;
 }
 
-.vista-juego .valor-comprar .descuento{
-    color:#fff;
+.vista-juego .valor-comprar .descuento {
+    color: #fff;
     margin-bottom: 0;
-    margin-right: 20px;   
+    margin-right: 20px;
 }
 
-.vista-juego .valor-comprar .btn-comprar{
+.vista-juego .valor-comprar .btn-comprar {
     position: relative;
     display: flex;
     align-items: center;
@@ -152,13 +162,5 @@
     line-height: 1;
     cursor: pointer;
     border-radius: 10px;
-    transition: transform 0, 3s ease;   
+    transition: transform 0, 3s ease;
 }
-
-
-
-
-
-
-
-
