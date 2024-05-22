@@ -82,7 +82,7 @@ export function AdNews() {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell>
-                                            {noticia.assets.length ? <img src={noticia.assets[0].url} width="80px" /> : <></>
+                                            {noticia.assets.length ? <img src={noticia.assets[0].asset.url} width="80px" /> : <></>
                                             }
                                         </TableCell>
                                         <TableCell>{noticia.titulo}</TableCell>

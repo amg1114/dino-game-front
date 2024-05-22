@@ -27,7 +27,7 @@ export function HomePage() {
                 let prevSlides = []
                 game.map(juego => {
                     if (juego.assets.length > 0) {
-                        const slide = juego.assets.length >= 1 ? juego.assets[1] : juego.assets[0];
+                        const slide = juego.assets.length >= 2 ? juego.assets[1].asset : juego.assets[0].asset;
                         prevSlides.push(slide)
                     }
                 })
@@ -82,12 +82,12 @@ export function HomePage() {
                         {
                             categorias.slice(0, 3).map((elemento, index) => {
                                 return (
-                                    <GameSectionList
+                                    elemento.videoGames.length ? <GameSectionList
                                         games={elemento.videoGames}
                                         sectionTitle={elemento.titulo.toUpperCase()}
                                         id={elemento.id}
                                         key={index}
-                                    />
+                                    /> : <></>
                                 )
                             })
                         }
