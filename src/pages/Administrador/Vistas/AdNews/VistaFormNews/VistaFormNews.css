@@ -14,6 +14,11 @@
     display: flex;
     justify-content: start;
 }
+
+.formulario-agregar-noticia  .contenedor-form-modal .form {
+    margin-bottom: 20px;
+}
+
 .formulario-agregar-noticia .botones-opciones-admin {
     width: 100%;
     column-gap: 30px;

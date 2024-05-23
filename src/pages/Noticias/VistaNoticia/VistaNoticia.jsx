@@ -32,7 +32,7 @@ export function VistaNoticia() {
                         setNoticia(noticia_data);
                     })
             })
-    }, [])
+    }, [id])
 
     return <>
         {

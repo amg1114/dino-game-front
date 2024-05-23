@@ -50,21 +50,16 @@ const asyncUploadFile = (asset, onProgress, onComplete, onError) => {
 };
 
 const registerFile = (file_url, asset) => {
-    let data = {
-        title: asset.title,
+    const data = {
+        title: asset.name,
         url: file_url,
         index: asset.index,
     };
-
-    if (asset.path === "video-games") {
-        data.videoGameId = asset.ownerId;
-    } else {
-        data.noticiaId = asset.ownerId;
-    }
-
-    axios.post(process.env.REACT_APP_API + "/assets", data)
+    console.log("Crear asset:", { data });
+    axios
+        .post(`${process.env.REACT_APP_API}/assets/${asset.type}/${asset.ownerId}`, data)
         .then((res) => console.log("The asset was registered"))
-        .catch((err)=>console.error(err));
+        .catch((err) => console.error(err));
 };
 
 export { asyncUploadFile };
