@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAuth } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { set } from "lodash";
 
 export function SolicitudDesarrollador() {
     const { usuario } = useAuth()
@@ -20,14 +21,33 @@ export function SolicitudDesarrollador() {
         if (usuario) {
             axios.get(process.env.REACT_APP_API + `/users/developers/${usuario.id}/solicitud`)
                 .then((respuesta) => {
-                    setValidacion(true)
-                    Swal.fire({
-                        icon: "info",
-                        title: "Solicitud en proceso",
-                        text: "Ya has realizado una solicitud de desarrollador"
-                    }).then(() => {
-                        navigate("/perfil")
-                    })
+                    console.log(respuesta.data)
+                    if (respuesta.data.estado === 0) {
+                        Swal.fire({
+                            icon: "info",
+                            title: "Solicitud en proceso",
+                            text: "Ya has realizado una solicitud de desarrollador"
+                        }).then(() => {
+                            navigate("/perfil")
+                        })
+                    } else if (respuesta.data.estado === 1) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Solicitud aprobada",
+                            text: "Tu solicitud ha sido aprobada"
+                        }).then(() => {
+                            navigate("/perfil")
+                        })
+                    } else if (respuesta.data.estado === 2) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Solicitud rechazada",
+                            text: "Tu solicitud ha sido rechazada"
+                        }).then(() => {
+                            navigate("/perfil")
+                        })
+                    }
+
                     console.log(respuesta.data)
                 })
                 .catch((error) => {
@@ -47,6 +67,7 @@ export function SolicitudDesarrollador() {
         axios.post((process.env.REACT_APP_API + `/users/developers/${usuario.id}/solicitud`), solicitud)
             .then((respuesta) => {
                 console.log(respuesta.data)
+                setValidacion(true)
                 Swal.fire({
                     icon: "success",
                     title: "Solicitud enviada",

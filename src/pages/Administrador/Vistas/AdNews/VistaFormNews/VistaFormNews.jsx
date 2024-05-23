@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
@@ -11,8 +11,16 @@ import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
 
 import './VistaFormNews.css'
+import { asyncUploadFile } from "../../../../../services/assets-service";
 
 export function VistaFormNews() {
+    const navigate = useNavigate();
+    const [assets, setAssets] = useState([])
+    const [noticia, setNoticia] = useState({
+        titulo: '',
+        descripcion: '',
+    })
+
     const editorConfiguration = {
         toolbar: [
             'undo',
@@ -29,18 +37,11 @@ export function VistaFormNews() {
         ]
     }
 
-    const [noticia, setNoticia] = useState({
-        titulo: '',
-        descripcion: '',
-    })
-
-    const [assetsFormConfig, setAssetsFormConfig] = useState({
-        canSend: false,
-        ownerId: null,
-        path: 'noticias',
-        maxFiles: 1,
-    })
-
+    /**
+     * Actualiza el estado de la noticia
+     * @param {string} field Campo de la noticia cambiado
+     * @param {string} value Valor del campo
+     */
     const handleChange = (field, value) => {
         setNoticia({
             ...noticia,
@@ -48,23 +49,85 @@ export function VistaFormNews() {
         })
     }
 
+    /**
+     * Agrega un archivo a la lista de archivos a subir
+     */
+    const handleAssetChange = (asset) => {
+        setAssets([...assets, asset]);
+    }
+
+    /**
+     * Elimina un archivo de la lista de archivos a subir
+     * @param {number} id Identificador del archivo a eliminar
+     */
+    const handleAssetDelete = (id) => {
+        setAssets(assets.filter(asset => asset.id !== id));
+    }
+
+    /**
+     * Reinicia la lista de archivos a subir
+     */
+    const handleAssetReset = () => {
+        setAssets([]);
+    }
+
+    /**
+     * Sube los archivos a la base de datos y a la nube
+     * @param {number} ownerID Identificador del dueño de los archivos
+     */
+    const handleAssetUpload = (ownerID) => {
+        let assetToUpload = assets;
+
+        assetToUpload.forEach((asset, i) => {
+            asset.ownerId = ownerID;
+            asset.type = 'noticia';
+            asset.index = i;
+
+            asyncUploadFile(asset, (percentage) => {
+                if (percentage === 100) {
+                    asset.state = 'completed';
+                } else {
+                    asset.state = 'in_progress';
+                }
+            }, () => {
+                asset.state = 'completed'
+                handleUploadComplete()
+            }, (err) => console.error(err))
+        })
+
+        setAssets(assetToUpload);
+    }
+
+    /**
+    * Verifica si todos los archivos han sido subidos
+    */
+    const handleUploadComplete = () => {
+        if (!assets.some(asset => asset.state !== 'completed')) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Noticia publicada',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                navigate('/admin/noticias')
+            })
+        }
+    }
+
+    /**
+     * Guarda la noticia en la base de datos
+    */
     const handleSave = () => {
-        if (noticia.titulo && noticia.descripcion) {
-            axios.post(`${process.env.REACT_APP_API}/noticias`, {...noticia, fecha: new Date()})
+        if (noticia.titulo && noticia.descripcion && assets.length > 0) {
+            axios.post(`${process.env.REACT_APP_API}/noticias`, { ...noticia, fecha: new Date() })
                 .then((response) => {
-                    console.log("Se ha guardado la noticia correctamente")
-                    const id = response.data.id
-                    setAssetsFormConfig({
-                        ...assetsFormConfig,
-                        canSend: true,
-                        ownerId: id
-                    })
+                    handleAssetUpload(response.data.id)
                 })
                 .catch((error) => {
                     console.log(error)
                 })
             return
-        }else {
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -74,7 +137,23 @@ export function VistaFormNews() {
 
     }
 
-
+    /**
+     * Cancela la publicación de la noticia
+     */
+    const handleCancelar = () => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate('/admin/noticias')
+            }
+        })
+    }
 
     return <>
         <div className="modal-fade animate__animated animate__fadeIn">
@@ -117,14 +196,18 @@ export function VistaFormNews() {
                                 </div>
                             </form>
                             <AssetsForm
-                                config={assetsFormConfig}
+                                assets={assets}
+                                maxFiles={1}
+                                onChange={(asset) => handleAssetChange(asset)}
+                                onDelete={(id) => handleAssetDelete(id)}
+                                onReset={() => handleAssetReset()}
                             />
                             <div className="botones-opciones-admin">
-                                <button className="btn btn-4" onClick={()=>handleSave()}>
+                                <button className="btn btn-4" onClick={() => handleSave()}>
                                     GUARDAR
                                 </button>
-                                <button className="btn btn-3">
-                                    ELIMINAR
+                                <button className="btn btn-5" onClick={() => handleCancelar()}>
+                                    CANCELAR
                                 </button>
                             </div>
                         </div>

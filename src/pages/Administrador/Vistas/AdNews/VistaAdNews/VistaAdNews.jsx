@@ -73,7 +73,7 @@ export function VistaAdNews() {
                         <div className="container content-modal">
                             <div className="izquierda">
                                 <h2>{noticia.titulo}</h2>
-                                <img src={noticia.assets[0] ? noticia.assets[0].url : ''} alt={noticia.assets[0] ? noticia.assets[0].titulo : ''} className="imagen-juego" />
+                                <img src={noticia.assets[0] ? noticia.assets[0].asset.url : ''} alt={noticia.assets[0] ? noticia.assets[0].asset.titulo : ''} className="imagen-juego" />
                                 <p className="fecha">{moment(noticia.fecha, "YYYY-MM-DD").format("MMMM, DD, YYYY")}</p>
                                 <p>{noticia.descripcion}</p>
                             </div>

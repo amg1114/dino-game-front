@@ -9,7 +9,7 @@ import './VistaJuego.css'
 export function VistaJuego() {
 
     const { id } = useParams()
-    const ENDPOINT_API = `https://dinogame.up.railway.app/api/video-games/${id}`
+    const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
 
 
@@ -43,10 +43,10 @@ export function VistaJuego() {
                             </div>
                             <div className="vista-juego">
                                 <div className="info-izquierda">
-                                    <div> <img className="img1" src={juego.assets[0].url} alt={juego.assets[0].title} /></div>
+                                    <div> <img className="img1" src={juego.assets[0].asset.url} alt={juego.assets[0].asset.title} /></div>
                                     <div>
                                         {juego.assets.slice(1, juego.assets.length).map((img, index) => {
-                                            return (<img className="mas-img" key={index} src={img.url} alt={img.title} />)
+                                            return (<img className="mas-img" key={index} src={img.asset.url} alt={img.asset.title} />)
                                         })
                                         }
                                     </div>
@@ -63,27 +63,33 @@ export function VistaJuego() {
                                         }
                                     </div>
 
-                                    <p>
-
-                                        <p> <span className="descripcion"> descripción <br /></span>  {juego.descripcion} </p>
-                                        <span className="desarrollador">Desarrollado por:<span className="det-nom-edit" >{juego.developer.user.nombre}</span></span>
+                                    <div>
+                                        <h3 className="color-green">Descripcion</h3>
+                                        <p>{juego.descripcion}</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="color-green">Desarrollador <span className="color-white" >{juego.developer.user.nombre}</span></h3>
                                         <div className="separador"></div>
-
-                                    </p>
-
-                                    <p className="info"><div className="req">requisitos:  {juego.versions[0].requisitos.map((req, index) => {
-                                        return (<span className="requisitos">{req.requisito} </span >)
-                                    })}
                                     </div>
 
-                                        <p className="ver">
-                                            información de la versión reciente:
-                                            <span className="version">{juego.versions[0].version}</span>
-                                        </p>
-
-                                    </p>
-                                    <div className="det-dev-size">
-                                        <p className="size">tamaño: <span className="requisitos">{juego.versions[0].size}</span></p>
+                                    <div className="info-video-game">
+                                        <div className="info-requisitos">
+                                            <h3 className="color-green">Requisitos:</h3>
+                                            <ul>
+                                                {juego.versions[0].requisitos.map((req) => {
+                                                    return <li className="color-white" key={req.id}>{req.requisito}</li>
+                                                })
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div className="info-version">
+                                            <h3 className="color-green">VERSIÓN RECIENTE</h3>
+                                            <span className="color-white">{juego.versions[0].version}</span>
+                                            <p className="color-white">{juego.versions[0].descripcion}</p>
+                                        </div>
+                                        <div className="info-tamaño">
+                                            <h3 className="color-green">TAMAÑO: <span className="color-white"> {juego.versions[0].size}</span></h3>
+                                        </div>
                                     </div>
 
                                     <div className="valor-comprar">
