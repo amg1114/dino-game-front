@@ -3,10 +3,11 @@ import { useEffect, useState } from "react"
 import { GameCard } from "../../../../components/GameCard/GameCard"
 import { FormularioFiltros } from "../../../../partials/FormularioFiltros/FormularioFiltros"
 import './AdGames.css'
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import Swal from "sweetalert2"
 export function AdGames() {
+    const navigate = useNavigate()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
     const [juegos, setJuegos] = useState([]);
 
@@ -112,7 +113,7 @@ export function AdGames() {
                                                             public
                                                         </span>
                                                     </Link>
-                                                    <button className='btn btn-1'>
+                                                    <button className='btn btn-1' onClick={() => navigate(`/admin/descuento/${juego.id}`)}>
                                                         <span className="material-symbols-outlined">
                                                             price_change
                                                         </span>
