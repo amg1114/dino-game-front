@@ -29,6 +29,11 @@ import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdReques
 import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
 import { VistaAdNews } from './pages/Administrador/Vistas/AdNews/VistaAdNews/VistaAdNews'
 import { VistaFormNews } from './pages/Administrador/Vistas/AdNews/VistaFormNews/VistaFormNews'
+import { LayoutDeveloper } from './pages/Developer/LayoutDeveloper/LayoutDeveloper'
+import { AdministrarJuegosDeveloper } from './pages/Developer/Vistas/AdministrarJuegosDeveloper/AdministrarJuegosDeveloper'
+import { CrearJuego } from './pages/Developer/Vistas/CrearJuego/CrearJuego'
+import { Finanzas } from './pages/Developer/Vistas/Finanzas/Finanzas'
+import { NoticiasDeveloper } from './pages/Developer/Vistas/NoticiasDeveloper/NoticiasDeveloper'
 
 function App() {
   // /juegos/
@@ -125,6 +130,34 @@ function App() {
             {
               path: 'form',
               element: <VistaFormNews />
+            }
+          ]
+        },
+      ]
+    },
+    {
+      path: 'developer',
+      element: <LayoutDeveloper/>,
+      children: [
+        {
+          path: '',
+          element: <AdministrarJuegosDeveloper/>,
+        },
+        {
+          path: 'crear',
+          element: <CrearJuego/>
+        },
+        {
+          path: 'finanzas',
+          element: <Finanzas/>
+        },
+        {
+          path: 'noticias',
+          element: <NoticiasDeveloper/>,
+          children: [
+            {
+              path: 'form',
+              element: <VistaFormNews/>
             }
           ]
         },
