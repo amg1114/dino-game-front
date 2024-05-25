@@ -1,0 +1,38 @@
+.container .tituloJuego {
+    text-align: center;
+    color: #57CC99;
+}
+
+.Subtitulo{
+    color: #57CC99;
+}
+
+.ListaImagen{
+    width: 70px;
+    height: 80px;
+    display: flex;
+    gap: 15px;
+}
+.Subtitulo1 {
+    margin-top: 30px;
+    color: #57CC99;
+}
+
+.formulario{
+    display: grid;
+    gap: 20px;
+}
+
+.small-height{
+    height: 20px;
+}
+
+.container .buttons-group{
+    margin-top: 100px;
+    justify-content:space-between;  
+}
+.container-compra .btn{
+    padding: 15px 46px;
+}
+
+

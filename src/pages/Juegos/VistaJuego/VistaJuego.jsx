@@ -1,6 +1,4 @@
 import axios from "axios";
-
-
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -97,10 +95,13 @@ export function VistaJuego() {
                                             {juego.descuentos[0] ? <>
 
                                                 <span className="precio">${juego.precio}</span>
-                                                <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
+                                                <Link to="/juegos/compra">
+                                                    <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
+                                                </Link>
                                             </> :
-
-                                                <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
+                                                <Link to="/juegos/compra">
+                                                    <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
+                                                </Link>
                                             }
                                         </div>
                                     </div>
