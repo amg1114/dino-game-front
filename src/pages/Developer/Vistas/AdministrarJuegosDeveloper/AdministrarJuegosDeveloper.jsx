@@ -113,7 +113,7 @@ export function AdministrarJuegosDeveloper(){
                                                             public
                                                         </span>
                                                     </Link>
-                                                    <button className='btn btn-1'>
+                                                    <button className='btn btn-1' onClick={() => navigate(`/developer/descuento/${juego.id}`)}>
                                                         <span className="material-symbols-outlined">
                                                             price_change
                                                         </span>

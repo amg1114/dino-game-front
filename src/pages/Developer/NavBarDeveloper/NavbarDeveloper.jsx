@@ -6,7 +6,7 @@ export function NavBarDeveloper(){
     const { usuario } = useAuth()
     return <>
         <div className="navbar-container container">
-            <Link to='/perfil' className="brand"><img src={logo} alt="#" className="logo" />
+            <Link to='/' className="brand"><img src={logo} alt="#" className="logo" />
             </Link>
             <h1 className="titleAdmin">PAGINA DE DESARROLLADOR</h1>
             {

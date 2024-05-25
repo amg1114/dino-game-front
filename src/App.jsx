@@ -149,6 +149,12 @@ function App() {
         {
           path: '',
           element: <AdministrarJuegosDeveloper/>,
+          children: [
+            {
+              path: 'descuento/:id',
+              element: <VistaDescuento />
+            }
+          ]
         },
         {
           path: 'crear',
