@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Informacion } from './Informacion/Informacion';
 import { Imagenes } from './Imagenes/Imagenes';
 import { Versiones } from './Versiones/Versiones';
+import { Confirmar } from './Confirmar/Confrimar';
 
 export function CrearJuego() {
 
@@ -94,17 +95,7 @@ export function CrearJuego() {
             </div>
             <div hidden={value !== 3}>
                 <div className='content-tab'>
-                    <div className="spantext">
-                        <p> • CONFIRMACION DE CREACIÓN DE JUEGO</p>
-                        <p> • ¿ESTA DE ACUERDO CON LA CREACION DEL SIGUIENTE JUEGO?</p>
-                        <ul>
-                            <li>{datos.titulo}</li>
-                            <li>{datos.descripcion}</li>
-                            <li>{datos.categoria}</li>
-                            <li>{versions[0].version}</li>
-                        </ul>
-                        <p>• Por favor, confirme su aprobación para proceder con la creacion del juego.</p>
-                    </div>
+                    <Confirmar datos={datos} versions={versions}/>
                 </div>
             </div>
             <div className='botones'>
