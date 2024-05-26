@@ -5,8 +5,12 @@ import { Informacion } from './Informacion/Informacion';
 import { Imagenes } from './Imagenes/Imagenes';
 import { Versiones } from './Versiones/Versiones';
 import { Confirmar } from './Confirmar/Confrimar';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export function CrearJuego() {
+
+    const navigate = useNavigate()
 
     //VARIABLES DE ESTADO
     const [value, setValue] = useState(0)
@@ -18,20 +22,42 @@ export function CrearJuego() {
     })
     const [assets, setAssets] = useState([])
     const [versions, setVersions] = useState([])
+    const [juego, setJuego] = useState([])
 
 
     // CONTROLAR EL CAMBIO DE TAB
     const handleChangetab = (newValue) => {
-
-        !(validateDatos(value)) ?
+        if (!validateDatos(value)) {
             Swal.fire({
                 title: 'INCOMPLETO',
                 text: 'TODOS LOS CAMPOS SON OBLIGATORIOS PARA AVANZAR',
                 icon: 'error',
                 confirmButtonText: 'Aceptar'
-            })
-            :
-            setValue(newValue)
+            });
+        } else {
+            if (value === 0) {
+                axios.post(`${process.env.REACT_APP_API}/video-games`, datos)
+                    .catch((error) => { console.log(error) })
+                    .then((respuesta) => {
+                        setJuego(respuesta.data);
+                        setValue(newValue);
+                    })
+            } else if (value === 1) {
+                if (assets.length <= 1) {
+                    Swal.fire({
+                        title: 'INCOMPLETO',
+                        text: 'AGREGRE MINIMO 2 IMAGENES',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    handleAssetUpload(juego.id)
+                    setValue(newValue)
+                }
+            } else if (value === 2) {
+                setValue(newValue)
+            }
+        }
     };
     const validateDatos = (currentTab) => {
         if (currentTab === 0) {
@@ -63,6 +89,27 @@ export function CrearJuego() {
         setAssets([]);
     }
 
+    const handleAssetUpload = (ownerID) => {
+        let assetToUpload = assets;
+
+        assetToUpload.forEach((asset, i) => {
+            asset.ownerId = ownerID;
+            asset.type = 'video-games';
+            asset.index = i;
+
+            asyncUploadFile(asset, (percentage) => {
+                if (percentage === 100) {
+                    asset.state = 'completed';
+                } else {
+                    asset.state = 'in_progress';
+                }
+            }, () => {
+                asset.state = 'completed'
+            }, (err) => console.error(err))
+        })
+
+        setAssets(assetToUpload);
+    }
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
@@ -106,7 +153,19 @@ export function CrearJuego() {
                             </button>
 
                         </> :
-                        <button className='btn btn-4'>
+                        <button className='btn btn-4' onClick={() => {
+                            Swal.fire({
+                                title: '¿Estás seguro de Publicar este  juego?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: 'Aceptar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    navigate('/developer')
+                                }
+                            })
+                        }}>
                             GUARDAR
                         </button>
                 }
