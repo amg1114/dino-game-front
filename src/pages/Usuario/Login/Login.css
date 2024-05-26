@@ -19,6 +19,7 @@
     padding: 10px;
     margin: 10px;
     cursor: pointer;
+    color: #fff;
 }
 
 .container .form .botones-login-register .opc-registro{
@@ -26,5 +27,9 @@
     color: #57cc99;
     margin-top: 10px;
     margin-left:22px;
+    color: #fff;
 }
 
+.login-form {
+    justify-content: center;
+}

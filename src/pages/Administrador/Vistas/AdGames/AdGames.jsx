@@ -94,7 +94,7 @@ export function AdGames() {
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell>
-                                                {juego.assets.length ? <img src={juego.assets[0].url} width="80px" /> : <></>
+                                                {juego.assets.length ? <img src={juego.assets[0].asset.url} width="80px" /> : <></>
                                                 }
                                             </TableCell>
                                             <TableCell>{juego.titulo}</TableCell>
