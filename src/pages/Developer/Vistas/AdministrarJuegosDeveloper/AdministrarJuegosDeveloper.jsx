@@ -1,30 +1,34 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { GameCard } from "../../../../components/GameCard/GameCard"
+import { useAuth } from "../../../../providers/AuthProvider"
 import { FormularioFiltros } from "../../../../partials/FormularioFiltros/FormularioFiltros"
 import './AdministrarJuegosDeveloper.css'
 import { Link, Outlet } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import Swal from "sweetalert2"
 
-export function AdministrarJuegosDeveloper(){
+export function AdministrarJuegosDeveloper() {
+    const { usuario } = useAuth()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
     const [juegos, setJuegos] = useState([]);
 
     useEffect(() => {
-        if (!juegos.length) {
+        if (usuario !== null && !juegos.length) {
             loadGames();
         }
-    }, []);
+    }, [usuario]);
 
     const loadGames = (params = {}) => {
-        axios.get(ENDPOINT, { params })
-            .catch((error) => {
-                error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
-            })
-            .then((respuesta) => {
-                setJuegos(respuesta.data)
-            })
+        if (usuario) {
+            axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`, { params })
+                .catch((error) => {
+                    error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
+                })
+                .then((respuesta) => {
+                    setJuegos(respuesta.data)
+                })
+        }
     };
 
     const Search = (data) => {
