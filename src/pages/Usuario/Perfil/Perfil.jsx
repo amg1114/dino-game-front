@@ -1,9 +1,16 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Perfil.css"
 import { useAuth } from "../../../providers/AuthProvider";
+import { useEffect } from "react";
 
 export function Perfil() {
-  const { deleteToken } = useAuth()
+  const { usuario, isLoading, deleteToken } = useAuth()
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!isLoading && !usuario) {
+      navigate('/login')
+    }
+  }, [isLoading, usuario])
 
   return <>
     <div className="container">
