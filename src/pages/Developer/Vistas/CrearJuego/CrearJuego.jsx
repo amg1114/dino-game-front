@@ -13,7 +13,7 @@ export function CrearJuego() {
     const [datos, setDatos] = useState({
         titulo: "",
         descripcion: "",
-        categoria: "",
+        categorias: [],
         precio: ""
     })
     const [assets, setAssets] = useState([])
@@ -35,7 +35,7 @@ export function CrearJuego() {
     };
     const validateDatos = (currentTab) => {
         if (currentTab === 0) {
-            return Object.values(datos).every(valor => valor !== "");
+            return Object.values(datos).every(valor => valor !== "") && datos.categorias.length > 0
         } else if (currentTab === 1) {
             return assets.length > 0;
         } else if (currentTab === 2) {
@@ -49,7 +49,6 @@ export function CrearJuego() {
         const { name, value } = event.target;
         setDatos(prevDatos => ({ ...prevDatos, [name]: value }));
     }
-
 
     //CONTROLAR LOS ASSETS DEL JUEGO
     const handleAssetChange = (asset) => {
@@ -95,7 +94,7 @@ export function CrearJuego() {
             </div>
             <div hidden={value !== 3}>
                 <div className='content-tab'>
-                    <Confirmar datos={datos} versions={versions}/>
+                    <Confirmar datos={datos} versions={versions} />
                 </div>
             </div>
             <div className='botones'>
@@ -116,7 +115,6 @@ export function CrearJuego() {
                 </button>
 
             </div>
-
         </div>
     </>
 }

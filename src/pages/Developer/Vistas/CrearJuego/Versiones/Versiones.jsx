@@ -22,17 +22,6 @@ export function Versiones({ handleVersions }) {
 
     return (
         <>
-            <div hidden={validacion}>
-                <FormVersiones
-                    handleAddVersion={handleAddVersion}
-                    handleValidacion={handleValidacion}
-                />
-            </div>
-            <div className="boton-agregar">
-                <Link className="btn btn-4" onClick={() => { setValidacion(false) }}>
-                    AGREGAR VERSION
-                </Link>
-            </div>
             <p className="spantext-versiones"> • LA ULTIMA VERSION SERÁ LA QUE EL USUARIO PODRA DESCARGAR DESDE LA TIENDA</p>
 
             {versiones.map((version, index) => (
@@ -51,6 +40,18 @@ export function Versiones({ handleVersions }) {
                     </AccordionDetails>
                 </Accordion>
             ))}
+            <div hidden={validacion}>
+                <FormVersiones
+                    handleAddVersion={handleAddVersion}
+                    handleValidacion={handleValidacion}
+                />
+            </div>
+            <div className="boton-agregar">
+                <Link className="btn btn-4" onClick={() => { setValidacion(false) }}>
+                    AGREGAR VERSION
+                </Link>
+            </div>
+
         </>
     );
 }

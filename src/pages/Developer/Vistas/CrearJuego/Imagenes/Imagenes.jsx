@@ -2,7 +2,7 @@ import AssetsForm from "../../../../../components/assetsForm/AssetsForm"
 
 export function Imagenes({ assets, handleAssetChange, handleAssetDelete, handleAssetReset }) {
     return <>
-        <div className="formulario-agregar-noticia">
+        <div className="formulario-agregar-juego">
             <div className="contenedor-form-modal">
                 <AssetsForm
                     assets={assets}

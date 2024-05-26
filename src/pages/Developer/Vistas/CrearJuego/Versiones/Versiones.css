@@ -1,7 +1,7 @@
 .boton-agregar{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: end;
 }
 .spantext-versiones{
     text-align: left;
