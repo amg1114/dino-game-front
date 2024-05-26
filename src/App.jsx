@@ -55,16 +55,15 @@ function App() {
         {
           path: 'juegos',
           element: <PaginaJuegos />,
-          children: [
+          children: [   
             {
-              path: 'compra',
-              element: <VistaCompra/>
+              path: ':id/compra',
+              element: <VistaCompra />
             },
             {
               path: ':id',
-              element: <VistaJuego />
-            }
-            
+              element: <VistaJuego />,              
+            }                       
           ]
         },
         {

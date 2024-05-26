@@ -66,6 +66,8 @@ a {
     top: 5px;
 
 }
+
+
 .gameCardSection:hover .description .description-texto{
     padding-left: 10px;
     padding-right: 10px;

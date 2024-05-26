@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import './VistaJuego.css'
+import { VistaCompra } from "../VistaCompra/VistaCompra";
+
 
 export function VistaJuego() {
 
     const { id } = useParams()
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
-
 
     useEffect(() => {
 
@@ -19,16 +20,16 @@ export function VistaJuego() {
             })
             .then(function (respuesta) {
                 setJuego(respuesta.data);
+           
+              
             })
     }, []
     )
-
-
-
+    
     return <>
-
         {
             juego === null ? <></> : (
+                
                 <div>
                     <div className="modal-fade animate__animated animate__fadeIn">
                         <div className="modal-content animate__animated animate__slideInDown">
@@ -95,11 +96,11 @@ export function VistaJuego() {
                                             {juego.descuentos[0] ? <>
 
                                                 <span className="precio">${juego.precio}</span>
-                                                <Link to="/juegos/compra">
+                                                <Link to={`/juegos/${id}/compra`}>
                                                     <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
                                                 </Link>
                                             </> :
-                                                <Link to="/juegos/compra">
+                                                <Link to={`/juegos/${id}/compra`}>
                                                     <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
                                                 </Link>
                                             }
@@ -114,3 +115,4 @@ export function VistaJuego() {
         }
     </>
 }
+
