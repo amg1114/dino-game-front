@@ -7,6 +7,7 @@ import { Versiones } from './Versiones/Versiones';
 import { Confirmar } from './Confirmar/Confrimar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { asyncUploadFile } from '../../../../services/assets-service';
 
 export function CrearJuego() {
 
@@ -36,7 +37,7 @@ export function CrearJuego() {
             });
         } else {
             if (value === 0) {
-                axios.post(`${process.env.REACT_APP_API}/video-games`, datos)
+                axios.post(`${process.env.REACT_APP_API}/video-games`, { ...datos, fechaLanzamiento: new Date() })
                     .catch((error) => { console.log(error) })
                     .then((respuesta) => {
                         setJuego(respuesta.data);
@@ -55,6 +56,11 @@ export function CrearJuego() {
                     setValue(newValue)
                 }
             } else if (value === 2) {
+                axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, versions)
+                    .then(() => {
+                        console.log('ESTE ES EL CONSOLE LOG QUE ESTA EN CREAR JUEGO.JSX Y SE SUPONE QUE YA SE PUBLICOESTO '+ versions)
+    
+                    })
                 setValue(newValue)
             }
         }
@@ -114,6 +120,66 @@ export function CrearJuego() {
     const handleVersions = (versiones) => {
         setVersions(versiones)
     }
+
+    // CONTROLAR GUARDAR Y ELIMINAR
+    const handleGuardar = () => {
+        Swal.fire({
+            title: '¿Estás seguro de Publicar este  juego?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate('/developer')
+                setDatos({
+                    titulo: "",
+                    descripcion: "",
+                    categorias: [],
+                    precio: ""
+                });
+                setAssets([]);
+                setJuego([]);
+                setVersions([]);
+                setValue(0)
+            } else if (result.isDismissed) {
+                setValue(0)
+            }
+        })
+    }
+
+    const handleEliminar = () => {
+        Swal.fire({
+            title: '¿Estás seguro de Eliminar el juego?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${process.env.REACT_APP_API}/video-games/${juego.id}`)
+                    .then(() => {
+                        console.log('EL JUEGO HA SIDO ELIMINADO')
+                        setDatos({
+                            titulo: "",
+                            descripcion: "",
+                            categorias: [],
+                            precio: ""
+                        });
+                        setAssets([]);
+                        setJuego([]);
+                        setVersions([]);
+                        setValue(0);
+                        navigate('/developer')
+                    })
+                    .catch(error => { console.log(error) })
+
+                navigate('/developer')
+            } else if (result.isDismissed) {
+                setValue(0)
+            }
+        })
+    }
     return <>
         <div>
             <div className='container-tabs'>
@@ -147,29 +213,15 @@ export function CrearJuego() {
             <div className='botones'>
                 {
                     value <= 2 ?
-                        <>
-                            <button className='btn btn-4' onClick={() => handleChangetab(value + 1)}>
-                                SIGUIENTE
-                            </button>
-
-                        </> :
-                        <button className='btn btn-4' onClick={() => {
-                            Swal.fire({
-                                title: '¿Estás seguro de Publicar este  juego?',
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonText: 'Aceptar',
-                                cancelButtonText: 'Cancelar'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    navigate('/developer')
-                                }
-                            })
-                        }}>
+                        <button className='btn btn-4' onClick={() => handleChangetab(value + 1)}>
+                            SIGUIENTE
+                        </button>
+                        :
+                        <button className='btn btn-4' onClick={() => { handleGuardar() }}>
                             GUARDAR
                         </button>
                 }
-                <button className='btn btn-3'>
+                <button className='btn btn-3' onClick={() => { handleEliminar() }}>
                     ELIMINAR
                 </button>
 

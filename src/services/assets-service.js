@@ -24,7 +24,7 @@ const storage = getStorage(app);
  */
 const asyncUploadFile = (asset, onProgress, onComplete, onError) => {
     return new Promise(function (resolve, reject) {
-        const storageRef = ref(storage, `uploads/${asset.path}/${asset.ownerId}/${asset.file.name}`);
+        const storageRef = ref(storage, `uploads/${asset.type}/${asset.ownerId}/${asset.file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, asset.file);
 
         uploadTask.on(

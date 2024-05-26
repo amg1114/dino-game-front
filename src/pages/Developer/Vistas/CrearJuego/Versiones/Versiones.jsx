@@ -15,6 +15,7 @@ export function Versiones({ handleVersions }) {
 
     useEffect(() => {
         handleVersions(versiones)
+        console.log('ESTE ES EL CONSOLE LOG QUE ESTA EN VERSIONES.JSX QUE SE GENERA CADA QUE LAS VERSIONES SE AGREGAN'+versiones)
     }, [versiones])
     const handleValidacion = (value) => {
         setValidacion(value);
@@ -22,7 +23,7 @@ export function Versiones({ handleVersions }) {
 
     return (
         <>
-            <p className="spantext-versiones"> • LA ULTIMA VERSION SERÁ LA QUE EL USUARIO PODRA DESCARGAR DESDE LA TIENDA</p>
+            <p className="spantext-versiones">LA ULTIMA VERSION SERÁ LA QUE EL USUARIO PODRA DESCARGAR DESDE LA TIENDA</p>
 
             {versiones.map((version, index) => (
                 <Accordion key={index}>
@@ -32,10 +33,12 @@ export function Versiones({ handleVersions }) {
                     <AccordionDetails>
                         <Typography>
                             <h3><span>VERSIÓN {version.version}</span></h3>
-                            <h4>#{version.numero}</h4>
+                            <h4>#{version.descripcion}</h4>
                             <h4>TAMAÑO: {version.size}</h4>
                             <h4>URL: {version.url}</h4>
-                            <h4>FECHA DE LANZAMIENTO: {version.fechaLanzamiento}</h4>
+                            <h4>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
+                            <h4>REQUISITOS:</h4>
+                            <ul>{version.requisitos.map((requisito, i) => {return <li key={"requisito " + i + " de la version "+ version.version}>{requisito}</li>})}</ul>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
