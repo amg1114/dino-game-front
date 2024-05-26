@@ -37,11 +37,6 @@ export function VistaFormNews() {
         ]
     }
 
-    /**
-     * Actualiza el estado de la noticia
-     * @param {string} field Campo de la noticia cambiado
-     * @param {string} value Valor del campo
-     */
     const handleChange = (field, value) => {
         setNoticia({
             ...noticia,
@@ -49,32 +44,18 @@ export function VistaFormNews() {
         })
     }
 
-    /**
-     * Agrega un archivo a la lista de archivos a subir
-     */
     const handleAssetChange = (asset) => {
         setAssets([...assets, asset]);
     }
 
-    /**
-     * Elimina un archivo de la lista de archivos a subir
-     * @param {number} id Identificador del archivo a eliminar
-     */
     const handleAssetDelete = (id) => {
         setAssets(assets.filter(asset => asset.id !== id));
     }
 
-    /**
-     * Reinicia la lista de archivos a subir
-     */
     const handleAssetReset = () => {
         setAssets([]);
     }
 
-    /**
-     * Sube los archivos a la base de datos y a la nube
-     * @param {number} ownerID Identificador del dueño de los archivos
-     */
     const handleAssetUpload = (ownerID) => {
         let assetToUpload = assets;
 
@@ -98,9 +79,6 @@ export function VistaFormNews() {
         setAssets(assetToUpload);
     }
 
-    /**
-    * Verifica si todos los archivos han sido subidos
-    */
     const handleUploadComplete = () => {
         if (!assets.some(asset => asset.state !== 'completed')) {
             Swal.fire({
@@ -109,14 +87,11 @@ export function VistaFormNews() {
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                navigate('/admin/noticias')
+                navigate(window.location.pathname === '/developer/noticias/form'? '/developer/noticias' : '/admin/noticias')
             })
         }
     }
 
-    /**
-     * Guarda la noticia en la base de datos
-    */
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion && assets.length > 0) {
             axios.post(`${process.env.REACT_APP_API}/noticias`, { ...noticia, fecha: new Date() })
@@ -137,9 +112,6 @@ export function VistaFormNews() {
 
     }
 
-    /**
-     * Cancela la publicación de la noticia
-     */
     const handleCancelar = () => {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -159,7 +131,7 @@ export function VistaFormNews() {
         <div className="modal-fade animate__animated animate__fadeIn">
             <div className="modal-content modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link to="/admin/noticias" className="modal-closer color-gray">
+                    <Link to={window.location.pathname === '/developer/noticias/form'? '/developer/noticias' : '/admin/noticias'} className="modal-closer color-gray">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>

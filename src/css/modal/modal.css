@@ -26,11 +26,12 @@
     padding: 20px;
     width: 30%;
     height: auto;
+    overflow-y: scroll;
     max-width: 1200px;
     border-radius: 10px;
 }
 
-.modal-fade .modal-content.modal-form{
+.modal-fade .modal-content .modal-form{
     max-width: 600px;
 }
 
