@@ -56,11 +56,12 @@ export function CrearJuego() {
                     setValue(newValue)
                 }
             } else if (value === 2) {
-                axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, versions)
-                    .then(() => {
-                        console.log('ESTE ES EL CONSOLE LOG QUE ESTA EN CREAR JUEGO.JSX Y SE SUPONE QUE YA SE PUBLICOESTO '+ versions)
-    
-                    })
+                versions.map((v, index) => {
+                    axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, v)
+                        .then(() => {
+                            console.log('sucess')
+                        })
+                })
                 setValue(newValue)
             }
         }
@@ -119,6 +120,7 @@ export function CrearJuego() {
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
+        console.log('VERSIONES' + versiones)
     }
 
     // CONTROLAR GUARDAR Y ELIMINAR
@@ -224,7 +226,6 @@ export function CrearJuego() {
                 <button className='btn btn-3' onClick={() => { handleEliminar() }}>
                     ELIMINAR
                 </button>
-
             </div>
         </div>
     </>

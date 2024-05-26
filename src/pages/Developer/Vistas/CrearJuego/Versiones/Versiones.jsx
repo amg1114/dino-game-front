@@ -11,12 +11,8 @@ export function Versiones({ handleVersions }) {
 
     const handleAddVersion = (data) => {
         setVersiones(prevVersiones => [...prevVersiones, data]);
+        handleVersions([...versiones, data]);
     }
-
-    useEffect(() => {
-        handleVersions(versiones)
-        console.log('ESTE ES EL CONSOLE LOG QUE ESTA EN VERSIONES.JSX QUE SE GENERA CADA QUE LAS VERSIONES SE AGREGAN'+versiones)
-    }, [versiones])
     const handleValidacion = (value) => {
         setValidacion(value);
     }
@@ -38,7 +34,7 @@ export function Versiones({ handleVersions }) {
                             <h4>URL: {version.url}</h4>
                             <h4>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
                             <h4>REQUISITOS:</h4>
-                            <ul>{version.requisitos.map((requisito, i) => {return <li key={"requisito " + i + " de la version "+ version.version}>{requisito}</li>})}</ul>
+                            {version.requisitos.map((requisito, i) => {return <h5>{requisito}</h5>})}
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
