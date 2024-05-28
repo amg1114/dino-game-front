@@ -6,19 +6,22 @@ import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 export function NoticiasDeveloper(){
-    const ENDPOINT_API = process.env.REACT_APP_API + "/noticias/autor"
+
+    const {usuario} = useAuth()
+    const ENDPOINT_API = process.env.REACT_APP_API + "/noticias/autor/"
     const [noticias, setNoticias] = useState([]);
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(ENDPOINT_API)
+        if(usuario != null){
+        axios.get(ENDPOINT_API + usuario.id)
             .catch(function (error) {
                 console.log(error)
             })
             .then(function (respuesta) {
                 setNoticias(respuesta.data)
-            })
-    }, [])
+            })}
+    }, [usuario])
 
     const handleDelete = (id) => {
         Swal.fire({
