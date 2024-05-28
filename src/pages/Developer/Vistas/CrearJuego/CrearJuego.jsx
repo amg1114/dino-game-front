@@ -133,7 +133,7 @@ export function CrearJuego() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                navigate('/developer')
+                navigate('/dashboard')
                 setDatos({
                     titulo: "",
                     descripcion: "",
@@ -172,11 +172,11 @@ export function CrearJuego() {
                         setJuego([]);
                         setVersions([]);
                         setValue(0);
-                        navigate('/developer')
+                        navigate('/dashboard')
                     })
                     .catch(error => { console.log(error) })
 
-                navigate('/developer')
+                navigate('/dashboard')
             } else if (result.isDismissed) {
                 setValue(0)
             }

@@ -143,7 +143,7 @@ function App() {
       ]
     },
     {
-      path: 'developer',
+      path: 'dashboard',
       element: <LayoutDeveloper/>,
       children: [
         {

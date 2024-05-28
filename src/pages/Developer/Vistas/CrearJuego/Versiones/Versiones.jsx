@@ -27,14 +27,14 @@ export function Versiones({ handleVersions }) {
                         <Typography>{`Version ${version.version}`}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
+                        <Typography component="div">
                             <h3><span>VERSIÓN {version.version}</span></h3>
                             <h4>#{version.descripcion}</h4>
                             <h4>TAMAÑO: {version.size}</h4>
                             <h4>URL: {version.url}</h4>
                             <h4>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
                             <h4>REQUISITOS:</h4>
-                            {version.requisitos.map((requisito, i) => {return <h5>{requisito}</h5>})}
+                            {version.requisitos.map((requisito, i) => {return <h5 key={i + " requisito del acordion "+index}>{requisito}</h5>})}
                         </Typography>
                     </AccordionDetails>
                 </Accordion>

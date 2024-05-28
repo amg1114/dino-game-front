@@ -45,7 +45,7 @@ export function NoticiasDeveloper(){
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 }).then(() => {
-                    navigate('/developer/noticias')
+                    navigate('/dashboard/noticias')
                 })
             })
             .catch((error) => {
@@ -57,7 +57,7 @@ export function NoticiasDeveloper(){
             <div className="noticiasPageAdmin">
                 <h2><span>DINO</span>NOTICIAS</h2>
                 <div className="buttons-group align-end">
-                    <Link className="btn btn-2 boton-agregar-noticia" to='/developer/noticias/form'>
+                    <Link className="btn btn-2 boton-agregar-noticia" to='/dashboard/noticias/form'>
                         AGREGAR NOTICIA
                     </Link>
                 </div>

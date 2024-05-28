@@ -1,97 +1,110 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useAuth } from "../../../../providers/AuthProvider";
+import { MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
+import { InputFilledStyleAdmin } from "../../../../utils/mui.styles-admin";
 import axios from "axios";
+import { useAuth } from "../../../../providers/AuthProvider";
+import './Finanzas.css'
 
 export function Finanzas() {
     const { usuario } = useAuth();
-    const ENDPOINT = process.env.REACT_APP_API + "/video-games";
-    const [juegos, setJuegos] = useState([]);
+    const [mes, setMes] = useState(0);
+    const [juegos, setJuegos] = useState(null);
     const [finanzas, setFinanzas] = useState([]);
 
-    useEffect(() => {
-        if (usuario !== null && !juegos.length) {
-            loadGames();
-        }
-    }, [usuario, juegos]);
+    const ENDPOINT = process.env.REACT_APP_API + "/video-games";
+
+    const mesActual = new Date().getMonth();
+
+    const handleChange = (event) => {
+        setMes(event.target.value);
+    };
 
     useEffect(() => {
-        if (juegos.length && usuario !== null) {
-            const allFinanzas = [];
-            juegos.map((juego) => {
-                for (let i = 0; i < 12; i++) {
-                    axios.get(ENDPOINT + `/${juego.id}/ventas/${i}`)
-                        .then((respuesta) => {
-                            const newFinanza = {
-                                imagen: juego.assets[0].asset.url,
-                                titulo: juego.titulo,
-                                mes: i + 1,
-                                ventas: respuesta.data.cant_ventas,
-                                ganancias: respuesta.data.ganancias
-                            };
-                            allFinanzas.push(newFinanza);
-                            if (allFinanzas.length === juegos.length * 12) {
-                                setFinanzas(allFinanzas);
-                            }
-                        });
-                }
-            });
-        }
-    }, [juegos]);
-
-    const loadGames = (params = {}) => {
-        if (usuario) {
-            axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`, { params })
+        if (usuario !== null && juegos === null) {
+            axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`)
                 .then((respuesta) => {
                     setJuegos(respuesta.data);
                 })
                 .catch((error) => {
                     if (error.code === "ERR_BAD_REQUEST") {
-                        setJuegos(null);
+                        setJuegos([]);
                     } else {
                         console.log(error);
                     }
                 });
+        } else if (juegos !== null && usuario !== null) {
+            setFinanzas([])
+            juegos.map(juego => {
+                axios.get(`${ENDPOINT}/${juego.id}/ventas/${mes}`)
+                    .then(respuesta => {
+                        const newFinanza = {
+                            imagen: juego.assets[0].asset.url,
+                            titulo: juego.titulo,
+                            ventas: respuesta.data.cant_ventas,
+                            ganancias: respuesta.data.ganancias
+                        };
+                        console.log(respuesta.data)
+                        console.log('MES ACTUAL: ' + mes)
+                        setFinanzas(prevFinanzas => [...prevFinanzas, newFinanza]);
+                    })
+                    .catch(error => console.log(error));
+            });
         }
-    };
+    }, [usuario, mes, juegos]);
 
     return (
-        <div className="container container-developer">
-            <h2>FINANZAS</h2>
-            {
-                finanzas.length <= 0 ? <></> : (
+        <div className="container container-finanzas">
+            <div className="titulo">
+            <h3>SELECCIONE UN MES</h3>
+            </div>
+            <Select
+                id="mes"
+                value={mes}
+                placeholder="SELECCIONE UN MES"
+                onChange={handleChange}
+                fullWidth
+                sx={InputFilledStyleAdmin}
+                variant="filled"
+            >
+                {Array.from({ length: mesActual + 1 }, (_, index) => (
+                    <MenuItem key={index} value={index}>
+                        {new Date(0, index).toLocaleString('es-ES', { month: 'long' }).toUpperCase()}
+                    </MenuItem>
+                ))}
+            </Select>
+            {finanzas.length === 0 ? (
+                <h3>NO GENERO GANANCIAS ESTE MES</h3>
+            ) : (
+                <div className="body-table">
+                    <h3><span>FINANZAS</span> DE {new Date(0, mes).toLocaleString('es-ES', { month: 'long' }).toUpperCase()}</h3>
                     <TableContainer sx={{ marginTop: '20px' }}>
                         <Table>
                             <TableHead>
                                 <TableRow>
                                     <TableCell>
-                                        <span className="material-symbols-outlined">
-                                            image
-                                        </span>
+                                        <span className="material-symbols-outlined">image</span>
                                     </TableCell>
-                                    <TableCell><strong>TITULO</strong></TableCell>
-                                    <TableCell><strong>MES</strong></TableCell>
-                                    <TableCell><strong>VENTAS</strong></TableCell>
-                                    <TableCell><strong>GANANCIAS</strong></TableCell>
+                                    <TableCell><strong>Titulo</strong></TableCell>
+                                    <TableCell><strong>Cantidad De ventas</strong></TableCell>
+                                    <TableCell><strong>Ganancias</strong></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {finanzas.map((finanza, index) => (
-                                    <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableRow key={index}>
                                         <TableCell>
-                                            {finanza.imagen ? <img src={finanza.imagen} width="80px" /> : <></>}
+                                            <img src={finanza.imagen} alt={finanza.titulo} width="80px" />
                                         </TableCell>
                                         <TableCell>{finanza.titulo}</TableCell>
-                                        <TableCell><p>{finanza.mes}</p></TableCell>
-                                        <TableCell><p>{finanza.ventas}</p></TableCell>
+                                        <TableCell>{finanza.ventas}</TableCell>
                                         <TableCell>${finanza.ganancias}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
-                )
-            }
+                </div>
+            )}
         </div>
     );
 }
