@@ -8,17 +8,14 @@ export function GameCard({ Game }) {
 
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/biblioteca/${id}`
     const [validacion, setValidacion] = useState(false);
+
     useEffect(() => {
         console.log(descuentos)
-        axios.get(ENDPOINT_API)            
-            .then(function (respuesta) {
+        axios.get(ENDPOINT_API)
+            .then(function () {
                 setValidacion(true);
             })
-            .catch(function (error) {
-                
-            })          
-
-    }, []
+    }, [validacion]
     )
 
     return <>
@@ -41,11 +38,11 @@ export function GameCard({ Game }) {
                 <div className="urlGame">
                     <Link to={"/juegos/" + id} className='stretched-link'>{titulo}</Link>
                 </div>
-                    <span className="btn btn-1 precio">${precio} {descuentos === undefined ? <></> :(descuentos[0].porcentaje)}</span>
-
+                {(descuentos === undefined || descuentos.length === 0) ?
+                    <span className="btn btn-1 precio">${precio}</span> :
+                    <span className="btn btn-1 precio">${precio} %{descuentos[0].porcentaje}</span>
+                }
             </>}
-
-
         </div>
     </>
 }
