@@ -91,6 +91,7 @@ export function Finanzas() {
                             </TableHead>
                             <TableBody>
                                 {finanzas.map((finanza, index) => (
+                                    finanza.ventas?
                                     <TableRow key={index}>
                                         <TableCell>
                                             <img src={finanza.imagen} alt={finanza.titulo} width="80px" />
@@ -98,7 +99,15 @@ export function Finanzas() {
                                         <TableCell>{finanza.titulo}</TableCell>
                                         <TableCell>{finanza.ventas}</TableCell>
                                         <TableCell>${finanza.ganancias}</TableCell>
-                                    </TableRow>
+                                    </TableRow>:
+                                    <TableRow key={index}>
+                                    <TableCell>
+                                        <img src={finanza.imagen} alt={finanza.titulo} width="80px" />
+                                    </TableCell>
+                                    <TableCell>{finanza.titulo}</TableCell>
+                                    <TableCell>{0}</TableCell>
+                                    <TableCell>${0}</TableCell>
+                                </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
