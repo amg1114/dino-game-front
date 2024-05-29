@@ -9,3 +9,18 @@ export const EstadoSolicitud = {
     ACEPTADA: 1,
     RECHAZADA: 2
 }
+
+export const CKEditor_CONFIG = {
+    toolbar: [
+        'undo',
+        'redo',
+        '|',
+        'heading',
+        'bold',
+        'italic',
+        'link',
+        '|',
+        'bulletedList',
+        'numberedList',
+    ]
+}
