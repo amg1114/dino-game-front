@@ -1,13 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-// Componentes
-import { LayoutComponent } from './pages/LayoutComponent'
-import { AdminLayoutComponent } from './pages/Administrador/LayoutAdmin/AdminLayoutComponent'
-
 // Providers
 import AuthProvider from './providers/AuthProvider'
 
 // Paginas
+import { LayoutComponent } from './pages/LayoutComponent'
 import { HomePage } from './pages/HomePage/HomePage'
 import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
@@ -28,6 +25,7 @@ import { Biblioteca } from './pages/Usuario/Biblioteca/Biblioteca'
 import { SolicitudDesarrollador } from './pages/Usuario/SolicitudDesarrollador/SolicitudDesarrollador'
 
 // ----------- Vistas de Administrador ------------
+import { AdminLayoutComponent } from './pages/Administrador/LayoutAdmin/AdminLayoutComponent'
 import { AdGames } from './pages/Administrador/Vistas/AdGames/AdGames'
 import { AdUsersDev } from './pages/Administrador/Vistas/AdUsersDev/AdUsersDev'
 import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdRequestDev'
@@ -118,13 +116,7 @@ function App() {
       children: [
         {
           path: '',
-          element: <AdGames />,
-          children: [
-            {
-              path: 'descuento/:id',
-              element: <VistaDescuento />
-            }
-          ]
+          element: <AdGames />
         },
         {
           path: 'desarrolladores',
