@@ -12,7 +12,7 @@ import { CKEditor_CONFIG } from "../../../../../utils/constants";
 import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsForm/CreateAssetsForm";
 import { uploadFile, deleteFile } from "../../../../../services/assets-service";
 
-export function VistaUpdateNews({ }) {
+export function VistaUpdateNews() {
     const { id } = useParams();
 
     const [noticia, setNoticia] = useState(null);
@@ -143,7 +143,7 @@ export function VistaUpdateNews({ }) {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate('/admin/noticias')
+                    navigate(-1)
                 })
             })
             .catch((error) => {
@@ -209,7 +209,7 @@ export function VistaUpdateNews({ }) {
                                     {hasChanges ? <button className="btn btn-4" onClick={() => handleSave()}>
                                         GUARDAR
                                     </button> : <></>}
-                                    <Link className="btn btn-5" to='/admin/noticias'>
+                                    <Link className="btn btn-5" onClick={()=>navigate(-1)}>
                                         CANCELAR
                                     </Link>
                                 </div>

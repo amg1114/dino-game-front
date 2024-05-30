@@ -52,7 +52,6 @@ export function CrearJuego() {
                     });
                 } else {
                     handleAssetUpload(juego.id)
-                    setValue(newValue)
                 }
             } else if (value === 2) {
                 versions.map((v, index) => {
@@ -83,9 +82,8 @@ export function CrearJuego() {
     }
 
     //CONTROLAR LOS ASSETS DEL JUEGO
-    const handleAssetChange = (asset) => {
-        const prevAssets = [...assets];
-        setAssets([...asset, ...prevAssets]);
+    const handleAssetChange = (new_assets) => {
+        setAssets([...new_assets, ...assets]);
     }
 
     const handleAssetDelete = (id) => {
@@ -97,6 +95,15 @@ export function CrearJuego() {
     }
 
     const handleAssetUpload = (ownerID) => {
+        Swal.fire({
+            title: 'Subiendo imagenes',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        })
 
         const promises = assets.map(async (asset, i) => {
             asset.ownerId = ownerID;
@@ -108,20 +115,24 @@ export function CrearJuego() {
                 if (percentage === 100) {
                     asset.state = 'completed';
                 }
-            })
+            });
         })
 
-
-        Promise.all(promises)
-            .catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                })
-                console.log(error)
+        Promise.all(promises).then(() => {
+            Swal.close();
+            setValue(2);
+        }).catch((err) => {
+            Swal.close();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo salió mal',
             })
+            console.error('ERROR', err)
+        });
+
     }
+
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
