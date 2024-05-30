@@ -16,7 +16,6 @@ function AuthProvider({ child }) {
     }
 
     const getUsuario = () => {
-        setIsLoading(true);
         axios.get(process.env.REACT_APP_API + "/auth/profile")
             .then((response) => {
                 setUsuario(response.data)

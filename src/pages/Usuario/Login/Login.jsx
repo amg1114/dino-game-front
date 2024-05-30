@@ -45,7 +45,6 @@ export function Login() {
                 })
             })
             .catch(function (error) {
-                console.error(error)
                 Swal.fire({
                     icon: "error",
                     title: "Error al Iniciar sesión",

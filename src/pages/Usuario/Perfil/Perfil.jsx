@@ -5,21 +5,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function Perfil() {
-  const { deleteToken, usuario } = useAuth()
-  const [roles, setRoles] = useState([])
+  const { isLoading, usuario, deleteToken } = useAuth();
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (usuario != null) {
-      axios.get(process.env.REACT_APP_API + `/users/${usuario.id}/role`)
-        .then((respuesta) => {
-          setRoles(respuesta.data)
-        })
-        .catch((error) => console.log(error))
+    if (!isLoading && !usuario) {
+      navigate("/login")
     }
-  }, [usuario])
+  }, [usuario, isLoading])
 
-  return <>
+  return <>{isLoading ? <p>Loading</p> : <>
     <div className="container">
       <div className="content-layout informacion-usuario">
         <aside>
@@ -35,7 +30,7 @@ export function Perfil() {
               <Link className="btn btn-4" to="/perfil/solicitud-desarrollador">SOLICITUD PERFIL DESARROLLADOR</Link>
             </li>
             {
-              roles.map((rol) => {
+              usuario.role.map((rol) => {
                 if (rol === "ADMINISTRATOR") {
                   return <button className="btn btn-admin" onClick={() => { navigate('/admin') }}>DASHBOARD ADMIN</button>
                 }
@@ -56,5 +51,5 @@ export function Perfil() {
 
       </div>
     </div>
-  </>
+  </>}</>
 }

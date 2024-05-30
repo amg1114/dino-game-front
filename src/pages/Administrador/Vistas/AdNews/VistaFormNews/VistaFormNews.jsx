@@ -1,17 +1,19 @@
+import './VistaFormNews.css'
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 
+import { TextField } from "@mui/material";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 
+// import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
+import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsForm/CreateAssetsForm";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
-
-import './VistaFormNews.css'
-import { asyncUploadFile } from "../../../../../services/assets-service";
+import { uploadFile } from "../../../../../services/assets-service";
+import { CKEditor_CONFIG } from "../../../../../utils/constants";
 
 export function VistaFormNews() {
     const navigate = useNavigate();
@@ -45,7 +47,8 @@ export function VistaFormNews() {
     }
 
     const handleAssetChange = (asset) => {
-        setAssets([...assets, asset]);
+        const prevAssets = [...assets];
+        setAssets([...asset, ...prevAssets]);
     }
 
     const handleAssetDelete = (id) => {
@@ -59,41 +62,33 @@ export function VistaFormNews() {
     const handleAssetUpload = (ownerID) => {
         let assetToUpload = assets;
 
-        assetToUpload.forEach((asset, i) => {
+        const promises = assetToUpload.map(async (asset, i) => {
             asset.ownerId = ownerID;
-            asset.type = 'noticia';
+            asset.type = 'noticias';
             asset.index = i;
+            asset.state = 'in_progress';
 
-            asyncUploadFile(asset, (percentage) => {
+            return await uploadFile(asset, (percentage) => {
                 if (percentage === 100) {
                     asset.state = 'completed';
-                } else {
-                    asset.state = 'in_progress';
                 }
-            }, () => {
-                asset.state = 'completed'
-                handleUploadComplete()
-            }, (err) => console.error(err))
+            })
         })
 
         setAssets(assetToUpload);
     }
 
-    const handleUploadComplete = () => {
-        if (!assets.some(asset => asset.state !== 'completed')) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Noticia publicada',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                navigate(window.location.pathname === '/dashboard/noticias/form'? '/dashboard/noticias' : '/admin/noticias')
-            })
-        }
-    }
 
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion && assets.length > 0) {
+            Swal.fire({
+                title: 'Creando Noticia',
+                html: 'Por favor espere',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            })
             axios.post(`${process.env.REACT_APP_API}/noticias`, { ...noticia, fecha: new Date() })
                 .then((response) => {
                     handleAssetUpload(response.data.id)
@@ -159,15 +154,14 @@ export function VistaFormNews() {
                                 <div className="field-wrapper full-width">
                                     <CKEditor
                                         editor={ClassicEditor}
-                                        config={editorConfiguration}
-                                        data="<p>Contenido de la Noticia</p>"
+                                        config={{ placeholder: 'Escribe el contenido de la noticia', ...CKEditor_CONFIG }}
                                         onChange={(event, editor) => {
                                             handleChange('descripcion', editor.getData())
                                         }}
                                     />
                                 </div>
                             </form>
-                            <AssetsForm
+                            <CreateAssetsForm
                                 assets={assets}
                                 maxFiles={1}
                                 onChange={(asset) => handleAssetChange(asset)}

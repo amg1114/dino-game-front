@@ -20,11 +20,14 @@
     max-width: 1200px;
     border-radius: 10px;
 }
+.modal-fade .modal-content.modal-form {
+    height: auto;
+}
 
 .modal-fade .modal-content-admin {
     background: #ffff;
     padding: 20px;
-    width: 30%;
+  /*   width: 30%; */
     height: auto;
     overflow-y: scroll;
     max-width: 1200px;
