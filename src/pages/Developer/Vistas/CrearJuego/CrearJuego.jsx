@@ -7,8 +7,6 @@ import { Versiones } from './Versiones/Versiones';
 import { Confirmar } from './Confirmar/Confrimar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { asyncUploadFile } from '../../../../services/assets-service';
-
 export function CrearJuego() {
 
     const navigate = useNavigate()
@@ -99,7 +97,7 @@ export function CrearJuego() {
     const handleAssetUpload = (ownerID) => {
         let assetToUpload = assets;
 
-        assetToUpload.forEach((asset, i) => {
+      /*   assetToUpload.forEach((asset, i) => {
             asset.ownerId = ownerID;
             asset.type = 'video-games';
             asset.index = i;
@@ -114,7 +112,7 @@ export function CrearJuego() {
                 asset.state = 'completed'
             }, (err) => console.error(err))
         })
-
+ */
         setAssets(assetToUpload);
     }
     // CONTROLAR LAS VERSIONES DEL JUEGO

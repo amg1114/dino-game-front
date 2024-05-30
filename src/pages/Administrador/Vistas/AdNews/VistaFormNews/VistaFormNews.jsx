@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-// import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsForm/CreateAssetsForm";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
 import { uploadFile } from "../../../../../services/assets-service";
