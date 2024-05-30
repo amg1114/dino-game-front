@@ -28,6 +28,7 @@
     height: 90%;
     max-width: 1200px;
     border-radius: 10px;
+    overflow-y: scroll;
 }
 
 .modal-fade .modal-content-admin {

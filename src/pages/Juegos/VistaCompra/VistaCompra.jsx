@@ -76,11 +76,11 @@ export function VistaCompra() {
                             <div className="container-compra">
                                 <h2 className="tituloJuego">COMPRAR JUEGO</h2>
                                 <h3 className="Subtitulo">METODOS DE PAGO</h3>
-                                <div className="ListaImagen">
-                                    <img src={TarjetaVisa} />
-                                    <img src={TarjetaMaster} />
-                                    <img src={TarjetaAmerican} />
-                                    <img src={TarjetaAval} />
+                                <div className="ListaImage">
+                                    <img src={TarjetaVisa} alt="imagen1" />
+                                    <img src={TarjetaMaster} alt="imagen2"/>
+                                    <img src={TarjetaAmerican} alt="imagen3"/>
+                                    <img src={TarjetaAval} alt="imagen4"/>
                                 </div>
                                 <h3 className="Subtitulo1">DATOS DE PAGO</h3>
                                 <form className="formulario">

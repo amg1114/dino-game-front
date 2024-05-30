@@ -4,10 +4,11 @@ import { Link, useParams } from "react-router-dom";
 
 import './VistaJuego.css'
 import { VistaCompra } from "../VistaCompra/VistaCompra";
+import { useAuth } from "../../../providers/AuthProvider";
 
 
 export function VistaJuego() {
-
+    const { usuario } = useAuth()
     const { id } = useParams()
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
@@ -20,16 +21,16 @@ export function VistaJuego() {
             })
             .then(function (respuesta) {
                 setJuego(respuesta.data);
-           
-              
+
+
             })
     }, []
     )
-    
+
     return <>
         {
             juego === null ? <></> : (
-                
+
                 <div>
                     <div className="modal-fade animate__animated animate__fadeIn">
                         <div className="modal-content animate__animated animate__slideInDown">
@@ -56,8 +57,8 @@ export function VistaJuego() {
                                     <h2 className="titulo-juego">{juego.titulo}</h2>
 
                                     <div className="categoria">
-                                        {juego.categorias.map((index) => {
-                                            return (<h3 className="categoria-juego">{index.titulo}</h3>)
+                                        {juego.categorias.map((index, i) => {
+                                            return (<h3 className="categoria-juego" key={i}>{index.titulo}</h3>)
                                         })
                                         }
                                     </div>
@@ -93,16 +94,28 @@ export function VistaJuego() {
 
                                     <div className="valor-comprar">
                                         <div className="comprar">
-                                            {juego.descuentos[0] ? <>
+                                            {usuario ? (
+
+                                                juego.descuentos[0] ? <>
+
+                                                    <span className="precio">${juego.precio}</span>
+                                                    <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
+                                                        comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
+                                                    </Link>
+                                                </> :
+                                                    <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
+                                                        comprar ${juego.precio}
+                                                    </Link>
+                                            ) : (juego.descuentos[0] ? <>
 
                                                 <span className="precio">${juego.precio}</span>
-                                                <Link to={`/juegos/${id}/compra`}>
-                                                    <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
+                                                <Link to={`/login`} className="btn btn-1 comprar">
+                                                    comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
                                                 </Link>
                                             </> :
-                                                <Link to={`/juegos/${id}/compra`}>
-                                                    <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
-                                                </Link>
+                                                <Link to={`/login`} className="btn btn-1 comprar">
+                                                    comprar ${juego.precio}
+                                                </Link>)
                                             }
                                         </div>
                                     </div>
