@@ -14,6 +14,8 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
         requisitos: []
     });
 
+    const currentDate = new Date().toISOString().split('T')[0];
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         if (name === 'requisitos') {
@@ -104,7 +106,7 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
                             id="releaseDate"
                             name="releaseDate"
                             type="date"
-                            value={data.releaseDate}
+                            value={data.releaseDate || currentDate}
                             onChange={handleChange}
                             sx={InputFilledStyleAdmin}
                             fullWidth

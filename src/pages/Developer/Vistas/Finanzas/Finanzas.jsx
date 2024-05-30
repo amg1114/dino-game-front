@@ -7,7 +7,7 @@ import './Finanzas.css';
 
 export function Finanzas() {
     const { usuario } = useAuth();
-    const [mes, setMes] = useState(0);
+    const [mes, setMes] = useState(1);
     const [juegos, setJuegos] = useState(null);
     const [finanzas, setFinanzas] = useState([]);
 
@@ -66,7 +66,7 @@ export function Finanzas() {
                     onChange={handleChange}
                 >
                     {Array.from({ length: mesActual + 1 }, (_, index) => (
-                        <MenuItem key={index} value={index}>
+                        <MenuItem key={index} value={index+1}>
                             {new Date(0, index).toLocaleString('es-ES', { month: 'long' }).toUpperCase()}
                         </MenuItem>
                     ))}

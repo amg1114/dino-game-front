@@ -7,6 +7,7 @@ import { Versiones } from './Versiones/Versiones';
 import { Confirmar } from './Confirmar/Confrimar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { uploadFile } from '../../../../services/assets-service';
 export function CrearJuego() {
 
     const navigate = useNavigate()
@@ -83,7 +84,8 @@ export function CrearJuego() {
 
     //CONTROLAR LOS ASSETS DEL JUEGO
     const handleAssetChange = (asset) => {
-        setAssets([...assets, asset]);
+        const prevAssets = [...assets];
+        setAssets([...asset, ...prevAssets]);
     }
 
     const handleAssetDelete = (id) => {
@@ -95,30 +97,34 @@ export function CrearJuego() {
     }
 
     const handleAssetUpload = (ownerID) => {
-        let assetToUpload = assets;
 
-      /*   assetToUpload.forEach((asset, i) => {
+        const promises = assets.map(async (asset, i) => {
             asset.ownerId = ownerID;
             asset.type = 'video-games';
             asset.index = i;
+            asset.state = 'in_progress';
 
-            asyncUploadFile(asset, (percentage) => {
+            return await uploadFile(asset, (percentage) => {
                 if (percentage === 100) {
                     asset.state = 'completed';
-                } else {
-                    asset.state = 'in_progress';
                 }
-            }, () => {
-                asset.state = 'completed'
-            }, (err) => console.error(err))
+            })
         })
- */
-        setAssets(assetToUpload);
+
+
+        Promise.all(promises)
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                })
+                console.log(error)
+            })
     }
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
-        console.log('VERSIONES' + versiones)
     }
 
     // CONTROLAR GUARDAR Y ELIMINAR
