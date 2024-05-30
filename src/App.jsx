@@ -9,7 +9,6 @@ import { HomePage } from './pages/HomePage/HomePage'
 import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
 import { PaginaJuegos } from './pages/Juegos/PaginaJuegos/PaginaJuegos'
-import { StyleGuidePage } from './pages/StyleGuide/StyleGuide'
 import { ErrorElement } from './pages/ErrorElement'
 import { Perfil } from './pages/Usuario/Perfil/Perfil'
 
