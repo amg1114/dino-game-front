@@ -7,6 +7,7 @@ import { Versiones } from './Versiones/Versiones';
 import { Confirmar } from './Confirmar/Confrimar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { uploadFile } from '../../../../services/assets-service';
 export function CrearJuego() {
 
     const navigate = useNavigate()
@@ -51,7 +52,6 @@ export function CrearJuego() {
                     });
                 } else {
                     handleAssetUpload(juego.id)
-                    setValue(newValue)
                 }
             } else if (value === 2) {
                 versions.map((v, index) => {
@@ -82,8 +82,8 @@ export function CrearJuego() {
     }
 
     //CONTROLAR LOS ASSETS DEL JUEGO
-    const handleAssetChange = (asset) => {
-        setAssets([...assets, asset]);
+    const handleAssetChange = (new_assets) => {
+        setAssets([...new_assets, ...assets]);
     }
 
     const handleAssetDelete = (id) => {
@@ -95,26 +95,44 @@ export function CrearJuego() {
     }
 
     const handleAssetUpload = (ownerID) => {
-        let assetToUpload = assets;
+        Swal.fire({
+            title: 'Subiendo imagenes',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        })
 
-      /*   assetToUpload.forEach((asset, i) => {
+        const promises = assets.map(async (asset, i) => {
             asset.ownerId = ownerID;
             asset.type = 'video-games';
             asset.index = i;
+            asset.state = 'in_progress';
 
-            asyncUploadFile(asset, (percentage) => {
+            return await uploadFile(asset, (percentage) => {
                 if (percentage === 100) {
                     asset.state = 'completed';
-                } else {
-                    asset.state = 'in_progress';
                 }
-            }, () => {
-                asset.state = 'completed'
-            }, (err) => console.error(err))
+            });
         })
- */
-        setAssets(assetToUpload);
+
+        Promise.all(promises).then(() => {
+            Swal.close();
+            setValue(2);
+        }).catch((err) => {
+            Swal.close();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo salió mal',
+            })
+            console.error('ERROR', err)
+        });
+
     }
+
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
