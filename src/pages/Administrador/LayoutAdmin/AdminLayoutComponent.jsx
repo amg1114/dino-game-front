@@ -30,7 +30,7 @@ export function AdminLayoutComponent() {
                 <div className="container content-layout">
                     <aside className="aside-admin">
                         <h2><span>DINO</span>MENU</h2>
-                        <ul className="content-Link-admin">
+                        <ul className="aside-toolbar">
                             <li><Link className="btn btn-4 Link-admin" to='/admin'>ADMINISTRAR JUEGOS</Link></li>
                             <li><Link className="btn btn-4 Link-admin" to='/admin/desarrolladores'> ADMINISTRAR USUARIOS</Link></li>
                             <li><Link className="btn btn-4 Link-admin" to='/admin/solicitudes'>SOLICITUDES DE DESARROLLADOR</Link></li>

@@ -21,23 +21,7 @@ export function VistaFormNews() {
         titulo: '',
         descripcion: '',
     })
-
-    const editorConfiguration = {
-        toolbar: [
-            'undo',
-            'redo',
-            '|',
-            'heading',
-            'bold',
-            'italic',
-            'link',
-            '|',
-            'bulletedList',
-            'numberedList',
-
-        ]
-    }
-
+    
     const handleChange = (field, value) => {
         setNoticia({
             ...noticia,
@@ -59,9 +43,8 @@ export function VistaFormNews() {
     }
 
     const handleAssetUpload = (ownerID) => {
-        let assetToUpload = assets;
 
-        const promises = assetToUpload.map(async (asset, i) => {
+        const promises = assets.map(async (asset, i) => {
             asset.ownerId = ownerID;
             asset.type = 'noticias';
             asset.index = i;
@@ -74,7 +57,26 @@ export function VistaFormNews() {
             })
         })
 
-        setAssets(assetToUpload);
+
+        Promise.all(promises)
+            .then((response) => {
+                Swal.close()
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Noticia creada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/admin/noticias')
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                })
+                console.log(error)
+            })
     }
 
 
