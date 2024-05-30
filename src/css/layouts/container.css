@@ -63,3 +63,35 @@
     grid-column: 9 / span 4;
     margin-left: 20px;
 }
+
+.Container-admin-dev, .ContainerAdmin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffff;
+    color: black;
+    overflow-y: scroll;
+}
+
+.content-Link-admin-dev{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    gap: 20px;
+    width: 90%;
+}
+.content-Link-admin-dev .Link-admin-dev-cs{
+    margin-top: 20px;
+}
+
+.aside-toolbar {
+    display: flex;
+    max-width: 280px;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBNRRLubiJMj03wnUD3YNs9zrbp_FUnVc0",
@@ -16,50 +16,62 @@ const storage = getStorage(app);
 
 /**
  * Carga un archivo a Firebase
- * @param {Object} asset - Objeto de información con el archivo que se va a cargar.
- * @param {function} onProgress - Función de devolución de llamada que se llama cuando cambia el progreso de la carga.
- * @param {function} onComplete - Función de devolución de llamada que se llama cuando la carga se completa con éxito.
- * @param {function} onError - Función de devolución de llamada que se llama cuando ocurre un error durante la carga.
- * @returns {Promise} Una promesa que se resuelve cuando la carga se completa con éxito o se rechaza si ocurre un error.
+ * @param {Object} asset El archivo a subir
+ * @param {*} onProgress Función de devolución de llamada que se llama cuando cambia el progreso de la carga.
+ * @returns Promesa que se resuelve cuando la carga se completa con éxito o se rechaza si ocurre un error.
  */
-const asyncUploadFile = (asset, onProgress, onComplete, onError) => {
-    return new Promise(function (resolve, reject) {
-        const storageRef = ref(storage, `uploads/${asset.path}/${asset.ownerId}/${asset.file.name}`);
+const uploadFile = async (asset, onProgress) => {
+    return new Promise((resolve, reject) => {
+        const storageRef = ref(storage, `uploads/${asset.type}/${asset.name}`);
         const uploadTask = uploadBytesResumable(storageRef, asset.file);
 
         uploadTask.on(
             "state_changed",
             (snapshot) => {
-                if (snapshot.metadata) {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(progress + "% of " + snapshot.metadata.name);
-                    onProgress(progress, snapshot.metadata.name);
-                }
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                onProgress(progress);
             },
             (error) => {
-                onError({ error });
+                reject(error);
             },
             () => {
-                getDownloadURL(storageRef).then((url) => {
-                    registerFile(url, asset);
-                    onComplete(uploadTask.snapshot.metadata.name + " upload is done.");
+                getDownloadURL(storageRef).then(async (url) => {
+                    return await registerFile(url, asset).then(() => {
+                        resolve();
+                    });
                 });
             }
         );
     });
 };
 
-const registerFile = (file_url, asset) => {
+/**
+ * Carga un archivo a Firebase de forma asíncrona
+ * @param {Object} asset El archivo a subir
+ * @returns Promesa que se resuelve cuando la carga se completa con éxito o se rechaza si ocurre un error.
+ */
+const deleteFile = async (asset) => {
+    const storageRef = ref(storage, `uploads/${asset.type}/${asset.name}`);
+
+    return await deleteObject(storageRef).then(() => {
+        return axios.delete(`${process.env.REACT_APP_API}/assets/${asset.id}`);
+    });
+};
+
+/**
+ * Registra un archivo en la base de datos
+ * @param {string} file_url URL del archivo
+ * @param {*} asset Campos del asset
+ * @returns Promesa que se resuelve cuando la carga se completa con éxito o se rechaza si ocurre un error.
+ */
+const registerFile = async (file_url, asset) => {
     const data = {
         title: asset.name,
         url: file_url,
         index: asset.index,
     };
-    console.log("Crear asset:", { data });
-    axios
-        .post(`${process.env.REACT_APP_API}/assets/${asset.type}/${asset.ownerId}`, data)
-        .then((res) => console.log("The asset was registered"))
-        .catch((err) => console.error(err));
+
+    return axios.post(`${process.env.REACT_APP_API}/assets/${asset.type}/${asset.ownerId}`, data);
 };
 
-export { asyncUploadFile };
+export { deleteFile, uploadFile };

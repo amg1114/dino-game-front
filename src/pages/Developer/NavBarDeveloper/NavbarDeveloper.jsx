@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom"
-import { useAuth } from "../../../providers/AuthProvider"
-import './NavBarAdmin.css'
+import { Link } from 'react-router-dom'
 import logo from '../../../assets/dinogameLogo.png'
-export function NavBarAdmin() {
+import { useAuth } from '../../../providers/AuthProvider'
+
+export function NavBarDeveloper(){
     const { usuario } = useAuth()
     return <>
         <div className="navbar-container container">
             <Link to='/' className="brand"><img src={logo} alt="#" className="logo" />
             </Link>
-            <h1 className="titleAdmin">PAGINA DE ADMINISTADOR</h1>
+            <h1 className="titleAdmin">PAGINA DE DESARROLLADOR</h1>
             {
                 usuario ?
                     <Link to='/perfil' className="btn btn-admin">
-                        {usuario.nombre}  <span className="material-symbols-outlined">
+                        {usuario.nombre}  
+                        <span className="material-symbols-outlined">
                             account_circle
                         </span>
                     </Link> : <></>
