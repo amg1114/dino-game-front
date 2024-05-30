@@ -45,7 +45,6 @@ export function Login() {
                 })
             })
             .catch(function (error) {
-                console.error(error)
                 Swal.fire({
                     icon: "error",
                     title: "Error al Iniciar sesión",
@@ -57,7 +56,7 @@ export function Login() {
     return (
         <>
             <div className="modal-fade animate__animated animate__fadeIn">
-                <div className="modal-content modal-form animate__animated animate__slideInDown">
+                <div className="modal-form animate__animated animate__slideInDown">
                     <div className="modal-header">
                         <Link to="/" className="modal-closer">
                             <span className="material-symbols-outlined">

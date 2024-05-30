@@ -1,30 +1,34 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { GameCard } from "../../../../components/GameCard/GameCard"
+import { useAuth } from "../../../../providers/AuthProvider"
 import { FormularioFiltros } from "../../../../partials/FormularioFiltros/FormularioFiltros"
-import './AdGames.css'
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import './AdministrarJuegosDeveloper.css'
+import { Link, Outlet } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import Swal from "sweetalert2"
-export function AdGames() {
-    const navigate = useNavigate()
+
+export function AdministrarJuegosDeveloper() {
+    const { usuario } = useAuth()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
     const [juegos, setJuegos] = useState([]);
 
     useEffect(() => {
-        if (!juegos.length) {
+        if (usuario !== null && !juegos.length) {
             loadGames();
         }
-    }, []);
+    }, [usuario]);
 
     const loadGames = (params = {}) => {
-        axios.get(ENDPOINT, { params })
-            .catch((error) => {
-                error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
-            })
-            .then((respuesta) => {
-                setJuegos(respuesta.data)
-            })
+        if (usuario) {
+            axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`, { params })
+                .catch((error) => {
+                    error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
+                })
+                .then((respuesta) => {
+                    setJuegos(respuesta.data)
+                })
+        }
     };
 
     const Search = (data) => {
@@ -65,7 +69,7 @@ export function AdGames() {
             })
     }
     return (
-        <div className="container container-admin">
+        <div className="container container-developer">
             <h2><span>ADMINISTRAR </span>JUEGOS</h2>
             <FormularioFiltros onSearch={Search} />
             {
@@ -113,11 +117,6 @@ export function AdGames() {
                                                             public
                                                         </span>
                                                     </Link>
-                                                    <button className='btn btn-1' onClick={() => navigate(`/admin/descuento/${juego.id}`)}>
-                                                        <span className="material-symbols-outlined">
-                                                            price_change
-                                                        </span>
-                                                    </button>
                                                     <button className='btn btn-3' onClick={() => handleDelete(juego.id)}>
                                                         <span className="material-symbols-outlined">
                                                             delete
