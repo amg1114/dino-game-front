@@ -169,8 +169,12 @@ function App() {
           element: <NoticiasDeveloper/>,
           children: [
             {
-              path: 'form',
+              path: 'crear',
               element: <VistaFormNews/>
+            },
+            {
+              path: 'editar/:id',
+              element: <VistaUpdateNews />
             }
           ]
         },
