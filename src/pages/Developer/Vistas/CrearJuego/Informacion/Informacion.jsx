@@ -82,6 +82,7 @@ export function Informacion({ datos, handleChange }) {
                                         checked={selectedCategories.some(c => c.id === categoria.id)}
                                         onChange={() => handleCategoryChange(categoria)}
                                     />
+                                    <span></span>
                                     {categoria.titulo}
                                 </label>
                             ))}

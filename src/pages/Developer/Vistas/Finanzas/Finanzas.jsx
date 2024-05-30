@@ -1,9 +1,9 @@
-import { MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, FormControl, InputLabel } from "@mui/material";
 import { useEffect, useState } from "react";
 import { InputFilledStyleAdmin } from "../../../../utils/mui.styles-admin";
 import axios from "axios";
 import { useAuth } from "../../../../providers/AuthProvider";
-import './Finanzas.css'
+import './Finanzas.css';
 
 export function Finanzas() {
     const { usuario } = useAuth();
@@ -12,7 +12,6 @@ export function Finanzas() {
     const [finanzas, setFinanzas] = useState([]);
 
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
-
     const mesActual = new Date().getMonth();
 
     const handleChange = (event) => {
@@ -20,58 +19,59 @@ export function Finanzas() {
     };
 
     useEffect(() => {
-        if (usuario !== null && juegos === null) {
-            axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`)
-                .then((respuesta) => {
-                    setJuegos(respuesta.data);
-                })
-                .catch((error) => {
+        const obtenerDatos = async () => {
+            if (usuario) {
+                try {
+                    if (!juegos) {
+                        const respuestaJuegos = await axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`);
+                        setJuegos(respuestaJuegos.data);
+                    }
+
+                    if (juegos) {
+                        const nuevasFinanzas = await Promise.all(juegos.map(async (juego) => {
+                            const respuestaVentas = await axios.get(`${ENDPOINT}/${juego.id}/ventas/${mes}`);
+                            return {
+                                imagen: juego.assets[0].asset.url,
+                                titulo: juego.titulo,
+                                ventas: respuestaVentas.data.cant_ventas,
+                                ganancias: respuestaVentas.data.ganancias
+                            };
+                        }));
+                        setFinanzas(nuevasFinanzas);
+                    }
+                } catch (error) {
                     if (error.code === "ERR_BAD_REQUEST") {
                         setJuegos([]);
                     } else {
                         console.log(error);
                     }
-                });
-        } else if (juegos !== null && usuario !== null) {
-            setFinanzas([])
-            juegos.map(juego => {
-                axios.get(`${ENDPOINT}/${juego.id}/ventas/${mes}`)
-                    .then(respuesta => {
-                        const newFinanza = {
-                            imagen: juego.assets[0].asset.url,
-                            titulo: juego.titulo,
-                            ventas: respuesta.data.cant_ventas,
-                            ganancias: respuesta.data.ganancias
-                        };
-                        console.log(respuesta.data)
-                        console.log('MES ACTUAL: ' + mes)
-                        setFinanzas(prevFinanzas => [...prevFinanzas, newFinanza]);
-                    })
-                    .catch(error => console.log(error));
-            });
-        }
-    }, [usuario, mes, juegos]);
+                }
+            }
+        };
+
+        obtenerDatos();
+    }, [usuario, mes, juegos, ENDPOINT]);
 
     return (
         <div className="container container-finanzas">
             <div className="titulo">
-            <h3>SELECCIONE UN MES</h3>
+                <h3>SELECCIONE UN MES</h3>
             </div>
-            <Select
-                id="mes"
-                value={mes}
-                placeholder="SELECCIONE UN MES"
-                onChange={handleChange}
-                fullWidth
-                sx={InputFilledStyleAdmin}
-                variant="filled"
-            >
-                {Array.from({ length: mesActual + 1 }, (_, index) => (
-                    <MenuItem key={index} value={index}>
-                        {new Date(0, index).toLocaleString('es-ES', { month: 'long' }).toUpperCase()}
-                    </MenuItem>
-                ))}
-            </Select>
+            <FormControl fullWidth variant="filled" sx={InputFilledStyleAdmin}>
+                <InputLabel id="mes-label">MES</InputLabel>
+                <Select
+                    labelId="mes-label"
+                    id="mes"
+                    value={mes}
+                    onChange={handleChange}
+                >
+                    {Array.from({ length: mesActual + 1 }, (_, index) => (
+                        <MenuItem key={index} value={index}>
+                            {new Date(0, index).toLocaleString('es-ES', { month: 'long' }).toUpperCase()}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             {finanzas.length === 0 ? (
                 <h3>NO GENERO GANANCIAS ESTE MES</h3>
             ) : (
@@ -91,23 +91,14 @@ export function Finanzas() {
                             </TableHead>
                             <TableBody>
                                 {finanzas.map((finanza, index) => (
-                                    finanza.ventas?
                                     <TableRow key={index}>
                                         <TableCell>
                                             <img src={finanza.imagen} alt={finanza.titulo} width="80px" />
                                         </TableCell>
                                         <TableCell>{finanza.titulo}</TableCell>
-                                        <TableCell>{finanza.ventas}</TableCell>
-                                        <TableCell>${finanza.ganancias}</TableCell>
-                                    </TableRow>:
-                                    <TableRow key={index}>
-                                    <TableCell>
-                                        <img src={finanza.imagen} alt={finanza.titulo} width="80px" />
-                                    </TableCell>
-                                    <TableCell>{finanza.titulo}</TableCell>
-                                    <TableCell>{0}</TableCell>
-                                    <TableCell>${0}</TableCell>
-                                </TableRow>
+                                        <TableCell>{finanza.ventas || 0}</TableCell>
+                                        <TableCell>${finanza.ganancias || 0}</TableCell>
+                                    </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
