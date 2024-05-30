@@ -1,13 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-// Componentes
-import { LayoutComponent } from './pages/LayoutComponent'
-import { AdminLayoutComponent } from './pages/Administrador/LayoutAdmin/AdminLayoutComponent'
-
 // Providers
 import AuthProvider from './providers/AuthProvider'
 
 // Paginas
+import { LayoutComponent } from './pages/LayoutComponent'
 import { HomePage } from './pages/HomePage/HomePage'
 import { PaginaNoticias } from './pages/Noticias/PaginaNoticias/PaginaNoticias'
 import { PaginaCategorias } from './pages/Categorias/PaginaCategorias/PaginaCategorias'
@@ -28,13 +25,21 @@ import { Biblioteca } from './pages/Usuario/Biblioteca/Biblioteca'
 import { SolicitudDesarrollador } from './pages/Usuario/SolicitudDesarrollador/SolicitudDesarrollador'
 
 // ----------- Vistas de Administrador ------------
+import { AdminLayoutComponent } from './pages/Administrador/LayoutAdmin/AdminLayoutComponent'
 import { AdGames } from './pages/Administrador/Vistas/AdGames/AdGames'
 import { AdUsersDev } from './pages/Administrador/Vistas/AdUsersDev/AdUsersDev'
 import { AdRequestDev } from './pages/Administrador/Vistas/AdRequestDev/AdRequestDev'
 import { AdNews } from './pages/Administrador/Vistas/AdNews/AdNews'
 import { VistaFormNews } from './pages/Administrador/Vistas/AdNews/VistaFormNews/VistaFormNews'
-import { VistaDescuento } from './pages/Administrador/Vistas/AdGames/VistaDescuento/VistaDescuento'
 import { VistaUpdateNews } from './pages/Administrador/Vistas/AdNews/VistaUpdateNews/VistaUpdateNews'
+import { VistaDescuento } from './pages/Administrador/Vistas/AdGames/VistaDescuento/VistaDescuento'
+
+// ----------- Vistas de Developer ------------
+import { LayoutDeveloper } from './pages/Developer/LayoutDeveloper/LayoutDeveloper'
+import { AdministrarJuegosDeveloper } from './pages/Developer/Vistas/AdministrarJuegosDeveloper/AdministrarJuegosDeveloper'
+import { CrearJuego } from './pages/Developer/Vistas/CrearJuego/CrearJuego'
+import { Finanzas } from './pages/Developer/Vistas/Finanzas/Finanzas'
+import { NoticiasDeveloper } from './pages/Developer/Vistas/NoticiasDeveloper/NoticiasDeveloper'
 
 function App() {
   // /juegos/
@@ -111,13 +116,7 @@ function App() {
       children: [
         {
           path: '',
-          element: <AdGames />,
-          children: [
-            {
-              path: 'descuento/:id',
-              element: <VistaDescuento />
-            }
-          ]
+          element: <AdGames />
         },
         {
           path: 'desarrolladores',
@@ -134,6 +133,44 @@ function App() {
             {
               path: 'crear',
               element: <VistaFormNews />
+            },
+            {
+              path: 'editar/:id',
+              element: <VistaUpdateNews />
+            }
+          ]
+        },
+      ]
+    },
+    {
+      path: 'dashboard',
+      element: <LayoutDeveloper/>,
+      children: [
+        {
+          path: '',
+          element: <AdministrarJuegosDeveloper/>,
+          children: [
+            {
+              path: 'descuento/:id',
+              element: <VistaDescuento />
+            }
+          ]
+        },
+        {
+          path: 'crear',
+          element: <CrearJuego/>
+        },
+        {
+          path: 'finanzas',
+          element: <Finanzas/>
+        },
+        {
+          path: 'noticias',
+          element: <NoticiasDeveloper/>,
+          children: [
+            {
+              path: 'crear',
+              element: <VistaFormNews/>
             },
             {
               path: 'editar/:id',

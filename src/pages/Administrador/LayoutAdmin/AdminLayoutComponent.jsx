@@ -1,6 +1,5 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { NavBarAdmin } from "../Components/NavBarAdmin";
-import './AdminLayoutComponent.css'
 import { useAuth } from "../../../providers/AuthProvider";
 import { Roles } from "../../../utils/constants";
 import { useEffect, useState } from "react";
@@ -31,7 +30,7 @@ export function AdminLayoutComponent() {
                 <div className="container content-layout">
                     <aside className="aside-admin">
                         <h2><span>DINO</span>MENU</h2>
-                        <ul className="content-Link-admin">
+                        <ul className="aside-toolbar">
                             <li><Link className="btn btn-4 Link-admin" to='/admin'>ADMINISTRAR JUEGOS</Link></li>
                             <li><Link className="btn btn-4 Link-admin" to='/admin/desarrolladores'> ADMINISTRAR USUARIOS</Link></li>
                             <li><Link className="btn btn-4 Link-admin" to='/admin/solicitudes'>SOLICITUDES DE DESARROLLADOR</Link></li>

@@ -29,12 +29,18 @@
     padding: 20px;
   /*   width: 30%; */
     height: auto;
+    overflow-y: scroll;
     max-width: 1200px;
     border-radius: 10px;
 }
 
-.modal-fade .modal-content.modal-form{
+.modal-fade .modal-form{
+    background: #22577A;
+    padding: 20px;
+    width: 100%;
+    height: 90%;
     max-width: 600px;
+    border-radius: 10px;
 }
 
 .modal-fade .modal-content .container {

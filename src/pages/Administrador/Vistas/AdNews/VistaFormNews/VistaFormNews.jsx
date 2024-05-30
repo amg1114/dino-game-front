@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-// import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsForm/CreateAssetsForm";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
 import { uploadFile } from "../../../../../services/assets-service";
@@ -22,12 +21,7 @@ export function VistaFormNews() {
         titulo: '',
         descripcion: '',
     })
-
-    /**
-     * Actualiza el estado de la noticia
-     * @param {string} field Campo de la noticia cambiado
-     * @param {string} value Valor del campo
-     */
+    
     const handleChange = (field, value) => {
         setNoticia({
             ...noticia,
@@ -35,37 +29,22 @@ export function VistaFormNews() {
         })
     }
 
-    /**
-     * Agrega un archivo a la lista de archivos a subir
-     */
     const handleAssetChange = (asset) => {
         const prevAssets = [...assets];
         setAssets([...asset, ...prevAssets]);
     }
 
-    /**
-     * Elimina un archivo de la lista de archivos a subir
-     * @param {number} id Identificador del archivo a eliminar
-     */
     const handleAssetDelete = (id) => {
         setAssets(assets.filter(asset => asset.id !== id));
     }
 
-    /**
-     * Reinicia la lista de archivos a subir
-     */
     const handleAssetReset = () => {
         setAssets([]);
     }
 
-    /**
-     * Sube los archivos a la base de datos y a la nube
-     * @param {number} ownerID Identificador del dueño de los archivos
-     */
     const handleAssetUpload = (ownerID) => {
-        let assetToUpload = assets;
 
-        const promises = assetToUpload.map(async (asset, i) => {
+        const promises = assets.map(async (asset, i) => {
             asset.ownerId = ownerID;
             asset.type = 'noticias';
             asset.index = i;
@@ -78,27 +57,29 @@ export function VistaFormNews() {
             })
         })
 
-        Promise.all(promises).then((res) => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Noticia publicada',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
+
+        Promise.all(promises)
+            .then((response) => {
+                Swal.close()
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Noticia creada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 navigate('/admin/noticias')
             })
-            
-        }).catch((error) => {
-            console.log(error)
-        })
-
-
-        setAssets(assetToUpload);
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                })
+                console.log(error)
+            })
     }
 
-    /**
-     * Guarda la noticia en la base de datos
-    */
+
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion && assets.length > 0) {
             Swal.fire({
@@ -127,9 +108,6 @@ export function VistaFormNews() {
 
     }
 
-    /**
-     * Cancela la publicación de la noticia
-     */
     const handleCancelar = () => {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -149,7 +127,7 @@ export function VistaFormNews() {
         <div className="modal-fade animate__animated animate__fadeIn">
             <div className="modal-content modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link to="/admin/noticias" className="modal-closer color-gray">
+                    <Link to={window.location.pathname === '/dashboard/noticias/form'? '/dashboard/noticias' : '/admin/noticias'} className="modal-closer color-gray">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>
