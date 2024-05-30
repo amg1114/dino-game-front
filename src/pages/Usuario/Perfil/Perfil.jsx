@@ -32,10 +32,12 @@ export function Perfil() {
             {
               usuario.role.map((rol) => {
                 if (rol === "ADMINISTRATOR") {
-                  return <button className="btn btn-admin" onClick={() => { navigate('/admin') }}>DASHBOARD ADMIN</button>
+                  return <li key={'btn-admin'}>
+                    <Link className="btn btn-4" to='/admin'>ADMINISTRACIÓN</Link>
+                  </li>
                 }
                 if (rol === "DEVELOPER") {
-                  return <button className="btn btn-admin" onClick={() => { navigate('/dashboard') }}>DASHBOARD DEV</button>
+                  return <li key={'btn-dashboard'}><Link className="btn btn-4" to='/dashboard'>DASHBOARD</Link></li>
                 }
               })
             }
