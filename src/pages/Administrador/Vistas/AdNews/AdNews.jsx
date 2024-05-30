@@ -56,7 +56,7 @@ export function AdNews() {
             <div className="noticiasPageAdmin">
                 <h2><span>DINO</span>NOTICIAS</h2>
                 <div className="buttons-group align-end">
-                    <Link className="btn btn-2 boton-agregar-noticia" to='/admin/noticias/form'>
+                    <Link className="btn btn-2 boton-agregar-noticia" to='crear'>
                         AGREGAR NOTICIA
                     </Link>
                 </div>
@@ -92,6 +92,11 @@ export function AdNews() {
                                                 <Link to={`/noticias/${noticia.id}`} className='btn btn-2'>
                                                     <span className="material-symbols-outlined">
                                                         public
+                                                    </span>
+                                                </Link>
+                                                <Link to={`editar/${noticia.id}`} className="btn btn-1">
+                                                    <span className="material-symbols-outlined">
+                                                        edit
                                                     </span>
                                                 </Link>
                                                 <button className='btn btn-3' onClick={() => handleDelete(noticia.id)}>

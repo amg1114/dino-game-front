@@ -12,3 +12,7 @@
 .form .field-wrapper.full-width{
     width: 100%;
 }
+
+.assets-form__input-file {
+    display: none;
+}
