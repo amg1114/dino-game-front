@@ -27,7 +27,7 @@
 .modal-fade .modal-content-admin {
     background: #ffff;
     padding: 20px;
-    width: 30%;
+  /*   width: 30%; */
     height: auto;
     max-width: 1200px;
     border-radius: 10px;

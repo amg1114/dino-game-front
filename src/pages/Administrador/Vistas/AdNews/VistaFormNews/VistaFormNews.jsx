@@ -12,7 +12,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import AssetsForm from "../../../../../components/assetsForm/AssetsForm";
 import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsForm/CreateAssetsForm";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
-import { asyncUploadFile } from "../../../../../services/assets-service";
+import { uploadFile } from "../../../../../services/assets-service";
 import { CKEditor_CONFIG } from "../../../../../utils/constants";
 
 export function VistaFormNews() {
@@ -65,31 +65,20 @@ export function VistaFormNews() {
     const handleAssetUpload = (ownerID) => {
         let assetToUpload = assets;
 
-        assetToUpload.forEach((asset, i) => {
+        const promises = assetToUpload.map(async (asset, i) => {
             asset.ownerId = ownerID;
-            asset.type = 'noticia';
+            asset.type = 'noticias';
             asset.index = i;
+            asset.state = 'in_progress';
 
-            asyncUploadFile(asset, (percentage) => {
+            return await uploadFile(asset, (percentage) => {
                 if (percentage === 100) {
                     asset.state = 'completed';
-                } else {
-                    asset.state = 'in_progress';
                 }
-            }, () => {
-                asset.state = 'completed'
-                handleUploadComplete()
-            }, (err) => console.error(err))
+            })
         })
 
-        setAssets(assetToUpload);
-    }
-
-    /**
-    * Verifica si todos los archivos han sido subidos
-    */
-    const handleUploadComplete = () => {
-        if (!assets.some(asset => asset.state !== 'completed')) {
+        Promise.all(promises).then((res) => {
             Swal.fire({
                 icon: 'success',
                 title: 'Noticia publicada',
@@ -98,7 +87,13 @@ export function VistaFormNews() {
             }).then(() => {
                 navigate('/admin/noticias')
             })
-        }
+            
+        }).catch((error) => {
+            console.log(error)
+        })
+
+
+        setAssets(assetToUpload);
     }
 
     /**
@@ -106,6 +101,14 @@ export function VistaFormNews() {
     */
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion && assets.length > 0) {
+            Swal.fire({
+                title: 'Creando Noticia',
+                html: 'Por favor espere',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            })
             axios.post(`${process.env.REACT_APP_API}/noticias`, { ...noticia, fecha: new Date() })
                 .then((response) => {
                     handleAssetUpload(response.data.id)
