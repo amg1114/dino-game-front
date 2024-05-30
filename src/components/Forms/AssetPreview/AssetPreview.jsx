@@ -27,10 +27,10 @@ export function AssetPreview({ file, onDelete }) {
         })
     }
     return (
-        <div className={`assets-preview-group__box ${stateClass}`} data-file={id} key={file.id}>
-            <img className="assets-preview-group__img" src={url} alt={name}/>
+        <div className={`assets-preview-group__box ${stateClass}`} data-file={id}>
+            <img className="assets-preview-group__img" src={url} alt={name} />
             <button className="assets-preview-group__delete-button" onClick={() => handleDelete()}>
-                <span className="material-symbols-outlined" >
+                <span className="material-symbols-outlined">
                     delete
                 </span>
             </button>

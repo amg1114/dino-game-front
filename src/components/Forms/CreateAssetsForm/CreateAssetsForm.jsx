@@ -42,7 +42,8 @@ export const CreateAssetsForm = ({ maxFiles, onChange, onDelete, onReset, assets
                 id: uuidv4(),
                 name: file.name,
                 url: URL.createObjectURL(file),
-                file
+                state: 'pending',
+                file,
             }
 
             if (assets.some(obj => obj.name === asset.name)) {
@@ -52,7 +53,7 @@ export const CreateAssetsForm = ({ maxFiles, onChange, onDelete, onReset, assets
             newAssets.push(asset);
         }
         if (newAssets.length > 0) {
-            onChange(newAssets);   
+            onChange(newAssets);
         }
     };
 
@@ -61,16 +62,17 @@ export const CreateAssetsForm = ({ maxFiles, onChange, onDelete, onReset, assets
             <h3>Subir Imágenes</h3>
             <div className="assets-preview-group">
                 {
-                    assets.length ?
-                        (assets.map(asset => <AssetPreview file={asset} key={asset.id} onDelete={onDelete} />))
+
+                    assets.filter(asset => asset.state !== 'to_delete').length ?
+                        (assets.filter(asset => asset.state !== 'to_delete').map(asset => <AssetPreview file={asset} key={asset.id} onDelete={onDelete} />))
                         : <p>No hay imágenes para subir aún.</p>
                 }
             </div>
             <form className="buttons-group">
                 <input className='assets-form__input-file ' type="file" name='assetInput' id="assetInput" multiple onChange={(e) => handleFileChange(e)} />
-                {assets.length < maxFiles ? <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label> : <></>}
+                { assets.filter(asset => asset.state !== 'to_delete').length  < maxFiles ? <label className='btn btn-2' htmlFor="assetInput">Agregar Imagen</label> : <></>}
                 {
-                    assets.length ?
+                    assets.filter(asset => asset.state === 'pending').length ?
                         <button className='btn btn-3' type="button" onClick={reset}>Descartar</button>
                         : <></>
                 }
