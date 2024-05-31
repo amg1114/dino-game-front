@@ -6,8 +6,8 @@ import { FormVersiones } from "../../../CrearJuego/Versiones/FormVersiones";
 
 export function AddVersions({ handleVersions, versionesPrev }) {
     const [versiones, setVersiones] = useState([]);
-    const [validacion, setValidacion] = useState(false);
-    
+    const [validacion, setValidacion] = useState(true);
+
     const handleAddVersion = (data) => {
         setVersiones(prevVersiones => [...prevVersiones, data]);
         handleVersions([...versiones, data]);
@@ -29,14 +29,14 @@ export function AddVersions({ handleVersions, versionesPrev }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography component="div">
-                                    <h3><span>VERSIÓN {version.version}</span></h3>
-                                    <h4>{version.descripcion}</h4>
-                                    <h4>TAMAÑO: {version.size}</h4>
-                                    <h4>URL: {version.url}</h4>
-                                    <h4>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
-                                    <h4>REQUISITOS:</h4>
+                                    <h3 style={{ fontSize: '16px' }}><span>VERSIÓN {version.version}</span></h3>
+                                    <h4 style={{ fontSize: '15px' }}>{version.descripcion}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>TAMAÑO: {version.size}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>URL: {version.url}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>REQUISITOS:</h4>
                                     {version.requisitos.map((requisito, i) => (
-                                        <h5 key={`${i}-requisito-${index}`}>
+                                        <h5 style={{ fontSize: '14px' }} key={`${i}-requisito-${index}`}>
                                             {typeof requisito === 'object' ? requisito.requisito : requisito}
                                         </h5>
                                     ))}
@@ -52,14 +52,14 @@ export function AddVersions({ handleVersions, versionesPrev }) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography component="div">
-                                    <h3><span>VERSIÓN {version.version}</span></h3>
-                                    <h4>{version.descripcion}</h4>
-                                    <h4>TAMAÑO: {version.size}</h4>
-                                    <h4>URL: {version.url}</h4>
-                                    <h4>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
-                                    <h4>REQUISITOS:</h4>
+                                    <h3 style={{ fontSize: '16px' }}><span>VERSIÓN {version.version}</span></h3>
+                                    <h4 style={{ fontSize: '15px' }}>{version.descripcion}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>TAMAÑO: {version.size}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>URL: {version.url}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>FECHA DE LANZAMIENTO: {version.releaseDate}</h4>
+                                    <h4 style={{ fontSize: '15px' }}>REQUISITOS:</h4>
                                     {version.requisitos.map((requisito, i) => (
-                                        <h5 key={`${i}-requisito-${index}`}>
+                                        <h5 style={{ fontSize: '14px' }} key={`${i}-requisito-${index}`}>
                                             {typeof requisito === 'object' ? requisito.requisito : requisito}
                                         </h5>
                                     ))}
@@ -73,11 +73,13 @@ export function AddVersions({ handleVersions, versionesPrev }) {
                             handleValidacion={handleValidacion}
                         />
                     </div>
-                    <div className="boton-agregar" style={{margin:'20px 0'}}>
-                        <Link className="btn btn-4" onClick={() => setValidacion(false)}>
-                            AGREGAR VERSION
-                        </Link>
-                    </div>
+                    {validacion && (
+                        <div className="boton-agregar" style={{ margin: '20px 0' }}>
+                            <Link className="btn btn-4" onClick={() => handleValidacion(false)}>
+                                AGREGAR VERSION
+                            </Link>
+                        </div>
+                    )}
                 </>
             )}
         </>

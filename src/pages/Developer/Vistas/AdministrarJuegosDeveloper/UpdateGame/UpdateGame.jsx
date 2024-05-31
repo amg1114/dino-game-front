@@ -99,7 +99,7 @@ export function UpdateGame() {
                                 <ConfirmarUpdate datos={datos} versions={versions} prevVersion={datos.versions} />
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <div style={{ display: 'flex', gap: '20px' }}>
+                                <div style={{ display: 'flex', gap: '20px', marginTop:'20px' }}>
                                     <button className="btn btn-4" onClick={() => handleBack()} disabled={value === 0}>ATRAS</button>
                                     <button className="btn btn-4" onClick={() => handleNext()} disabled={value === 2}>SIGUIENTE</button>
                                 </div>

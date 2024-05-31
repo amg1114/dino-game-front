@@ -5,16 +5,17 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 export function FormVersiones({ handleAddVersion, handleValidacion }) {
+    const currentDate = new Date().toISOString().split('T')[0];
+    
     const [data, setData] = useState({
         version: '',
         descripcion: '',
         size: '',
         url: '',
-        releaseDate: '',
+        releaseDate: currentDate,
         requisitos: []
     });
 
-    const currentDate = new Date().toISOString().split('T')[0];
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,7 +36,7 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
                 descripcion: '',
                 size: '',
                 url: '',
-                releaseDate: '',
+                releaseDate: currentDate,
                 requisitos: []
             });
         } else {
@@ -99,19 +100,6 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
                             fullWidth
                             variant="filled"
                             label='URL'
-                        />
-                    </div>
-                    <div className="field-wrapper full-width">
-                        <TextField
-                            id="releaseDate"
-                            name="releaseDate"
-                            type="date"
-                            value={data.releaseDate || currentDate}
-                            onChange={handleChange}
-                            sx={InputFilledStyleAdmin}
-                            fullWidth
-                            variant="filled"
-                            label='FECHA DE LANZAMIENTO'
                         />
                     </div>
                     <div className="field-wrapper full-width">

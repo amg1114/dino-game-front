@@ -117,7 +117,13 @@ function App() {
       children: [
         {
           path: '',
-          element: <AdGames />
+          element: <AdGames />,
+          children: [
+            {
+              path: 'descuento/:id',
+              element: <VistaDescuento />
+            }
+          ]
         },
         {
           path: 'desarrolladores',
@@ -151,10 +157,6 @@ function App() {
           path: '',
           element: <AdministrarJuegosDeveloper />,
           children: [
-            {
-              path: 'descuento/:id',
-              element: <VistaDescuento />
-            },
             {
               path: 'update/:id',
               element: <UpdateGame />
