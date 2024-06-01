@@ -43,11 +43,11 @@ function AuthProvider({ child }) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             localStorage.setItem("token", token);
             getUsuario();
-      //      getBiblioteca();
         } else {
             delete axios.defaults.headers.common["Authorization"];
             localStorage.removeItem("token");
             setUsuario(null);
+            setBiblioteca([])
         }
     }, [token]);
 

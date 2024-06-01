@@ -7,7 +7,7 @@ import { useAuth } from '../../providers/AuthProvider'
 export function GameCard({ Game }) {
     const { assets, titulo, descripcion, id, descuentos, precio } = Game
     const { biblioteca } = useAuth()
-    const [precioFinal, setPrecioFinal] = useState(precio);
+    const [precioFinal, setPrecioFinal] = useState("$"+precio);
 
     useEffect(() => {
         handlePrecio()
@@ -19,7 +19,7 @@ export function GameCard({ Game }) {
         } else if (precio === 0) {
             setPrecioFinal("GRATIS")
          } else if (descuentos && descuentos.length && !biblioteca.length) {
-            setPrecioFinal(`$ ${precio} %${descuentos[0].porcentaje}`)
+            setPrecioFinal(`$${precio} - ${descuentos[0].porcentaje * 100}%`)
         }
     }
 
