@@ -22,9 +22,7 @@ export function AdRequestDev() {
             .then((respuesta) => {
                 setSolicitudes(respuesta.data)
             })
-            .catch((error) => {
-                console.log(error)
-            })
+            
     }
 
     const handleAceptar = (id) => {

@@ -1,10 +1,12 @@
+import './AdGames.css'
+
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { FormularioFiltros } from "../../../../partials/FormularioFiltros/FormularioFiltros"
-import './AdGames.css'
-import { Link, useNavigate } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import Swal from "sweetalert2"
+
 export function AdGames() {
     const navigate = useNavigate()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
@@ -18,12 +20,12 @@ export function AdGames() {
 
     const loadGames = (params = {}) => {
         axios.get(ENDPOINT, { params })
-            .catch((error) => {
-                error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
-            })
             .then((respuesta) => {
                 setJuegos(respuesta.data)
             })
+            .catch((error) => {
+                console.log(error)
+            });
     };
 
     const Search = (data) => {
@@ -60,6 +62,11 @@ export function AdGames() {
                 })
             })
             .catch((error) => {
+                Swal.fire({
+                    title: 'Error al eliminar el juego',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
                 console.log(error)
             })
     }

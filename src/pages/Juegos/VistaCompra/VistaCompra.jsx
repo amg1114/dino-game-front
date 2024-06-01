@@ -8,6 +8,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/mater
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Swal from "sweetalert2"
 
 
 export function VistaCompra() {
@@ -17,12 +18,17 @@ export function VistaCompra() {
 
     useEffect(() => {
         axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
             .then(function (respuesta) {
                 setJuego(respuesta.data);
+            }).catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
+                console.log(error)
             })
+
     }, [])
 
     return <>
@@ -78,9 +84,9 @@ export function VistaCompra() {
                                 <h3 className="Subtitulo">METODOS DE PAGO</h3>
                                 <div className="ListaImage">
                                     <img src={TarjetaVisa} alt="imagen1" />
-                                    <img src={TarjetaMaster} alt="imagen2"/>
-                                    <img src={TarjetaAmerican} alt="imagen3"/>
-                                    <img src={TarjetaAval} alt="imagen4"/>
+                                    <img src={TarjetaMaster} alt="imagen2" />
+                                    <img src={TarjetaAmerican} alt="imagen3" />
+                                    <img src={TarjetaAval} alt="imagen4" />
                                 </div>
                                 <h3 className="Subtitulo1">DATOS DE PAGO</h3>
                                 <form className="formulario">

@@ -3,29 +3,36 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import './VistaJuego.css'
-import { VistaCompra } from "../VistaCompra/VistaCompra";
 import { useAuth } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 export function VistaJuego() {
-    const { usuario } = useAuth()
+    const { usuario, biblioteca } = useAuth()
     const { id } = useParams()
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
-
+    const [comprado, setComprado] = useState(false);
     useEffect(() => {
+        if (juego === null) {
+            axios.get(ENDPOINT_API)
+                .then(function (respuesta) {
+                    setJuego(respuesta.data);
+                }).catch(function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal',
+                    });
+                    console.log(error)
+                })
+        }else if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === juego.id)) {
+            setComprado(true)
+        }
 
-        axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
-            .then(function (respuesta) {
-                setJuego(respuesta.data);
+    }, [id, biblioteca])
 
 
-            })
-    }, []
-    )
 
     return <>
         {
@@ -94,28 +101,33 @@ export function VistaJuego() {
 
                                     <div className="valor-comprar">
                                         <div className="comprar">
-                                            {usuario ? (
+                                            {comprado ?
+                                                <a href={juego.versions[0].url} target="_blank" className="btn btn-1 comprar" >
+                                                    DESCARGAR
+                                                </a> :
+                                                <> {usuario ? (
 
-                                                juego.descuentos[0] ? <>
+                                                    juego.descuentos[0] ? <>
+                                                        <span className="precio">${juego.precio}</span>
+                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
+                                                            comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
+                                                        </Link>
+                                                    </> :
+                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
+                                                            comprar ${juego.precio}
+                                                        </Link>
+
+                                                ) : (juego.descuentos[0] ? <>
 
                                                     <span className="precio">${juego.precio}</span>
-                                                    <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
+                                                    <Link to={`/login`} className="btn btn-1 comprar">
                                                         comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
                                                     </Link>
                                                 </> :
-                                                    <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
+                                                    <Link to={`/login`} className="btn btn-1 comprar">
                                                         comprar ${juego.precio}
-                                                    </Link>
-                                            ) : (juego.descuentos[0] ? <>
-
-                                                <span className="precio">${juego.precio}</span>
-                                                <Link to={`/login`} className="btn btn-1 comprar">
-                                                    comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
-                                                </Link>
-                                            </> :
-                                                <Link to={`/login`} className="btn btn-1 comprar">
-                                                    comprar ${juego.precio}
-                                                </Link>)
+                                                    </Link>)
+                                                }</>
                                             }
                                         </div>
                                     </div>

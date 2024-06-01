@@ -3,6 +3,7 @@ import axios from 'axios';
 import { TextField } from "@mui/material";
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin";
 import './Informacion.css';
+import Swal from "sweetalert2"
 
 export function Informacion({ datos, handleChange }) {
     const ENDPOINT = process.env.REACT_APP_API + '/categorias';
@@ -15,7 +16,12 @@ export function Informacion({ datos, handleChange }) {
                 setCategorias(respuesta.data);
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
+                console.log(error)
             });
     }, []);
 

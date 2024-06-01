@@ -23,7 +23,7 @@ export function InfoUser() {
 
     useEffect(() => {
         if (usuario) {
-            const {role, ...user_data} = usuario
+            const { role, ...user_data } = usuario
             setDatos(user_data)
             setDatosOriginales(user_data)
             setValidacion(false)
@@ -48,12 +48,12 @@ export function InfoUser() {
                 })
             })
             .catch((error) => {
-                console.log(error)
                 Swal.fire({
                     icon: "error",
                     title: "Error al Actualizar los datos",
                     text: error.response.data.message
                 })
+                console.log(error)
             })
         console.log('Datos enviados:', datos);
     };

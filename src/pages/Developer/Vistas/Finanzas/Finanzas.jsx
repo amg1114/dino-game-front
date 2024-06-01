@@ -4,6 +4,7 @@ import { InputFilledStyleAdmin } from "../../../../utils/mui.styles-admin";
 import axios from "axios";
 import { useAuth } from "../../../../providers/AuthProvider";
 import './Finanzas.css';
+import Swal from "sweetalert2"
 
 export function Finanzas() {
     const { usuario } = useAuth();
@@ -43,7 +44,11 @@ export function Finanzas() {
                     if (error.code === "ERR_BAD_REQUEST") {
                         setJuegos([]);
                     } else {
-                        console.log(error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
                     }
                 }
             }

@@ -37,10 +37,17 @@ export function CrearJuego() {
         } else {
             if (value === 0) {
                 axios.post(`${process.env.REACT_APP_API}/video-games`, { ...datos, fechaLanzamiento: new Date() })
-                    .catch((error) => { console.log(error) })
                     .then((respuesta) => {
                         setJuego(respuesta.data);
                         setValue(newValue);
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
+                        console.log(error)
                     })
             } else if (value === 1) {
                 if (assets.length <= 1) {
@@ -57,7 +64,7 @@ export function CrearJuego() {
                 versions.map((v, index) => {
                     axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, v)
                         .then(() => {
-                            console.log('sucess')
+                          
                         })
                 })
                 setValue(newValue)
@@ -83,7 +90,7 @@ export function CrearJuego() {
 
     //CONTROLAR LOS ASSETS DEL JUEGO
     const handleAssetChange = (new_assets) => {
-        setAssets([...new_assets, ...assets]);
+        setAssets([...assets, ...new_assets]);
     }
 
     const handleAssetDelete = (id) => {
@@ -189,7 +196,14 @@ export function CrearJuego() {
                         setValue(0);
                         navigate('/dashboard')
                     })
-                    .catch(error => { console.log(error) })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
+                        console.log(error)
+                    })
 
                 navigate('/dashboard')
             } else if (result.isDismissed) {

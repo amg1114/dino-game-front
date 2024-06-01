@@ -22,12 +22,13 @@ export function AdministrarJuegosDeveloper() {
     const loadGames = (params = {}) => {
         if (usuario) {
             axios.get(`${ENDPOINT}/developer/${usuario.id}/video-games`, { params })
-                .catch((error) => {
-                    error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
-                })
-                .then((respuesta) => {
-                    setJuegos(respuesta.data)
-                })
+            .then((respuesta) => {
+                setJuegos(respuesta.data)
+            })
+            .catch((error) => {
+
+                console.log(error)
+            })
         }
     };
 
@@ -65,6 +66,11 @@ export function AdministrarJuegosDeveloper() {
                 })
             })
             .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
                 console.log(error)
             })
     }

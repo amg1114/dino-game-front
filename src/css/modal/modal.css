@@ -48,7 +48,7 @@
     background: #22577A;
     padding: 20px;
     width: 100%;
-    height: 90%;
+    height: fit-content;
     max-width: 600px;
     border-radius: 10px;
 }
@@ -64,7 +64,7 @@
 }
 
 .modal-fade .modal-content-compra .modal-header,
-.modal-fade .modal-content .modal-header
+.modal-fade .modal-header
 {
     display: flex;
     justify-content: end;

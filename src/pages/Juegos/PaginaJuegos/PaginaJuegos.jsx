@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { GameCard } from "../../../components/GameCard/GameCard"
 import "./PaginaJuegos.css"
-
+import Swal from "sweetalert2"
 export function PaginaJuegos() {
 
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
@@ -16,12 +16,17 @@ export function PaginaJuegos() {
 
     const loadGames = (params = {}) => {
         axios.get(ENDPOINT, { params })
-            .catch((error) => {
-                error.code === "ERR_BAD_REQUEST" ? setJuegos(null):console.log(error)         
-            })
             .then((respuesta) => {
                 setJuegos(respuesta.data)
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
+                console.log(error)
             })
+
     };
 
     const Search = (data) => {

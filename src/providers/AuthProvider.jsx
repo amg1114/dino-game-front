@@ -5,6 +5,7 @@ const AuthContext = createContext();
 function AuthProvider({ child }) {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [usuario, setUsuario] = useState(null);
+    const [biblioteca, setBiblioteca] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const updateToken = (newToken) => {
@@ -20,9 +21,20 @@ function AuthProvider({ child }) {
             .then((response) => {
                 setUsuario(response.data)
                 setIsLoading(false);
+                getBiblioteca()
             })
             .catch(function (error) {
                 setIsLoading(false);
+            })
+    }
+
+    const getBiblioteca = () => {
+        axios.get(process.env.REACT_APP_API + "/video-games/biblioteca")
+            .then((response) => {
+                setBiblioteca(response.data)
+            })
+            .catch(function (error) {
+                setBiblioteca([])
             })
     }
 
@@ -35,6 +47,7 @@ function AuthProvider({ child }) {
             delete axios.defaults.headers.common["Authorization"];
             localStorage.removeItem("token");
             setUsuario(null);
+            setBiblioteca([])
         }
     }, [token]);
 
@@ -42,11 +55,12 @@ function AuthProvider({ child }) {
         return {
             token, 
             usuario,
+            biblioteca,
             isLoading,
             updateToken,
             deleteToken
         };
-    }, [token, isLoading, usuario]);
+    }, [token, isLoading, usuario, biblioteca]);
 
     return <AuthContext.Provider value={contextValue}>{child}</AuthContext.Provider>;
 }

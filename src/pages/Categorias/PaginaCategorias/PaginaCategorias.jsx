@@ -3,7 +3,7 @@ import './PaginaCategorias.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GameSectionList } from "../../../partials/GameSectionList/GameSectionList";
-
+import Swal from "sweetalert2"
 export function PaginaCategorias() {
 
     const ENDPOINT = process.env.REACT_APP_API + "/categorias"
@@ -12,11 +12,11 @@ export function PaginaCategorias() {
 
     useEffect(() => {
         axios.get(ENDPOINT)
-            .catch((error) => {
-                console.log(error);
-            })
             .then((respuesta) => {
                 setCategorias(respuesta.data);
+            })
+            .catch((error) => {
+                console.log(error)
             })
     }, [])
 
