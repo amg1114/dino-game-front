@@ -16,7 +16,7 @@ export function AdNews() {
                 setNoticias(respuesta.data)
             })
             .catch(function (error) {
-                setNoticias([])
+                console.log(error)
             })
     }, [])
 
@@ -51,6 +51,7 @@ export function AdNews() {
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 });
+                console.log(error)
             })
     }
     return <>

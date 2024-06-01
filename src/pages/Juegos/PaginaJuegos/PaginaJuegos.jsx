@@ -24,6 +24,7 @@ export function PaginaJuegos() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             })
 
     };

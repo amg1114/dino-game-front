@@ -21,6 +21,7 @@ export function Informacion({ datos, handleChange }) {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             });
     }, []);
 

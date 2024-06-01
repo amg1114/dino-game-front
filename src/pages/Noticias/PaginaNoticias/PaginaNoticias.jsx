@@ -13,11 +13,7 @@ export function PaginaNoticias() {
             .then(function (respuesta) {
                 setNoticias(respuesta.data)
             }).catch(function (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                });
+                console.log(error)
             })
 
 

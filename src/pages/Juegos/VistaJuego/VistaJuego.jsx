@@ -24,6 +24,7 @@ export function VistaJuego() {
                         title: 'Oops...',
                         text: 'Algo salió mal',
                     });
+                    console.log(error)
                 })
         }else if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === juego.id)) {
             setComprado(true)

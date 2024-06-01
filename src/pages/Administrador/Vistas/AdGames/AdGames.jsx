@@ -24,11 +24,7 @@ export function AdGames() {
                 setJuegos(respuesta.data)
             })
             .catch((error) => {
-                Swal.fire({
-                    title: 'Error al cargar los juegos',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar'
-                })
+                console.log(error)
             });
     };
 
@@ -71,6 +67,7 @@ export function AdGames() {
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 });
+                console.log(error)
             })
     }
     return (

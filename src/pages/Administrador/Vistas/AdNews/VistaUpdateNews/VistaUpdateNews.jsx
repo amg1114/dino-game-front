@@ -106,6 +106,7 @@ export function VistaUpdateNews() {
                         title: 'Oops...',
                         text: 'Algo salió mal',
                     })
+                    console.log(error)
                 })
             return
         } else {

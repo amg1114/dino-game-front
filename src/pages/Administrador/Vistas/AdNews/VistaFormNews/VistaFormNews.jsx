@@ -31,7 +31,7 @@ export function VistaFormNews() {
 
     const handleAssetChange = (asset) => {
         const prevAssets = [...assets];
-        setAssets([...asset, ...prevAssets]);
+        setAssets([...prevAssets, ...asset]);
     }
 
     const handleAssetDelete = (id) => {
@@ -75,6 +75,7 @@ export function VistaFormNews() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             })
     }
 
@@ -94,11 +95,8 @@ export function VistaFormNews() {
                     handleAssetUpload(response.data.id)
                 })
                 .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo salió mal',
-                    });
+                    
+                    console.log(error)
                 })
             return
         } else {
@@ -130,7 +128,7 @@ export function VistaFormNews() {
         <div className="modal-fade animate__animated animate__fadeIn">
             <div className="modal-content modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link onClick={navigate(-1)} className="modal-closer color-gray">
+                    <Link onClick={()=>navigate(-1)} className="modal-closer color-gray">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>

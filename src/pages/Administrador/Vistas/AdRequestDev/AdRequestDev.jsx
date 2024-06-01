@@ -22,13 +22,7 @@ export function AdRequestDev() {
             .then((respuesta) => {
                 setSolicitudes(respuesta.data)
             })
-            .catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                });
-            })
+            
     }
 
     const handleAceptar = (id) => {
