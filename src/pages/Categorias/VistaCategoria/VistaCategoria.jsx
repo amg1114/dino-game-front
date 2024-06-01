@@ -28,6 +28,7 @@ export function VistaCategoria() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             })
 
     }, [])

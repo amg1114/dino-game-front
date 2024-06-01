@@ -20,6 +20,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             });
     }, []);
 

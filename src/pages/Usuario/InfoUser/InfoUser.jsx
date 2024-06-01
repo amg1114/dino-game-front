@@ -53,6 +53,7 @@ export function InfoUser() {
                     title: "Error al Actualizar los datos",
                     text: error.response.data.message
                 })
+                console.log(error)
             })
         console.log('Datos enviados:', datos);
     };

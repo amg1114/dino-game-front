@@ -44,6 +44,7 @@ export function HomePage() {
                                     title: 'Oops...',
                                     text: 'Algo salió mal',
                                 });
+                                console.log(error)
                             })
 
 
@@ -54,6 +55,7 @@ export function HomePage() {
                             title: 'Oops...',
                             text: 'Algo salió mal',
                         });
+                        console.log(error)
                     })
 
             })
@@ -63,6 +65,7 @@ export function HomePage() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             })
 
     }, [])

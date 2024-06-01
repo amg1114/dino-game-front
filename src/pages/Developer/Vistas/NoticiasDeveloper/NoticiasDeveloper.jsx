@@ -19,11 +19,7 @@ export function NoticiasDeveloper() {
                     setNoticias(respuesta.data)
                 })
                 .catch(function (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo salió mal',
-                    });
+                    console.log(error)
                 })
         }
     }, [usuario])
@@ -59,6 +55,7 @@ export function NoticiasDeveloper() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 });
+                console.log(error)
             })
     }
     return <>

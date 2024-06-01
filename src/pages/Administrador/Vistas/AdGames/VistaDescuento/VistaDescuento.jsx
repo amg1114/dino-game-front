@@ -26,6 +26,7 @@ export function VistaDescuento() {
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 });
+                console.log(error)
             })
     }, [])
 

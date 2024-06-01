@@ -22,11 +22,7 @@ export function AdUsersDev() {
                 setUsers(respuesta.data)
             })
             .catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                });
+                console.log(error)
             })
     }
 
