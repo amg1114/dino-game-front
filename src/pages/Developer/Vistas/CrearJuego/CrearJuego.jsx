@@ -90,7 +90,7 @@ export function CrearJuego() {
 
     //CONTROLAR LOS ASSETS DEL JUEGO
     const handleAssetChange = (new_assets) => {
-        setAssets([...assets, new_assets]);
+        setAssets([...assets, ...new_assets]);
     }
 
     const handleAssetDelete = (id) => {
