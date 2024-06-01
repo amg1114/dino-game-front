@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import "./VistaNoticia.css"
 import { ListaNoticia } from "../../../partials/ListaNoticia/ListaNoticia";
 import { HomeListaNoticia } from "../../../partials/HomeListaNoticia/HomeListaNoticia";
+import Swal from "sweetalert2";
 
 export function VistaNoticia() {
 
@@ -18,20 +19,28 @@ export function VistaNoticia() {
 
     useEffect(() => {
         axios.get(ENDPOINT)
-            .catch(function (error) {
-                console.log(error)
-            })
             .then(function (response) {
                 const noticia_data = response.data;
                 axios.get(`${process.env.REACT_APP_API}/noticias`)
-                    .catch(function (error) {
-                        console.log(error)
-                    })
                     .then(function (response) {
                         setNoticias(response.data)
                         setNoticia(noticia_data);
+                    }).catch(function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
                     })
+
+            }).catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
             })
+
     }, [id])
 
     return <>

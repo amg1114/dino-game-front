@@ -1,10 +1,12 @@
+import './VistaDescuento.css'
+
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import Swal from "sweetalert2"
-import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin"
 import { TextField } from "@mui/material"
-import './VistaDescuento.css'
+
+import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin"
 
 export function VistaDescuento() {
     const navigate = useNavigate()
@@ -19,7 +21,11 @@ export function VistaDescuento() {
                 console.log(respuesta.data)
             })
             .catch((error) => {
-                console.log(error)
+                Swal.fire({
+                    title: 'Error al cargar el juego',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
             })
     }, [])
 

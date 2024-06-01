@@ -94,7 +94,6 @@ export function UpdateGame() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 })
-                console.log(error)
             })
     }
 

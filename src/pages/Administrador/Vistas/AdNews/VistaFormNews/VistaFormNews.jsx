@@ -74,8 +74,7 @@ export function VistaFormNews() {
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Algo salió mal',
-                })
-                console.log(error)
+                });
             })
     }
 
@@ -95,7 +94,11 @@ export function VistaFormNews() {
                     handleAssetUpload(response.data.id)
                 })
                 .catch((error) => {
-                    console.log(error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal',
+                    });
                 })
             return
         } else {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TextField } from "@mui/material";
 import { InputFilledStyleAdmin } from '../../../../../../utils/mui.styles-admin';
+import Swal from "sweetalert2"
 
 export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
     const ENDPOINT = process.env.REACT_APP_API + '/categorias';
@@ -14,7 +15,11 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                 setCategorias(respuesta.data);
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
             });
     }, []);
 

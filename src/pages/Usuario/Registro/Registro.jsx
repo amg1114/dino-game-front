@@ -71,7 +71,6 @@ export function Registro() {
                     title: "Error en el registro",
                     text: error.response.data.message
                 })
-               // console.log(error)
             })
     }
 

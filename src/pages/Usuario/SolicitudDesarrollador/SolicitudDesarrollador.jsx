@@ -51,7 +51,11 @@ export function SolicitudDesarrollador() {
                     console.log(respuesta.data)
                 })
                 .catch((error) => {
-                    console.log(error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal',
+                    });
                 })
         }
     }, [usuario])
@@ -77,7 +81,6 @@ export function SolicitudDesarrollador() {
                 })
             })
             .catch((error) => {
-                console.log(error)
                 Swal.fire({
                     icon: "error",
                     title: "Solicitud no enviada",
