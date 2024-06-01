@@ -39,16 +39,35 @@ export function VistaDescuento() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
+                if (datos.porcentaje === 0 || datos.fechaInicio === "" || datos.fechaFin === "") {
+                    Swal.fire({
+                        title: 'Por favor, complete todos los campos',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                    return;
+                }
                 axios.post(ENDPOINT, {
                     porcentaje: datos.porcentaje / 100,
                     fechaInicio: datos.fechaInicio,
                     fechaFin: datos.fechaFin
-                })
-                    .then(() => {
-                        Swal.fire('Descuento generado con exito', 'exito', 'success')
+                }).then(() => {
+                    Swal.fire({
+                        title: 'Descuento generado con exito',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
                         navigate(`/admin/${id}/descuentos`)
                         handleUpdate()
                     })
+                }).catch((error) => {
+                    Swal.fire({
+                        title: 'Error al generar el descuento',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                    console.log(error)
+                });
             }
         })
     }
@@ -61,6 +80,7 @@ export function VistaDescuento() {
         fechaInicio: "",
         fechaFin: ""
     })
+
     return <>
 
         {

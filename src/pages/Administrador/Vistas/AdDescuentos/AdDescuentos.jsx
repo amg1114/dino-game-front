@@ -81,6 +81,7 @@ export function AdDescuentos() {
             !descuentos || !descuentos.length ? <h3 style={{ textAlign: 'center' }}>NO TIENE NINGUN DESCUENTO</h3> : (
                 <>
                     <h3 style={{ textAlign: 'center' }}>Descuentos De <span>{juego.titulo}</span></h3>
+                    <p>De la lista de descuentos, se aplicará el primer descuento ordenado por fecha de inicio y fecha de finalización de manera ascendente, es decir, el descuento que comience primero y termine primero.</p>
                     <TableContainer>
                         <Table>
                             <TableHead >

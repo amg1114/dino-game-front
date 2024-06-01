@@ -104,6 +104,7 @@
 
 .vista-juego .valor-comprar {
     display: flex;
+    align-items: center;
     justify-content: end;
 }
 
