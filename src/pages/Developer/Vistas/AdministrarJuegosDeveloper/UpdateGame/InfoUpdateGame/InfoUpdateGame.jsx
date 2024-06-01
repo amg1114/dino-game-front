@@ -49,7 +49,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     id="titulo"
                                     name="titulo"
                                     value={datos.titulo}
-                                    onChange={handleChange}
+                                    onChange={() => handleChange()}
                                     sx={InputFilledStyleAdmin}
                                     fullWidth
                                     variant="filled"
@@ -61,7 +61,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     id="descripcion"
                                     name="descripcion"
                                     value={datos.descripcion}
-                                    onChange={handleChange}
+                                    onChange={() => handleChange()}
                                     label="DESCRIPCION"
                                     multiline
                                     minRows={7}
@@ -76,7 +76,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     name="precio"
                                     type='number'
                                     value={datos.precio}
-                                    onChange={handleChange}
+                                    onChange={() => handleChange()}
                                     label="PRECIO"
                                     sx={InputFilledStyleAdmin}
                                     variant="filled"

@@ -1,12 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom"
 import Swal from "sweetalert2"
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin"
 import { TextField } from "@mui/material"
 import './VistaDescuento.css'
 
 export function VistaDescuento() {
+    const { handleUpdate } = useOutletContext();
     const navigate = useNavigate()
     const { id } = useParams()
     const ENDPOINT = process.env.REACT_APP_API + `/video-games/${id}/descuentos`
@@ -35,7 +36,8 @@ export function VistaDescuento() {
                 axios.post(ENDPOINT, datos)
                     .then(() => {
                         Swal.fire('Descuento generado con exito', 'exito', 'success')
-                        navigate('/admin')
+                        navigate(`/admin/${id}/descuentos`)
+                        handleUpdate()
                     })
             }
         })
@@ -57,7 +59,7 @@ export function VistaDescuento() {
                     <div className="modal-fade animate__animated animate__fadeIn">
                         <div className="modal-content-admin animate__animated animate__slideInDown">
                             <div className="modal-header">
-                                <Link to="/admin" className="modal-closer-admin">
+                                <Link to={`/admin/${id}/descuentos`} className="modal-closer-admin">
                                     <span className="material-symbols-outlined">
                                         close
                                     </span>
