@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import './VistaJuego.css'
-import { VistaCompra } from "../VistaCompra/VistaCompra";
 import { useAuth } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 
 export function VistaJuego() {
-    const { usuario } = useAuth()
+    const { usuario, biblioteca } = useAuth()
     const { id } = useParams()
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
@@ -95,10 +94,9 @@ export function VistaJuego() {
 
                                     <div className="valor-comprar">
                                         <div className="comprar">
-                                            {usuario ? (
+                                            {biblioteca.length && biblioteca.find((game) => game.videoGame.id === id) ? <> {usuario ? (
 
                                                 juego.descuentos[0] ? <>
-
                                                     <span className="precio">${juego.precio}</span>
                                                     <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
                                                         comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
@@ -107,6 +105,7 @@ export function VistaJuego() {
                                                     <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
                                                         comprar ${juego.precio}
                                                     </Link>
+
                                             ) : (juego.descuentos[0] ? <>
 
                                                 <span className="precio">${juego.precio}</span>
@@ -117,7 +116,10 @@ export function VistaJuego() {
                                                 <Link to={`/login`} className="btn btn-1 comprar">
                                                     comprar ${juego.precio}
                                                 </Link>)
-                                            }
+                                            }</> :
+                                                <a href={juego.versions[0].url} target="_blank" className="btn btn-1 comprar" >
+                                                   DESCARGAR
+                                                </a>}
                                         </div>
                                     </div>
                                 </div>
