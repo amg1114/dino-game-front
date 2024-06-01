@@ -40,6 +40,7 @@ import { AdministrarJuegosDeveloper } from './pages/Developer/Vistas/Administrar
 import { CrearJuego } from './pages/Developer/Vistas/CrearJuego/CrearJuego'
 import { Finanzas } from './pages/Developer/Vistas/Finanzas/Finanzas'
 import { NoticiasDeveloper } from './pages/Developer/Vistas/NoticiasDeveloper/NoticiasDeveloper'
+import { UpdateGame } from './pages/Developer/Vistas/AdministrarJuegosDeveloper/UpdateGame/UpdateGame'
 
 function App() {
   // /juegos/
@@ -107,7 +108,7 @@ function App() {
           },
           ]
         }
-        
+
       ]
     },
     {
@@ -116,7 +117,13 @@ function App() {
       children: [
         {
           path: '',
-          element: <AdGames />
+          element: <AdGames />,
+          children: [
+            {
+              path: 'descuento/:id',
+              element: <VistaDescuento />
+            }
+          ]
         },
         {
           path: 'desarrolladores',
@@ -144,29 +151,29 @@ function App() {
     },
     {
       path: 'dashboard',
-      element: <LayoutDeveloper/>,
+      element: <LayoutDeveloper />,
       children: [
         {
           path: '',
-          element: <AdministrarJuegosDeveloper/>,
+          element: <AdministrarJuegosDeveloper />,
           children: [
             {
-              path: 'descuento/:id',
-              element: <VistaDescuento />
+              path: 'update/:id',
+              element: <UpdateGame />
             }
           ]
         },
         {
           path: 'crear',
-          element: <CrearJuego/>
+          element: <CrearJuego />
         },
         {
           path: 'finanzas',
-          element: <Finanzas/>
+          element: <Finanzas />
         },
         {
           path: 'noticias',
-          element: <NoticiasDeveloper/>,
+          element: <NoticiasDeveloper />,
           children: [
             {
               path: 'crear',

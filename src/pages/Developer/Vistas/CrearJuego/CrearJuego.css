@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
+    padding: 5px 0;
     width: 100%;
     height: 35px;
 }
@@ -25,7 +26,8 @@
 .botones{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    gap: 15px;
 }
 .spantext{
     text-align: left;

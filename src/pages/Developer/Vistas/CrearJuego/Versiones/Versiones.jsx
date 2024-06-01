@@ -45,11 +45,6 @@ export function Versiones({ handleVersions }) {
                     handleValidacion={handleValidacion}
                 />
             </div>
-            <div className="boton-agregar">
-                <Link className="btn btn-4" onClick={() => { setValidacion(false) }}>
-                    AGREGAR VERSION
-                </Link>
-            </div>
 
         </>
     );

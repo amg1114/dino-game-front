@@ -117,6 +117,11 @@ export function AdministrarJuegosDeveloper() {
                                                             public
                                                         </span>
                                                     </Link>
+                                                    <Link to={`/dashboard/update/${juego.id}`} className='btn btn-1'>
+                                                        <span className="material-symbols-outlined">
+                                                            edit
+                                                        </span>
+                                                    </Link>
                                                     <button className='btn btn-3' onClick={() => handleDelete(juego.id)}>
                                                         <span className="material-symbols-outlined">
                                                             delete

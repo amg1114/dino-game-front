@@ -136,7 +136,6 @@ export function CrearJuego() {
     // CONTROLAR LAS VERSIONES DEL JUEGO
     const handleVersions = (versiones) => {
         setVersions(versiones)
-        console.log('VERSIONES' + versiones)
     }
 
     // CONTROLAR GUARDAR Y ELIMINAR
