@@ -81,7 +81,7 @@ export function VistaDescuento() {
                                     <div className="field-wrapper full-width">
                                         <TextField
                                             id="porcentaje"
-                                            label="PORCENTAJE"
+                                            label="PORCENTAJE DE DESCUENTO"
                                             name="porcentaje"
                                             fullWidth
                                             variant="filled"

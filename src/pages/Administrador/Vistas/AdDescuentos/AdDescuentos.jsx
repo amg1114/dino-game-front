@@ -14,11 +14,22 @@ export function AdDescuentos() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API}/video-games/${id}`)
             .then((response) => {
+                setJuego(response.data)
                 axios.get(`${process.env.REACT_APP_API}/video-games/${id}/descuentos`)
                     .then((respuesta) => {
                         setDescuentos(respuesta.data)
-                        setJuego(response.data)
+                    }).catch((error) => {
+                        setDescuentos([])
+
                     })
+            }).catch((error) => {
+                Swal.fire({
+                    title: 'Error al cargar el juego',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    navigate('/admin')
+                })
             })
     }, [id, update])
 
@@ -43,10 +54,19 @@ export function AdDescuentos() {
             if (result.isConfirmed) {
                 axios.delete(`${process.env.REACT_APP_API}/video-games/${id}/descuentos/${descuento}`)
                     .then((respuesta) => {
-                        console.log(respuesta.data)
+                        Swal.fire({
+                            title: 'Descuento eliminado con exito',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        })
                         setUpdate(!update)
                     })
                     .catch((error) => {
+                        Swal.fire({
+                            title: 'Error al eliminar el descuento',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
                         console.log(error)
                     })
             }
@@ -58,7 +78,7 @@ export function AdDescuentos() {
     };
     return <>
         {
-            descuentos === null ? <h3 style={{ textAlign: 'center' }}>NO TIENE NINGUN DESCUENTO</h3> : (
+            !descuentos || !descuentos.length ? <h3 style={{ textAlign: 'center' }}>NO TIENE NINGUN DESCUENTO</h3> : (
                 <>
                     <h3 style={{ textAlign: 'center' }}>Descuentos De <span>{juego.titulo}</span></h3>
                     <TableContainer>
@@ -74,30 +94,27 @@ export function AdDescuentos() {
                             </TableHead>
                             <TableBody>
                                 {
-                                    descuentos.map((descuento, index) => {
-                                        return <>
-                                            <TableRow key={index}>
-                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaInicio}</p></TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaFin}</p></TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.porcentaje * 100}%</p></TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>
-                                                    {
-                                                        estado(descuento.fechaInicio, descuento.fechaFin)
-                                                    }
-                                                </TableCell>
-                                                <TableCell >
-                                                    <div>
-                                                        <button className="btn btn-3" onClick={() => handleBorrar(descuento.id)}>
-                                                            <span className="material-symbols-outlined">
-                                                                delete
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </TableCell>
-                                            </TableRow>
-                                        </>
-
-                                    })
+                                    descuentos.map((descuento, index) => (
+                                        <TableRow key={'row-descuento-' + index}>
+                                            <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaInicio}</p></TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaFin}</p></TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}><p>{descuento.porcentaje * 100}%</p></TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>
+                                                {
+                                                    estado(descuento.fechaInicio, descuento.fechaFin)
+                                                }
+                                            </TableCell>
+                                            <TableCell >
+                                                <div>
+                                                    <button className="btn btn-3" onClick={() => handleBorrar(descuento.id)}>
+                                                        <span className="material-symbols-outlined">
+                                                            delete
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
                                 }
                             </TableBody>
                         </Table>
