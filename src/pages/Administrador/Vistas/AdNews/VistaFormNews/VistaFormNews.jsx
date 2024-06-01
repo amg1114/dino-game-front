@@ -121,7 +121,7 @@ export function VistaFormNews() {
             cancelButtonColor: '#3085d6'
         }).then((result) => {
             if (result.isConfirmed) {
-                navigate('/admin/noticias')
+                navigate(-1)
             }
         })
     }
@@ -130,7 +130,7 @@ export function VistaFormNews() {
         <div className="modal-fade animate__animated animate__fadeIn">
             <div className="modal-content modal-content-admin animate__animated animate__slideInDown">
                 <div className="modal-header">
-                    <Link to={window.location.pathname === '/dashboard/noticias/form'? '/dashboard/noticias' : '/admin/noticias'} className="modal-closer color-gray">
+                    <Link onClick={navigate(-1)} className="modal-closer color-gray">
                         <span className="material-symbols-outlined close-admin">
                             close
                         </span>

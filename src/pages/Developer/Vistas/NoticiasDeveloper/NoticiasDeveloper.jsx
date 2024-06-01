@@ -66,7 +66,7 @@ export function NoticiasDeveloper() {
         <div className="noticiasPageAdmin">
             <h2><span>DINO</span>NOTICIAS</h2>
             <div className="buttons-group align-end">
-                <Link className="btn btn-2 boton-agregar-noticia" to='/dashboard/noticias/form'>
+                <Link className="btn btn-2 boton-agregar-noticia" to='/dashboard/noticias/crear'>
                     AGREGAR NOTICIA
                 </Link>
             </div>

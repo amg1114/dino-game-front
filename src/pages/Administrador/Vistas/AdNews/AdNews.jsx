@@ -16,11 +16,7 @@ export function AdNews() {
                 setNoticias(respuesta.data)
             })
             .catch(function (error) {
-                Swal.fire({
-                    title: 'Error al cargar las noticias',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar'
-                })
+                setNoticias([])
             })
     }, [])
 
