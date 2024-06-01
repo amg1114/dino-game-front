@@ -1,0 +1,16 @@
+.assets-box{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    position: relative;
+}
+
+.assets-box .assets-img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
