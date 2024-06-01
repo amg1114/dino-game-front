@@ -24,6 +24,16 @@
     height: auto;
 }
 
+.modal-fade .modal-content-compra {
+    background: #22577A;
+    padding: 20px;
+    width: 35%;
+    height: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
 .modal-fade .modal-content-admin {
     background: #ffff;
     padding: 20px;
@@ -47,10 +57,19 @@
     display: flex;
     gap: 20px;
 }
-.modal-fade .modal-content .modal-header, .modal-fade .modal-content-admin .modal-header{
+
+.modal-fade .modal-content .container-compra {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-fade .modal-content-compra .modal-header,
+.modal-fade .modal-content .modal-header
+{
     display: flex;
     justify-content: end;
 }
+
 .modal-fade .modal-content .modal-header .modal-closer {
     color: #fff;
     font-weight: bolder;
@@ -87,3 +106,4 @@
 .derecha{
     box-sizing: 30%;
 }
+

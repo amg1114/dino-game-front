@@ -16,6 +16,7 @@ import { Perfil } from './pages/Usuario/Perfil/Perfil'
 import { VistaCategoria } from './pages/Categorias/VistaCategoria/VistaCategoria'
 import { VistaNoticia } from './pages/Noticias/VistaNoticia/VistaNoticia'
 import { VistaJuego } from './pages/Juegos/VistaJuego/VistaJuego'
+import { VistaCompra } from './pages/Juegos/VistaCompra/VistaCompra'
 
 // ----------- Vistas de Usuario ------------
 import { Login } from './pages/Usuario/Login/Login'
@@ -66,11 +67,15 @@ function App() {
         {
           path: 'juegos',
           element: <PaginaJuegos />,
-          children: [
+          children: [   
+            {
+              path: ':id/compra',
+              element: <VistaCompra />
+            },
             {
               path: ':id',
-              element: <VistaJuego />
-            }
+              element: <VistaJuego />,              
+            }                       
           ]
         },
         {
