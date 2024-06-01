@@ -7,9 +7,7 @@ import Swal from "sweetalert2"
 export function AdDescuentos() {
     const { id } = useParams()
     const [descuentos, setDescuentos] = useState(null)
-    const [juego, setJuego] = useState([])
-    const [fechaInicio, setFechaInicio] = useState([])
-    const [fechaFin, setFechaFin] = useState([])
+    const [juego, setJuego] = useState(null)
     const [update, setUpdate] = useState(false)
     const navigate = useNavigate()
 
@@ -60,18 +58,18 @@ export function AdDescuentos() {
     };
     return <>
         {
-            descuentos === null ? <h3 style={{textAlign: 'center'}}>NO TIENE NINGUN DESCUENTO</h3> : (
+            descuentos === null ? <h3 style={{ textAlign: 'center' }}>NO TIENE NINGUN DESCUENTO</h3> : (
                 <>
-                    <h3 style={{textAlign: 'center'}}>Descuentos De <span>{juego.titulo}</span></h3>
+                    <h3 style={{ textAlign: 'center' }}>Descuentos De <span>{juego.titulo}</span></h3>
                     <TableContainer>
                         <Table>
                             <TableHead >
                                 <TableRow>
-                                    <TableCell sx={{textAlign: 'center'}}><strong>Fecha De Inicio</strong></TableCell>
-                                    <TableCell sx={{textAlign: 'center'}}><strong>Fecha Final</strong></TableCell>
-                                    <TableCell sx={{textAlign: 'center'}}><strong>Porcentaje</strong></TableCell>
-                                    <TableCell sx={{textAlign: 'center'}}><strong>Estado</strong></TableCell>
-                                    <TableCell sx={{textAlign: 'center'}}></TableCell>
+                                    <TableCell sx={{ textAlign: 'center' }}><strong>Fecha De Inicio</strong></TableCell>
+                                    <TableCell sx={{ textAlign: 'center' }}><strong>Fecha Final</strong></TableCell>
+                                    <TableCell sx={{ textAlign: 'center' }}><strong>Porcentaje</strong></TableCell>
+                                    <TableCell sx={{ textAlign: 'center' }}><strong>Estado</strong></TableCell>
+                                    <TableCell sx={{ textAlign: 'center' }}></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -79,10 +77,10 @@ export function AdDescuentos() {
                                     descuentos.map((descuento, index) => {
                                         return <>
                                             <TableRow key={index}>
-                                                <TableCell sx={{textAlign: 'center'}}><p>{descuento.fechaInicio}</p></TableCell>
-                                                <TableCell sx={{textAlign: 'center'}}><p>{descuento.fechaFin}</p></TableCell>
-                                                <TableCell sx={{textAlign: 'center'}}><p>{descuento.porcentaje}</p></TableCell>
-                                                <TableCell sx={{textAlign: 'center'}}>
+                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaInicio}</p></TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.fechaFin}</p></TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}><p>{descuento.porcentaje * 100}%</p></TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}>
                                                     {
                                                         estado(descuento.fechaInicio, descuento.fechaFin)
                                                     }
@@ -90,7 +88,9 @@ export function AdDescuentos() {
                                                 <TableCell >
                                                     <div>
                                                         <button className="btn btn-3" onClick={() => handleBorrar(descuento.id)}>
-                                                            BORRAR
+                                                            <span className="material-symbols-outlined">
+                                                                delete
+                                                            </span>
                                                         </button>
                                                     </div>
                                                 </TableCell>
@@ -105,11 +105,11 @@ export function AdDescuentos() {
                 </>
             )
         }
-        <div className="boton-generar-descuento" style={{width: '100%',display: 'flex', justifyContent: 'end', marginTop:'20px'}}>
-            <button className="btn btn-4" onClick={() => {navigate(`new`)}}>
+        <div className="boton-generar-descuento" style={{ width: '100%', display: 'flex', justifyContent: 'end', marginTop: '20px' }}>
+            <button className="btn btn-4" onClick={() => { navigate(`new`) }}>
                 GENERAR DESCUENTO
             </button>
         </div>
-        <Outlet context={{ handleUpdate }}/>
+        <Outlet context={{ handleUpdate }} />
     </>
 }

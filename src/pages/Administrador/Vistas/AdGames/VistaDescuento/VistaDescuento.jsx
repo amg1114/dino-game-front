@@ -19,7 +19,6 @@ export function VistaDescuento() {
         axios.get(ENDPOINT_GAME)
             .then((respuesta) => {
                 setJuego(respuesta.data)
-                console.log(respuesta.data)
             })
             .catch((error) => {
                 Swal.fire({
@@ -40,7 +39,11 @@ export function VistaDescuento() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(ENDPOINT, datos)
+                axios.post(ENDPOINT, {
+                    porcentaje: datos.porcentaje / 100,
+                    fechaInicio: datos.fechaInicio,
+                    fechaFin: datos.fechaFin
+                })
                     .then(() => {
                         Swal.fire('Descuento generado con exito', 'exito', 'success')
                         navigate(`/admin/${id}/descuentos`)
