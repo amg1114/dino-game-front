@@ -1,9 +1,11 @@
+import './VistaCategoria.css'
+
 import axios from "axios"
-import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
+
 import { GameCard } from "../../../components/GameCard/GameCard"
-import './VistaCategoria.css'
 
 
 
@@ -16,12 +18,16 @@ export function VistaCategoria() {
 
     useEffect(() => {
         axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
             .then(function (respuesta) {
                 setCategoria(respuesta.data)
                 setJuego(respuesta.data.videoGames)
+            })
+            .catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
             })
 
     }, [])

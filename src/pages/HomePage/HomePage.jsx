@@ -6,6 +6,8 @@ import { HomeCardNoticia } from "../../components/Noticias/HomeCardNoticia"
 import { HomeListaNoticia } from "../../partials/HomeListaNoticia/HomeListaNoticia"
 import "./HomePage.css"
 import { Link, Outlet } from "react-router-dom"
+import Swal from "sweetalert2"
+
 export function HomePage() {
 
     const ENDPOINT_API = process.env.REACT_APP_API + "/video-games?limit=5"
@@ -19,9 +21,6 @@ export function HomePage() {
     useEffect(() => {
 
         axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
             .then(function (respuesta) {
                 const game = respuesta.data
                 let prevSlides = []
@@ -32,23 +31,40 @@ export function HomePage() {
                     }
                 })
                 axios.get(ENDPOINT_CATEGORIAS)
-                    .catch(function (error) {
-                        console.log(error)
-                    })
                     .then(function (respuesta) {
                         const categorias = respuesta.data
                         axios.get(ENDPOINT_NOTICIAS)
-                            .catch(function (error) {
-                                console.log(error)
-                            })
                             .then(function (respuesta) {
                                 setCategorias(categorias)
                                 setNoticias(respuesta.data)
                                 setSlides(prevSlides)
+                            }).catch(function (error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Algo salió mal',
+                                });
                             })
 
+
                     })
+                    .catch(function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
+                    })
+
             })
+            .catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
+            })
+
     }, [])
 
     return <>

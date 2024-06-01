@@ -52,8 +52,6 @@ export function VistaUpdateNews() {
 
                     return;
                 }
-
-                console.log(err);
             })
     }, [id])
 
@@ -153,7 +151,6 @@ export function VistaUpdateNews() {
                     title: 'Oops...',
                     text: 'Algo salió mal',
                 })
-               console.log(error)
             })
     }
 

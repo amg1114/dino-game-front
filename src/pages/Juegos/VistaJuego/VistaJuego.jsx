@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import './VistaJuego.css'
 import { VistaCompra } from "../VistaCompra/VistaCompra";
 import { useAuth } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 export function VistaJuego() {
@@ -16,16 +17,16 @@ export function VistaJuego() {
     useEffect(() => {
 
         axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
             .then(function (respuesta) {
                 setJuego(respuesta.data);
-
-
+            }).catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
             })
-    }, []
-    )
+    }, [])
 
     return <>
         {

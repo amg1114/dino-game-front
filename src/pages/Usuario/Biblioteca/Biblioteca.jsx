@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { GameCard } from "../../../components/GameCard/GameCard";
 import { useAuth } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 export function Biblioteca() {
     const { usuario } = useAuth();
@@ -11,10 +12,14 @@ export function Biblioteca() {
     useEffect(() => {
         if (usuario) {
             axios.get(ENDPOINT_BIBLIOTECA)
-                .catch(function (error) {
-                    console.log(error);
-                }).then(function (respuesta) {
+                .then(function (respuesta) {
                     setBiblioteca(respuesta.data)
+                }).catch(function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal',
+                    });
                 })
         }
     }, [usuario])
