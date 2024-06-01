@@ -3,7 +3,7 @@ import './Confirmar.css'
 export function ConfirmarUpdate({datos, versions, prevVersion, assets}) {
     return <>
     {
-        Object.values(datos).every(valor => valor !== "") && datos.categorias.length > 0 && (versions.length > 0 || prevVersion.length > 0) && assets.length > 0?
+        Object.values(datos).every(valor => valor !== "") && datos.categorias.length > 0 && (versions.length > 0 || prevVersion !== undefined) && assets.length > 0?
         <div className="spantext">
             <p> CONFIRMACION DE ACTUALIZACION DE JUEGO</p>
             <p> ¿ESTA DE ACUERDO CON LA INFORMACION?</p>

@@ -27,7 +27,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
     const handleCategoryChange = (categoria) => {
         const updatedCategories = selectedCategories.some(c => c.id === categoria.id)
             ? selectedCategories.filter(c => c.id !== categoria.id)
-            : [...selectedCategories, categoriasprev, categoria];
+            : [...selectedCategories, ...categoriasprev, categoria];
 
         setSelectedCategories(updatedCategories);
         handleChange({ target: { name: 'categorias', value: updatedCategories } });
@@ -36,7 +36,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
     const handleCategoryPrevChange = (categoria) => {
         const updatedCategories = categoriasprev.some(c => c.id === categoria.id)
             ? categoriasprev.filter(c => c.id !== categoria.id)
-            : [...categoriasprev, selectedCategories, categoria];
+            : [...categoriasprev, ...selectedCategories, categoria];
 
         setSelectedCategories(updatedCategories);
         handleChange({ target: { name: 'categorias', value: updatedCategories } });
@@ -55,7 +55,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     id="titulo"
                                     name="titulo"
                                     value={datos.titulo}
-                                    onChange={() => handleChange()}
+                                    onChange={handleChange}
                                     sx={InputFilledStyleAdmin}
                                     fullWidth
                                     variant="filled"
@@ -67,7 +67,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     id="descripcion"
                                     name="descripcion"
                                     value={datos.descripcion}
-                                    onChange={() => handleChange()}
+                                    onChange={handleChange}
                                     label="DESCRIPCION"
                                     multiline
                                     minRows={7}
@@ -82,7 +82,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
                                     name="precio"
                                     type='number'
                                     value={datos.precio}
-                                    onChange={() => handleChange()}
+                                    onChange={handleChange}
                                     label="PRECIO"
                                     sx={InputFilledStyleAdmin}
                                     variant="filled"

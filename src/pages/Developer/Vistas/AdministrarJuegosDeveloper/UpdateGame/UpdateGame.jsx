@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import './UpdateGame.css';
 import axios from "axios";
 import { InfoUpdateGame } from "./InfoUpdateGame/InfoUpdateGame";
@@ -10,11 +10,18 @@ import { CreateAssetsForm } from "../../../../../components/Forms/CreateAssetsFo
 import { uploadFile, deleteFile } from "../../../../../services/assets-service";
 
 export function UpdateGame() {
+    const { handleRender } = useOutletContext();
     const { id } = useParams();
     const [value, setValue] = useState(0);
-    const [datos, setDatos] = useState(null);
+    const [datos, setDatos] = useState(({
+        titulo: '',
+        descripcion: '',
+        precio: '',
+        categorias: []
+    }));
     const [datosOriginales, setDatosOriginales] = useState(null);
     const [versions, setVersions] = useState([]);
+    const [prevVersions, setPrevVersions] = useState([])
     const [assets, setAssets] = useState([])
     const [hasChanges, setHasChanges] = useState(false);
 
@@ -24,8 +31,19 @@ export function UpdateGame() {
         axios.get(`${process.env.REACT_APP_API}/video-games/${id}`)
             .then((respuesta) => {
                 const { assets, ...datos } = respuesta.data
-                setDatos(respuesta.data);
-                setDatosOriginales(respuesta.data);
+                setDatos({
+                    titulo: respuesta.data.titulo,
+                    descripcion: respuesta.data.descripcion,
+                    precio: respuesta.data.precio,
+                    categorias: respuesta.data.categorias
+                });
+                setDatosOriginales({
+                    titulo: respuesta.data.titulo,
+                    descripcion: respuesta.data.descripcion,
+                    precio: respuesta.data.precio,
+                    categorias: respuesta.data.categorias
+                });
+                setPrevVersions(respuesta.data.versions)
 
                 setAssets(assets.map((asset) => ({
                     id: asset.assetID,
@@ -99,8 +117,10 @@ export function UpdateGame() {
     }
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setDatos(prevDatos => ({ ...prevDatos, [name]: value }));
+        if (event !== undefined) {
+            const { name, value } = event.target;
+            setDatos(prevDatos => ({ ...prevDatos, [name]: value }))
+        }
     };
 
     const handleVersions = (versiones) => {
@@ -125,10 +145,11 @@ export function UpdateGame() {
 
     const handleSave = () => {
         if (JSON.stringify(datos) !== JSON.stringify(datosOriginales)) {
-            axios.patch(`${process.env.REACT_APP_API}/video-games/${id}`)
+            axios.patch(`${process.env.REACT_APP_API}/video-games/${id}`, datos)
                 .then((respuesta) => {
                     console.log(respuesta.data)
                 })
+
         }
         if (versions.length > 0) {
             versions.map((version) => {
@@ -139,7 +160,16 @@ export function UpdateGame() {
         if(hasChanges){
             handleAssetUpload()
         }
-        navigate('/dashboard')
+        Swal.fire({
+            title: 'Operación exitosa',
+            text: 'Redirigiendo...',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            navigate('/dashboard')
+            handleRender()
+        });
     }
 
     return (
@@ -167,8 +197,8 @@ export function UpdateGame() {
                                 )}
                             </div>
                             <div hidden={value !== 1}>
-                                {datos.versions === undefined ? null : (
-                                    <AddVersions handleVersions={handleVersions} versionesPrev={datos.versions} />
+                                {prevVersions === undefined ? null : (
+                                    <AddVersions handleVersions={handleVersions} versionesPrev={prevVersions} />
                                 )}
                             </div>
                             <div hidden={value !== 2}>
@@ -181,7 +211,7 @@ export function UpdateGame() {
                                 />
                             </div>
                             <div hidden={value !== 3}>
-                                <ConfirmarUpdate datos={datos} versions={versions} prevVersion={datos.versions} assets={assets}/>
+                                <ConfirmarUpdate datos={datos} versions={versions} prevVersion={prevVersions} assets={assets} />
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>

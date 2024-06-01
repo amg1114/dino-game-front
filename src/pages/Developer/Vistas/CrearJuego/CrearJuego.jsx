@@ -63,9 +63,6 @@ export function CrearJuego() {
             } else if (value === 2) {
                 versions.map((v, index) => {
                     axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, v)
-                        .then(() => {
-                          
-                        })
                 })
                 setValue(newValue)
             }
