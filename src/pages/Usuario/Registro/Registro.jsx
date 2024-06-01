@@ -71,14 +71,13 @@ export function Registro() {
                     title: "Error en el registro",
                     text: error.response.data.message
                 })
-               // console.log(error)
             })
     }
 
     return (
         <div>
             <div className="modal-fade animate__animated animate__fadeIn">
-                <div className="modal-content modal-form animate__animated animate__slideInDown">
+                <div className="modal-form animate__animated animate__slideInDown">
                     <div className="modal-header">
                         <Link to="/" className="modal-closer">
                             <span className="material-symbols-outlined">

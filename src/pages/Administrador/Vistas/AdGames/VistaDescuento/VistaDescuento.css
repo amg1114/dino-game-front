@@ -1,0 +1,11 @@
+.modal-fade .modal-content-admin .modal-descuento{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal-fade .modal-content-admin .modal-descuento .boton-descuento{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

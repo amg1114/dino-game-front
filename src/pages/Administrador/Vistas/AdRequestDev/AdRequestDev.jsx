@@ -5,8 +5,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 import './AdRequestDev.css'
-import { useAuth } from '../../../../providers/AuthProvider'
-import { useNavigate } from 'react-router-dom'
+import { EstadoSolicitud } from '../../../../utils/constants'
 
 export function AdRequestDev() {
     const ENDPOINT = process.env.REACT_APP_API + "/users/developers/solicitudes"
@@ -24,7 +23,11 @@ export function AdRequestDev() {
                 setSolicitudes(respuesta.data)
             })
             .catch((error) => {
-                console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal',
+                });
             })
     }
 
@@ -97,9 +100,9 @@ export function AdRequestDev() {
                                             <TableCell>{solicitud.nombre}</TableCell>
                                             <TableCell><p>{solicitud.mensaje}</p></TableCell>
                                             <TableCell><a href={"mailto:" + solicitud.user.correo} style={{ color: '#38a3a5' }}><strong>{solicitud.user.correo}</strong></a></TableCell>
-                                            <TableCell>{solicitud.estado === 0 ? 'Pendiente' : solicitud.estado === 1 ? 'Aceptada' : 'Rechazada'}</TableCell>
+                                            <TableCell>{solicitud.estado === EstadoSolicitud.PENDIENTE ? 'Pendiente' : solicitud.estado === EstadoSolicitud.ACEPTADA ? 'Aceptada' : 'Rechazada'}</TableCell>
                                             <TableCell>
-                                               {solicitud.estado === 0 ? <div className="buttons-group">
+                                                {solicitud.estado === EstadoSolicitud.PENDIENTE ? <div className="buttons-group">
                                                     <button className='btn btn-1' onClick={() => handleAceptar(solicitud.user.id)}>
                                                         <span className="material-symbols-outlined">
                                                             how_to_reg

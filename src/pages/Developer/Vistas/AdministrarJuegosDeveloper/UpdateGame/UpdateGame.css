@@ -1,0 +1,8 @@
+.modal-update{
+    width: 800px;
+    overflow-y: scroll;
+}
+.container-tabs-update{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}

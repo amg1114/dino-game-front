@@ -18,12 +18,14 @@ export function InfoUser() {
         pais: '',
         sexo: ''
     });
+
     const [datosOriginales, setDatosOriginales] = useState(usuario);
 
     useEffect(() => {
         if (usuario) {
-            setDatos(usuario)
-            setDatosOriginales(usuario)
+            const { role, ...user_data } = usuario
+            setDatos(user_data)
+            setDatosOriginales(user_data)
             setValidacion(false)
         }
     }, [usuario]);
@@ -46,7 +48,6 @@ export function InfoUser() {
                 })
             })
             .catch((error) => {
-                console.log(error)
                 Swal.fire({
                     icon: "error",
                     title: "Error al Actualizar los datos",

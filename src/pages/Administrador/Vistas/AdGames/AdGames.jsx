@@ -1,12 +1,14 @@
+import './AdGames.css'
+
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { GameCard } from "../../../../components/GameCard/GameCard"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { FormularioFiltros } from "../../../../partials/FormularioFiltros/FormularioFiltros"
-import './AdGames.css'
-import { Link, Outlet } from "react-router-dom"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import Swal from "sweetalert2"
+
 export function AdGames() {
+    const navigate = useNavigate()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
     const [juegos, setJuegos] = useState([]);
 
@@ -18,12 +20,16 @@ export function AdGames() {
 
     const loadGames = (params = {}) => {
         axios.get(ENDPOINT, { params })
-            .catch((error) => {
-                error.code === "ERR_BAD_REQUEST" ? setJuegos(null) : console.log(error)
-            })
             .then((respuesta) => {
                 setJuegos(respuesta.data)
             })
+            .catch((error) => {
+                Swal.fire({
+                    title: 'Error al cargar los juegos',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                })
+            });
     };
 
     const Search = (data) => {
@@ -60,7 +66,11 @@ export function AdGames() {
                 })
             })
             .catch((error) => {
-                console.log(error)
+                Swal.fire({
+                    title: 'Error al eliminar el juego',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
             })
     }
     return (
@@ -112,7 +122,7 @@ export function AdGames() {
                                                             public
                                                         </span>
                                                     </Link>
-                                                    <button className='btn btn-1'>
+                                                    <button className='btn btn-1' onClick={() => navigate(`/admin/descuento/${juego.id}`)}>
                                                         <span className="material-symbols-outlined">
                                                             price_change
                                                         </span>

@@ -1,36 +1,42 @@
 import axios from "axios";
-
-
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import './VistaJuego.css'
+import { useAuth } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
+
 
 export function VistaJuego() {
-
+    const { usuario, biblioteca } = useAuth()
     const { id } = useParams()
     const ENDPOINT_API = `${process.env.REACT_APP_API}/video-games/${id}`
     const [juego, setJuego] = useState(null);
-
-
+    const [comprado, setComprado] = useState(false);
     useEffect(() => {
+        if (juego === null) {
+            axios.get(ENDPOINT_API)
+                .then(function (respuesta) {
+                    setJuego(respuesta.data);
+                }).catch(function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal',
+                    });
+                })
+        }else if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === juego.id)) {
+            setComprado(true)
+        }
 
-        axios.get(ENDPOINT_API)
-            .catch(function (error) {
-                console.log(error)
-            })
-            .then(function (respuesta) {
-                setJuego(respuesta.data);
-            })
-    }, []
-    )
+    }, [id, biblioteca])
 
 
 
     return <>
-
         {
             juego === null ? <></> : (
+
                 <div>
                     <div className="modal-fade animate__animated animate__fadeIn">
                         <div className="modal-content animate__animated animate__slideInDown">
@@ -57,8 +63,8 @@ export function VistaJuego() {
                                     <h2 className="titulo-juego">{juego.titulo}</h2>
 
                                     <div className="categoria">
-                                        {juego.categorias.map((index) => {
-                                            return (<h3 className="categoria-juego">{index.titulo}</h3>)
+                                        {juego.categorias.map((index, i) => {
+                                            return (<h3 className="categoria-juego" key={i}>{index.titulo}</h3>)
                                         })
                                         }
                                     </div>
@@ -94,13 +100,33 @@ export function VistaJuego() {
 
                                     <div className="valor-comprar">
                                         <div className="comprar">
-                                            {juego.descuentos[0] ? <>
+                                            {comprado ?
+                                                <a href={juego.versions[0].url} target="_blank" className="btn btn-1 comprar" >
+                                                    DESCARGAR
+                                                </a> :
+                                                <> {usuario ? (
 
-                                                <span className="precio">${juego.precio}</span>
-                                                <buttom className="btn btn-1 comprar" >comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}</buttom>
-                                            </> :
+                                                    juego.descuentos[0] ? <>
+                                                        <span className="precio">${juego.precio}</span>
+                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
+                                                            comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
+                                                        </Link>
+                                                    </> :
+                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
+                                                            comprar ${juego.precio}
+                                                        </Link>
 
-                                                <buttom className="btn btn-1 comprar" >comprar ${juego.precio}</buttom>
+                                                ) : (juego.descuentos[0] ? <>
+
+                                                    <span className="precio">${juego.precio}</span>
+                                                    <Link to={`/login`} className="btn btn-1 comprar">
+                                                        comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
+                                                    </Link>
+                                                </> :
+                                                    <Link to={`/login`} className="btn btn-1 comprar">
+                                                        comprar ${juego.precio}
+                                                    </Link>)
+                                                }</>
                                             }
                                         </div>
                                     </div>
@@ -113,3 +139,4 @@ export function VistaJuego() {
         }
     </>
 }
+

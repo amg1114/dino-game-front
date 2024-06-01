@@ -1,0 +1,11 @@
+.boton-agregar{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.spantext-versiones{
+    text-align: left;
+    width: 100%;
+    color: gray;
+    font-size: 15px;
+}
