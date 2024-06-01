@@ -60,7 +60,7 @@ export function AdDescuentos() {
     };
     return <>
         {
-            descuentos === null ? <></> : (
+            descuentos === null ? <h3 style={{textAlign: 'center'}}>NO TIENE NINGUN DESCUENTO</h3> : (
                 <>
                     <h3 style={{textAlign: 'center'}}>Descuentos De <span>{juego.titulo}</span></h3>
                     <TableContainer>
