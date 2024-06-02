@@ -7,7 +7,6 @@ import { LoadingSpinner } from "../../../components/LoadingSpinner/LoadingSpinne
 
 export function AdminLayoutComponent() {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
     const { isLoading, usuario, deleteToken } = useAuth();
 
     useEffect(() => {
@@ -15,8 +14,6 @@ export function AdminLayoutComponent() {
             if (!usuario.role.includes(Roles.ADMIN)) {
                 deleteToken();
                 navigate("/login")
-            } else {
-                setLoading(false);
             }
         }else if (!isLoading && !usuario){
             deleteToken();
@@ -25,7 +22,7 @@ export function AdminLayoutComponent() {
     }, [isLoading, usuario])
 
     return <div className="ContainerAdmin">
-        {loading ? <LoadingSpinner /> :
+        {isLoading ? <LoadingSpinner /> :
             <>
                 <NavBarAdmin />
                 <div className="container content-layout">
