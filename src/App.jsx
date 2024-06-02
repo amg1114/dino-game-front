@@ -42,6 +42,7 @@ import { CrearJuego } from './pages/Developer/Vistas/CrearJuego/CrearJuego'
 import { Finanzas } from './pages/Developer/Vistas/Finanzas/Finanzas'
 import { NoticiasDeveloper } from './pages/Developer/Vistas/NoticiasDeveloper/NoticiasDeveloper'
 import { UpdateGame } from './pages/Developer/Vistas/AdministrarJuegosDeveloper/UpdateGame/UpdateGame'
+import { AdDescuentos } from './pages/Administrador/Vistas/AdDescuentos/AdDescuentos'
 
 function App() {
   // /juegos/
@@ -122,13 +123,7 @@ function App() {
       children: [
         {
           path: '',
-          element: <AdGames />,
-          children: [
-            {
-              path: 'descuento/:id',
-              element: <VistaDescuento />
-            }
-          ]
+          element: <AdGames />
         },
         {
           path: 'desarrolladores',
@@ -152,6 +147,16 @@ function App() {
             }
           ]
         },
+        {
+          path: ':id/descuentos',
+          element: <AdDescuentos />,
+          children: [
+            {
+              path: 'new',
+              element: <VistaDescuento />
+            }
+          ]
+        }
       ]
     },
     {

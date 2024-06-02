@@ -26,7 +26,7 @@ export function VistaJuego() {
                     });
                     console.log(error)
                 })
-        }else if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === juego.id)) {
+        } else if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === juego.id)) {
             setComprado(true)
         }
 
@@ -100,36 +100,21 @@ export function VistaJuego() {
                                     </div>
 
                                     <div className="valor-comprar">
-                                        <div className="comprar">
-                                            {comprado ?
-                                                <a href={juego.versions[0].url} target="_blank" className="btn btn-1 comprar" >
-                                                    DESCARGAR
-                                                </a> :
-                                                <> {usuario ? (
-
-                                                    juego.descuentos[0] ? <>
-                                                        <span className="precio">${juego.precio}</span>
-                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar">
-                                                            comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
-                                                        </Link>
-                                                    </> :
-                                                        <Link to={`/juegos/${id}/compra`} className="btn btn-1 comprar" >
-                                                            comprar ${juego.precio}
-                                                        </Link>
-
-                                                ) : (juego.descuentos[0] ? <>
-
-                                                    <span className="precio">${juego.precio}</span>
-                                                    <Link to={`/login`} className="btn btn-1 comprar">
-                                                        comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)}
-                                                    </Link>
-                                                </> :
-                                                    <Link to={`/login`} className="btn btn-1 comprar">
-                                                        comprar ${juego.precio}
-                                                    </Link>)
-                                                }</>
-                                            }
-                                        </div>
+                                        {comprado ?
+                                            <a href={juego.versions[0].url} target="_blank" className="btn btn-1 comprar" >
+                                                DESCARGAR
+                                            </a> :
+                                            <>
+                                                {juego.descuentos[0] ? <span className="precio">${juego.precio}</span> : <></>}
+                                                <Link to={usuario ? `/juegos/${id}/compra` : '/login'} className="btn btn-1 comprar">
+                                                    {
+                                                        juego.descuentos[0] ?
+                                                            <>comprar ${(juego.precio) - (juego.precio) * (juego.descuentos[0].porcentaje)} ({juego.descuentos[0].porcentaje * 100}%)</> :
+                                                            <>comprar ${juego.precio}</>
+                                                    }
+                                                </Link>
+                                            </>
+                                        }
                                     </div>
                                 </div>
                             </div>
