@@ -2,13 +2,14 @@ import './VistaDescuento.css'
 
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom"
 import Swal from "sweetalert2"
 import { TextField } from "@mui/material"
 
 import { InputFilledStyleAdmin } from "../../../../../utils/mui.styles-admin"
 
 export function VistaDescuento() {
+    const { handleUpdate } = useOutletContext();
     const navigate = useNavigate()
     const { id } = useParams()
     const ENDPOINT = process.env.REACT_APP_API + `/video-games/${id}/descuentos`
@@ -18,7 +19,6 @@ export function VistaDescuento() {
         axios.get(ENDPOINT_GAME)
             .then((respuesta) => {
                 setJuego(respuesta.data)
-                console.log(respuesta.data)
             })
             .catch((error) => {
                 Swal.fire({
@@ -39,11 +39,35 @@ export function VistaDescuento() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(ENDPOINT, datos)
-                    .then(() => {
-                        Swal.fire('Descuento generado con exito', 'exito', 'success')
-                        navigate('/admin')
+                if (datos.porcentaje === 0 || datos.fechaInicio === "" || datos.fechaFin === "") {
+                    Swal.fire({
+                        title: 'Por favor, complete todos los campos',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
                     })
+                    return;
+                }
+                axios.post(ENDPOINT, {
+                    porcentaje: datos.porcentaje / 100,
+                    fechaInicio: datos.fechaInicio,
+                    fechaFin: datos.fechaFin
+                }).then(() => {
+                    Swal.fire({
+                        title: 'Descuento generado con exito',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        navigate(`/admin/${id}/descuentos`)
+                        handleUpdate()
+                    })
+                }).catch((error) => {
+                    Swal.fire({
+                        title: 'Error al generar el descuento',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                    console.log(error)
+                });
             }
         })
     }
@@ -56,6 +80,7 @@ export function VistaDescuento() {
         fechaInicio: "",
         fechaFin: ""
     })
+
     return <>
 
         {
@@ -64,7 +89,7 @@ export function VistaDescuento() {
                     <div className="modal-fade animate__animated animate__fadeIn">
                         <div className="modal-content-admin animate__animated animate__slideInDown">
                             <div className="modal-header">
-                                <Link to="/admin" className="modal-closer-admin">
+                                <Link to={`/admin/${id}/descuentos`} className="modal-closer-admin">
                                     <span className="material-symbols-outlined">
                                         close
                                     </span>
@@ -76,7 +101,7 @@ export function VistaDescuento() {
                                     <div className="field-wrapper full-width">
                                         <TextField
                                             id="porcentaje"
-                                            label="PORCENTAJE"
+                                            label="PORCENTAJE DE DESCUENTO"
                                             name="porcentaje"
                                             fullWidth
                                             variant="filled"

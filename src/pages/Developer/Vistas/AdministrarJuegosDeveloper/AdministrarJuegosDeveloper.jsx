@@ -12,12 +12,13 @@ export function AdministrarJuegosDeveloper() {
     const { usuario } = useAuth()
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
     const [juegos, setJuegos] = useState([]);
+    const [render, setRender] = useState(false)
 
     useEffect(() => {
-        if (usuario !== null && !juegos.length) {
+        if (usuario !== null) {
             loadGames();
         }
-    }, [usuario]);
+    }, [usuario,render]);
 
     const loadGames = (params = {}) => {
         if (usuario) {
@@ -73,6 +74,9 @@ export function AdministrarJuegosDeveloper() {
                 });
                 console.log(error)
             })
+    }
+    const handleRender = () => {
+        setRender(!render)
     }
     return (
         <div className="container container-developer">
@@ -143,7 +147,7 @@ export function AdministrarJuegosDeveloper() {
                     </TableContainer>
                 )
             }
-            <Outlet />
+            <Outlet  context={{ handleRender }} />
         </div>
     );
 }

@@ -20,7 +20,7 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         if (name === 'requisitos') {
-            const requisitosArray = value.split(',').map(requisito => requisito.trim());
+            const requisitosArray = value.split(',').map(requisito => requisito);
             setData(prevData => ({ ...prevData, [name]: requisitosArray }));
         } else {
             setData(prevData => ({ ...prevData, [name]: value }));
@@ -106,7 +106,7 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
                         <TextField
                             id="requisitos"
                             name="requisitos"
-                            value={data.requisitos.join(', ')}
+                            value={data.requisitos}
                             onChange={handleChange}
                             sx={InputFilledStyleAdmin}
                             fullWidth
@@ -116,7 +116,7 @@ export function FormVersiones({ handleAddVersion, handleValidacion }) {
                         />
                     </div>
                     <Link className="btn btn-2" onClick={submitVersion}>
-                        AÑADIR
+                        ACEPTAR
                     </Link>
                 </form>
             </div>

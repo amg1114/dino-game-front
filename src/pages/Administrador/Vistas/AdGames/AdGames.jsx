@@ -119,7 +119,7 @@ export function AdGames() {
                                                             public
                                                         </span>
                                                     </Link>
-                                                    <button className='btn btn-1' onClick={() => navigate(`/admin/descuento/${juego.id}`)}>
+                                                    <button className='btn btn-1' onClick={() => navigate(`/admin/${juego.id}/descuentos`)}>
                                                         <span className="material-symbols-outlined">
                                                             price_change
                                                         </span>
@@ -139,7 +139,6 @@ export function AdGames() {
                     </TableContainer>
                 )
             }
-            <Outlet />
         </div>
     );
 }

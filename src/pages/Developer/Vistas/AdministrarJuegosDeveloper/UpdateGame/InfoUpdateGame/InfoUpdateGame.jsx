@@ -27,7 +27,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
     const handleCategoryChange = (categoria) => {
         const updatedCategories = selectedCategories.some(c => c.id === categoria.id)
             ? selectedCategories.filter(c => c.id !== categoria.id)
-            : [...selectedCategories, categoriasprev, categoria];
+            : [...selectedCategories, ...categoriasprev, categoria];
 
         setSelectedCategories(updatedCategories);
         handleChange({ target: { name: 'categorias', value: updatedCategories } });
@@ -36,7 +36,7 @@ export function InfoUpdateGame({ datos, handleChange, prevCategorias }) {
     const handleCategoryPrevChange = (categoria) => {
         const updatedCategories = categoriasprev.some(c => c.id === categoria.id)
             ? categoriasprev.filter(c => c.id !== categoria.id)
-            : [...categoriasprev, selectedCategories, categoria];
+            : [...categoriasprev, ...selectedCategories, categoria];
 
         setSelectedCategories(updatedCategories);
         handleChange({ target: { name: 'categorias', value: updatedCategories } });
