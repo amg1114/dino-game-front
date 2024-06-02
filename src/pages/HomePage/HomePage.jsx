@@ -99,14 +99,14 @@ export function HomePage() {
 
                     <>
                         {
-                            categorias.slice(0, 3).map((elemento, index) => {
+                            categorias.filter(categoria => categoria.videoGames.length > 0).slice(0, 3).map((elemento, index) => {
                                 return (
-                                    elemento.videoGames.length ? <GameSectionList
+                                    <GameSectionList
                                         games={elemento.videoGames}
                                         sectionTitle={elemento.titulo.toUpperCase()}
                                         id={elemento.id}
-                                        key={index}
-                                    /> : <></>
+                                        key={'section#-' + index}
+                                    /> 
                                 )
                             })
                         }

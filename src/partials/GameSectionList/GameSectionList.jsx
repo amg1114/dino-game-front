@@ -17,7 +17,7 @@ export function GameSectionList({ games, sectionTitle, id}) {
                 {
                     games.slice(0, 3).map((game, index) => (
                         <GameCard
-                            key={index}
+                            key={'game#-'+index}
                             Game={game} />))
                 }
             </div>
