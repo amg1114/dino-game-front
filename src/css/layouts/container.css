@@ -1,5 +1,6 @@
 /* Estilos para el contenedor */
 .container {
+    position: relative;
     max-width: 1320px;
     margin: 0 auto; /* Centrar el contenedor */
 }

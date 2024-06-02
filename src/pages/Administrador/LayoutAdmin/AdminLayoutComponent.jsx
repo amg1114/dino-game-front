@@ -3,6 +3,7 @@ import { NavBarAdmin } from "../Components/NavBarAdmin";
 import { useAuth } from "../../../providers/AuthProvider";
 import { Roles } from "../../../utils/constants";
 import { useEffect, useState } from "react";
+import { LoadingSpinner } from "../../../components/LoadingSpinner/LoadingSpinner";
 
 export function AdminLayoutComponent() {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function AdminLayoutComponent() {
     }, [isLoading, usuario])
 
     return <div className="ContainerAdmin">
-        {loading ? <p>Loading</p> :
+        {loading ? <LoadingSpinner /> :
             <>
                 <NavBarAdmin />
                 <div className="container content-layout">

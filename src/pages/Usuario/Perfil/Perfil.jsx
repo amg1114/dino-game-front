@@ -3,6 +3,8 @@ import "./Perfil.css"
 import { useAuth } from "../../../providers/AuthProvider";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Roles } from "../../../utils/constants";
+import { LoadingSpinner } from "../../../components/LoadingSpinner/LoadingSpinner";
 
 export function Perfil() {
   const { isLoading, usuario, deleteToken } = useAuth();
@@ -14,7 +16,7 @@ export function Perfil() {
     }
   }, [usuario, isLoading])
 
-  return <>{isLoading ? <p>Loading</p> : <>
+  return <>{true ? <LoadingSpinner /> : <>
     <div className="container">
       <div className="content-layout informacion-usuario">
         <aside>
@@ -26,9 +28,11 @@ export function Perfil() {
             <li>
               <Link className="btn btn-4" to="/perfil/biblioteca">BIBLIOTECA</Link>
             </li>
-            <li>
-              <Link className="btn btn-4" to="/perfil/solicitud-desarrollador">SOLICITUD PERFIL DESARROLLADOR</Link>
-            </li>
+            { !usuario.role.includes(Roles.DEVELOPER) && !usuario.role.includes(Roles.ADMIN) ?
+              <li>
+                <Link className="btn btn-4" to="/perfil/solicitud-desarrollador">SOLICITUD PERFIL DESARROLLADOR</Link>
+              </li> : <></>
+            }
             {
               usuario.role.map((rol) => {
                 if (rol === "ADMINISTRATOR") {
