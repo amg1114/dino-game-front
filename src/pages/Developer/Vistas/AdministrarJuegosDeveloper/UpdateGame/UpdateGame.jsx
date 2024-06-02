@@ -80,7 +80,7 @@ export function UpdateGame() {
         setHasChanges(true)
     }
 
-    const handleAssetUpload = () => {
+    const handleAssetUpload = async () => {
         const promises = assets.map(async (asset, index) => {
             if (asset.state === 'to_delete') {
                 return await deleteFile({ ...asset, type: 'video-games', ownerId: datos.id, file: { name: asset.name } })
@@ -95,25 +95,7 @@ export function UpdateGame() {
             }
         })
 
-        Promise.all(promises)
-            .then(() => {
-                Swal.close()
-                Swal.fire({
-                    icon: 'success',
-                    title: 'JUEGO ACTUALIZADO',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            })
-            .catch((error) => {
-                Swal.close()
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                })
-                console.log(error)
-            })
+        return Promise.all(promises)
     }
 
     const handleChange = (event) => {
@@ -144,32 +126,60 @@ export function UpdateGame() {
     };
 
     const handleSave = () => {
+        let promises = [];
         if (JSON.stringify(datos) !== JSON.stringify(datosOriginales)) {
-            axios.patch(`${process.env.REACT_APP_API}/video-games/${id}`, datos)
-                .then((respuesta) => {
-                    console.log(respuesta.data)
-                })
-
+            promises.push(axios.patch(`${process.env.REACT_APP_API}/video-games/${id}`,
+                {
+                    titulo: datos.titulo,
+                    descripcion: datos.descripcion,
+                    precio: datos.precio,
+                    categorias: datos.categorias.map(categoria => categoria.id)
+                }
+            ))
         }
+
         if (versions.length > 0) {
             versions.map((version) => {
-                axios.post(`${process.env.REACT_APP_API}/video-games/${id}/versions`, version)
-                    .then(() => console.log('VERSION AGREGADA: ' + version))
+                promises.push(axios.post(`${process.env.REACT_APP_API}/video-games/${id}/versions`, version))
             })
         }
-        if(hasChanges){
-            handleAssetUpload()
+
+        if (hasChanges) {
+            promises.push(...handleAssetUpload())
         }
+
         Swal.fire({
-            title: 'Operación exitosa',
-            text: 'Redirigiendo...',
-            icon: 'success',
-            timer: 2000,
-            showConfirmButton: false
-        }).then(() => {
-            navigate('/dashboard')
-            handleRender()
+            title: 'ACTUALIZANDO JUEGO',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
         });
+        Promise.all(promises)
+            .then(() => {
+                Swal.close()
+                Swal.fire({
+                    title: 'ACTUALIZACIÓN EXITOSA',
+                    icon: 'success',
+                    timer: 2000,
+                }).then(() => {
+                    handleRender()
+                    navigate('/dashboard')
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+                Swal.fire({
+                    title: 'ERROR',
+                    text: 'NO SE PUDO ACTUALIZAR EL JUEGO',
+                    icon: 'error'
+                })
+            });
+
     }
 
     return (
@@ -215,8 +225,8 @@ export function UpdateGame() {
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
-                                    <button className="btn btn-4" onClick={() => handleBack()} disabled={value === 0}>ATRAS</button>
-                                    <button className="btn btn-4" onClick={() => handleNext()} disabled={value === 3}>SIGUIENTE</button>
+                                    {value === 0 ? <></> : <button className="btn btn-4" onClick={() => handleBack()}>ATRAS</button>}
+                                    {value === 3 ? <></> : <button className="btn btn-4" onClick={() => handleNext()}>SIGUIENTE</button>}
                                 </div>
                                 <div hidden={value !== 3}>
                                     <button onClick={() => handleSave()} className="btn btn-4" >GUARDAR</button>

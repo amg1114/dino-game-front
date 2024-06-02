@@ -18,7 +18,7 @@ export function ConfirmarUpdate({datos, versions, prevVersion, assets}) {
             </ul>
             <div className="assets-box">
                 {assets.filter(asset => asset.state !== 'to_delete').length ?
-                            (assets.filter(asset => asset.state !== 'to_delete').map(asset => {return <img className="assets-img" src={asset.url} alt={asset.name} />}))
+                            (assets.filter(asset => asset.state !== 'to_delete').map(asset => {return <img key={asset.id} className="assets-img" src={asset.url} alt={asset.name} />}))
                             : <></>}
             </div>
             <p> Por favor, confirme su aprobación para proceder con la creacion del juego.</p>

@@ -36,8 +36,19 @@ export function CrearJuego() {
             });
         } else {
             if (value === 0) {
+                Swal.fire({
+                    title: 'Guardando Información',
+                    text: 'Por favor espere',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                })
+
                 axios.post(`${process.env.REACT_APP_API}/video-games`, { ...datos, fechaLanzamiento: new Date() })
                     .then((respuesta) => {
+                        Swal.close();
                         setJuego(respuesta.data);
                         setValue(newValue);
                     })
@@ -61,13 +72,37 @@ export function CrearJuego() {
                     handleAssetUpload(juego.id)
                 }
             } else if (value === 2) {
-                versions.map((v, index) => {
-                    axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, v)
+                const promises = versions.map(async (v, index) => {
+                    return await axios.post(`${process.env.REACT_APP_API}/video-games/${juego.id}/versions`, v)
                 })
-                setValue(newValue)
+
+                Swal.fire({
+                    title: 'Guardando Información',
+                    text: 'Por favor espere',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                Promise.all(promises)
+                    .then(() => {
+                        Swal.close();
+                        setValue(newValue)
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Algo salió mal',
+                        });
+                        console.log(error)
+                    });
             }
         }
     };
+    
     const validateDatos = (currentTab) => {
         if (currentTab === 0) {
             return Object.values(datos).every(valor => valor !== "") && datos.categorias.length > 0
