@@ -83,9 +83,9 @@ export function UpdateGame() {
     const handleAssetUpload = async () => {
         const promises = assets.map(async (asset, index) => {
             if (asset.state === 'to_delete') {
-                return await deleteFile({ ...asset, type: 'video-games', ownerId: datos.id, file: { name: asset.name } })
+                return await deleteFile({ ...asset, type: 'video-games', ownerId: id, file: { name: asset.name } })
             } else if (asset.state === 'pending') {
-                return await uploadFile({ ...asset, ownerId: datos.id, type: 'video-games', index }, (percentage) => {
+                return await uploadFile({ ...asset, ownerId: id, type: 'video-games', index }, (percentage) => {
                     if (percentage === 100) {
                         asset.state = 'completed';
                     } else {
@@ -145,7 +145,7 @@ export function UpdateGame() {
         }
 
         if (hasChanges) {
-            promises.push(...handleAssetUpload())
+            promises.push(handleAssetUpload())
         }
 
         Swal.fire({
@@ -159,6 +159,7 @@ export function UpdateGame() {
                 Swal.showLoading()
             }
         });
+        
         Promise.all(promises)
             .then(() => {
                 Swal.close()
