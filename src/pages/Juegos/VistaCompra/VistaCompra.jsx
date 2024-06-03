@@ -40,7 +40,7 @@ export function VistaCompra() {
 
     const handleComprar = () => {
 
-        if (!nombre || !numero || !fecha || !cvc) {
+        if ( juego.precio > 0 && (!nombre || !numero || !fecha || !cvc)) {
             Swal.fire({
                 title: "Error",
                 icon: "error",
@@ -97,22 +97,22 @@ export function VistaCompra() {
                             </p>
 
                         </div>
-                        <div className="buttons-group">
-                            <button
-                                type="button"
-                                className='btn btn-3'
-                                onClick={() => navigate(-1)}
-                            >
-                                CANCELAR
-                            </button>
-                            <button
-                                type="button"
-                                className='btn btn-1'
-                                onClick={() => handleComprar()}
-                            >
-                                COMPRAR
-                            </button>
-                        </div>
+                        <div className="buttons-group1">
+                                    <button
+                                        type="button"
+                                        className='btn btn-3'
+                                        onClick={() => navigate(-1)}
+                                    >
+                                        CANCELAR
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className='btn btn-1'
+                                        onClick={() => handleComprar()}
+                                    >
+                                        COMPRAR
+                                    </button>
+                                </div>
                     </div>
                 </div>
             </>
@@ -146,7 +146,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => { setNombre(e.target.value) }}
+                                            onChange={(e) => {setNombre(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width ">
@@ -159,7 +159,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => { setNumero(e.target.value) }}
+                                            onChange={(e) => {setNumero(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -175,7 +175,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => { setFecha(e.target.value) }}
+                                            onChange={(e) => {setFecha(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -188,7 +188,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => { setCvc(e.target.value) }}
+                                            onChange={(e) => {setCvc(e.target.value)}}
                                         />
                                     </div>
                                 </form>
