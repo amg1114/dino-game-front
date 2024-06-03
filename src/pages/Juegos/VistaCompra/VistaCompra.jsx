@@ -4,11 +4,12 @@ import TarjetaVisa from "./Imagenes/TarjetaVisa.png"
 import TarjetaMaster from "./Imagenes/TarjetaMaster.png"
 import TarjetaAmerican from "./Imagenes/TarjetaAmerican.png"
 import TarjetaAval from "./Imagenes/TarjetaAval.png"
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Swal from "sweetalert2"
+import { set } from "lodash"
 
 
 export function VistaCompra() {
@@ -16,6 +17,13 @@ export function VistaCompra() {
     const ENDPOINT_API = process.env.REACT_APP_API + "/video-games/" + id
     const [juego, setJuego] = useState(null);
     const navigate = useNavigate();
+
+    const [nombre, setNombre] = useState("");
+    const [numero, setNumero] = useState("");
+    const [fecha, setFecha] = useState("");
+    const [cvc, setCvc] = useState("");
+
+
     useEffect(() => {
         axios.get(ENDPOINT_API)
             .then(function (respuesta) {
@@ -32,6 +40,16 @@ export function VistaCompra() {
     }, [])
 
     const handleComprar = () => {
+
+        if (!nombre || !numero || !fecha || !cvc) {
+            Swal.fire({
+                title: "Error",
+                icon: "error",
+                text: "Todos los campos son requeridos"
+            })
+            return
+        }
+
         let precio = juego.precio;
         if (juego.descuentos[0]) {
             precio = precio - (precio * juego.descuentos[0])
@@ -127,6 +145,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
+                                            onChange={(e) => {setNombre(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width ">
@@ -139,6 +158,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
+                                            onChange={(e) => {setNumero(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -154,6 +174,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
+                                            onChange={(e) => {setFecha(e.target.value)}}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -166,6 +187,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
+                                            onChange={(e) => {setCvc(e.target.value)}}
                                         />
                                     </div>
                                 </form>
@@ -173,14 +195,14 @@ export function VistaCompra() {
                                     <button
                                         type="button"
                                         className='btn btn-3'
-                                        onClick={()=>navigate(-1)}
+                                        onClick={() => navigate(-1)}
                                     >
                                         CANCELAR
                                     </button>
                                     <button
                                         type="button"
                                         className='btn btn-1'
-                                        onClick={()=>handleComprar()}
+                                        onClick={() => handleComprar()}
                                     >
                                         COMPRAR
                                     </button>
