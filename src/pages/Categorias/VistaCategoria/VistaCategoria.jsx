@@ -37,7 +37,8 @@ export function VistaCategoria() {
     return <>
         {categoria === null ? <></> : (
             <div className="seccion">
-                <h2 className="tituloCategoria">{categoria.titulo}</h2>
+                <h2 className="tituloCategoria"><span>DINO</span>{categoria.titulo}</h2>
+                <p>{categoria.descripcion}</p>
                 <div className="listaSeccion">
                     {juego.map((elemento, index) => {
                         return (
