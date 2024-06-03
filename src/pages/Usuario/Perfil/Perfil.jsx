@@ -16,7 +16,7 @@ export function Perfil() {
     }
   }, [usuario, isLoading])
 
-  return <>{true ? <LoadingSpinner /> : <>
+  return <>{isLoading ? <LoadingSpinner /> : <>
     <div className="container">
       <div className="content-layout informacion-usuario">
         <aside>
