@@ -8,8 +8,7 @@ import { TextField } from "@mui/material"
 import { InputFilledStyle } from "../../../utils/mui.styles"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Swal from "sweetalert2"
-import { set } from "lodash"
+import Swal from "sweetalert2";
 
 
 export function VistaCompra() {
@@ -98,18 +97,20 @@ export function VistaCompra() {
                             </p>
 
                         </div>
-                        <div className="buttons-group1">
+                        <div className="buttons-group">
                             <button
                                 type="button"
                                 className='btn btn-3'
+                                onClick={() => navigate(-1)}
                             >
                                 CANCELAR
                             </button>
                             <button
                                 type="button"
                                 className='btn btn-1'
+                                onClick={() => handleComprar()}
                             >
-                                DESCARGAR
+                                COMPRAR
                             </button>
                         </div>
                     </div>
@@ -145,7 +146,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => {setNombre(e.target.value)}}
+                                            onChange={(e) => { setNombre(e.target.value) }}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width ">
@@ -158,7 +159,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => {setNumero(e.target.value)}}
+                                            onChange={(e) => { setNumero(e.target.value) }}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -174,7 +175,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => {setFecha(e.target.value)}}
+                                            onChange={(e) => { setFecha(e.target.value) }}
                                         />
                                     </div>
                                     <div className="field-wrapper full-width">
@@ -187,7 +188,7 @@ export function VistaCompra() {
                                             sx={InputFilledStyle}
                                             variant="filled"
                                             fullWidth
-                                            onChange={(e) => {setCvc(e.target.value)}}
+                                            onChange={(e) => { setCvc(e.target.value) }}
                                         />
                                     </div>
                                 </form>
