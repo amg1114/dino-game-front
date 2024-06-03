@@ -73,7 +73,7 @@ export function SolicitudDesarrollador() {
                     title: "Solicitud enviada",
                     text: "La solicitud fue enviada con exito"
                 }).then(() => {
-                    navigate("/perfil")
+                    window.location.href ="/perfil" 
                 })
             })
             .catch((error) => {

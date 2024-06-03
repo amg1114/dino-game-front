@@ -67,7 +67,7 @@ export function VistaFormNews() {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate('/admin/noticias')
+                window.location.href ='/admin/noticias'
             })
             .catch((error) => {
                 Swal.fire({

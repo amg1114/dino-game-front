@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import './VistaCompra.css'
 import TarjetaVisa from "./Imagenes/TarjetaVisa.png"
 import TarjetaMaster from "./Imagenes/TarjetaMaster.png"
@@ -15,7 +15,7 @@ export function VistaCompra() {
     const { id } = useParams();
     const ENDPOINT_API = process.env.REACT_APP_API + "/video-games/" + id
     const [juego, setJuego] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get(ENDPOINT_API)
             .then(function (respuesta) {
@@ -30,6 +30,34 @@ export function VistaCompra() {
             })
 
     }, [])
+
+    const handleComprar = () => {
+        let precio = juego.precio;
+        if (juego.descuentos[0]) {
+            precio = precio - (precio * juego.descuentos[0])
+        }
+        axios.post(process.env.REACT_APP_API + "/video-games/biblioteca/" + id, {
+            precio
+        })
+            .then(res => {
+                Swal.fire({
+                    title: "Juego Adquirido!!",
+                    icon: "success",
+                    text: "Disfruta tu Compra",
+                    timer: 2000
+                }).then(() => {
+                    window.location.href = "/perfil/biblioteca"
+                })
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: "Error",
+                    icon: "error",
+                    text: "No se pudo comprar el juego"
+                })
+                console.log(err)
+            })
+    }
 
     return <>
         {juego === null ? <></> : (
@@ -145,12 +173,14 @@ export function VistaCompra() {
                                     <button
                                         type="button"
                                         className='btn btn-3'
+                                        onClick={()=>navigate(-1)}
                                     >
                                         CANCELAR
                                     </button>
                                     <button
                                         type="button"
                                         className='btn btn-1'
+                                        onClick={()=>handleComprar()}
                                     >
                                         COMPRAR
                                     </button>

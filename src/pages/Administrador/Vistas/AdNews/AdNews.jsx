@@ -42,7 +42,7 @@ export function AdNews() {
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 }).then(() => {
-                    navigate('/admin/noticias')
+                    window.location.href = '/admin/noticias'
                 })
             })
             .catch((error) => {

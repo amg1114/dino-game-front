@@ -102,7 +102,7 @@ export function CrearJuego() {
             }
         }
     };
-    
+
     const validateDatos = (currentTab) => {
         if (currentTab === 0) {
             return Object.values(datos).every(valor => valor !== "") && datos.categorias.length > 0
@@ -187,7 +187,7 @@ export function CrearJuego() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                navigate('/dashboard')
+                window.location.href = '/dashboard'
                 setDatos({
                     titulo: "",
                     descripcion: "",
@@ -226,7 +226,7 @@ export function CrearJuego() {
                         setJuego([]);
                         setVersions([]);
                         setValue(0);
-                        navigate('/dashboard')
+                        window.location.href = '/dashboard'
                     })
                     .catch(error => {
                         Swal.fire({
@@ -237,7 +237,7 @@ export function CrearJuego() {
                         console.log(error)
                     })
 
-                navigate('/dashboard')
+                window.location.href = '/dashboard'
             } else if (result.isDismissed) {
                 setValue(0)
             }
