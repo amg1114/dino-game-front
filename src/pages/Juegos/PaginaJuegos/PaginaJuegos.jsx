@@ -5,6 +5,7 @@ import axios from "axios"
 import { GameCard } from "../../../components/GameCard/GameCard"
 import "./PaginaJuegos.css"
 import Swal from "sweetalert2"
+import { LoadingSpinner } from "../../../components/LoadingSpinner/LoadingSpinner"
 export function PaginaJuegos() {
 
     const ENDPOINT = process.env.REACT_APP_API + "/video-games";
@@ -19,11 +20,7 @@ export function PaginaJuegos() {
             .then((respuesta) => {
                 setJuegos(respuesta.data)
             }).catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salió mal',
-                });
+                setJuegos([]);
                 console.log(error)
             })
 
@@ -41,13 +38,13 @@ export function PaginaJuegos() {
         <div className="container">
             <FormularioFiltros onSearch={Search} />
             {
-                juegos === null ? <><h1>Game was not found</h1></> : (
+                juegos === null ? <LoadingSpinner /> : juegos.length ? (
                     <div className="lista-juegos">
                         {juegos.map((juego, index) => (
                             <GameCard key={index} Game={juego} />
                         ))}
                     </div>
-                )
+                ) : <p>No se encontraron juegos.</p>
             }
             <Outlet />
         </div>
