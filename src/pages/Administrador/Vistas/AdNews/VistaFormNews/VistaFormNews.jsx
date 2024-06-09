@@ -1,7 +1,7 @@
 import './VistaFormNews.css'
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 import { TextField } from "@mui/material";
 import axios from "axios";
@@ -15,6 +15,7 @@ import { uploadFile } from "../../../../../services/assets-service";
 import { CKEditor_CONFIG } from "../../../../../utils/constants";
 
 export function VistaFormNews() {
+    const { handleRender } = useOutletContext();
     const navigate = useNavigate();
     const [assets, setAssets] = useState([])
     const [noticia, setNoticia] = useState({
@@ -67,7 +68,8 @@ export function VistaFormNews() {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                window.location.href ='/admin/noticias'
+                handleRender()
+                navigate(-1)
             })
             .catch((error) => {
                 Swal.fire({
@@ -78,7 +80,6 @@ export function VistaFormNews() {
                 console.log(error)
             })
     }
-
 
     const handleSave = () => {
         if (noticia.titulo && noticia.descripcion && assets.length > 0) {
