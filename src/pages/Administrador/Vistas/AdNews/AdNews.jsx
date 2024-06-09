@@ -8,17 +8,27 @@ import Swal from "sweetalert2";
 export function AdNews() {
     const ENDPOINT_API = process.env.REACT_APP_API + "/noticias"
     const [noticias, setNoticias] = useState([]);
+    const [render, setRender] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
+        loadNews()
+    }, [render])
+
+    const loadNews = () => {
         axios.get(ENDPOINT_API)
             .then(function (respuesta) {
                 setNoticias(respuesta.data)
             })
             .catch(function (error) {
+                setNoticias([])
                 console.log(error)
             })
-    }, [])
+    }
+
+    const handleRender = () => {
+        setRender(!render)
+    }
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -42,7 +52,8 @@ export function AdNews() {
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 }).then(() => {
-                    window.location.href = '/admin/noticias'
+                    handleRender()
+                    navigate('/admin/noticias')
                 })
             })
             .catch((error) => {
@@ -117,6 +128,6 @@ export function AdNews() {
             </TableContainer> : <p>No hay noticias aún</p>
             }
         </div>
-        <Outlet />
+        <Outlet context={ {handleRender} } />
     </>
 }

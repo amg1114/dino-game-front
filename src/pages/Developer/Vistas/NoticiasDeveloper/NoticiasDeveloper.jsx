@@ -4,25 +4,36 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { set } from "lodash";
 
 export function NoticiasDeveloper() {
 
     const { usuario } = useAuth()
-    const ENDPOINT_API = process.env.REACT_APP_API + "/noticias/autor/"
+    const ENDPOINT_API = process.env.REACT_APP_API + "/noticias/autor/";
+    const [render, setRender] = useState(false)
     const [noticias, setNoticias] = useState([]);
     const navigate = useNavigate()
 
     useEffect(() => {
         if (usuario != null) {
-            axios.get(ENDPOINT_API + usuario.id)
-                .then(function (respuesta) {
-                    setNoticias(respuesta.data)
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
+            loadData()
         }
-    }, [usuario])
+    }, [usuario, render])
+
+    const loadData = () => {
+        axios.get(ENDPOINT_API + usuario.id)
+            .then(function (respuesta) {
+                setNoticias(respuesta.data)
+            })
+            .catch(function (error) {
+                setNoticias([])
+                console.log(error)
+            })
+    }
+
+    const handleRender = () => {
+        setRender(!render)
+    }
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -46,6 +57,7 @@ export function NoticiasDeveloper() {
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 }).then(() => {
+                    handleRender()
                     navigate('/dashboard/noticias')
                 })
             })
@@ -121,6 +133,6 @@ export function NoticiasDeveloper() {
             </TableContainer> : <p>No hay noticias aún</p>
             }
         </div>
-        <Outlet />
+        <Outlet context={ {handleRender} }/>
     </>
 }

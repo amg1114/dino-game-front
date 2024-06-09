@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
@@ -14,6 +14,7 @@ import { uploadFile, deleteFile } from "../../../../../services/assets-service";
 
 export function VistaUpdateNews() {
     const { id } = useParams();
+    const { handleRender } = useOutletContext();
 
     const [noticia, setNoticia] = useState(null);
     const [updatedData, setUpdatedData] = useState(null)
@@ -23,7 +24,6 @@ export function VistaUpdateNews() {
     const [hasChanges, setHasChanges] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
     useState(() => {
         axios.get(`${process.env.REACT_APP_API}/noticias/${id}`)
             .then((res) => {
@@ -47,7 +47,7 @@ export function VistaUpdateNews() {
                         title: 'Noticia no encontrada',
                         icon: 'error',
                     }).then(() => {
-                        navigate('/admin/noticias')
+                        navigate(-1)
                     })
 
                     return;
@@ -142,6 +142,7 @@ export function VistaUpdateNews() {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
+                    handleRender()
                     navigate(-1)
                 })
             })
@@ -207,7 +208,7 @@ export function VistaUpdateNews() {
                                     {hasChanges ? <button className="btn btn-4" onClick={() => handleSave()}>
                                         GUARDAR
                                     </button> : <></>}
-                                    <Link className="btn btn-5" onClick={()=>navigate(-1)}>
+                                    <Link className="btn btn-5" onClick={() => navigate(-1)}>
                                         CANCELAR
                                     </Link>
                                 </div>
