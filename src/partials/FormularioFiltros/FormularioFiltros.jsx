@@ -45,7 +45,7 @@ export function FormularioFiltros({ onSearch }) {
             />
             <div className="field-wrapper">
                 <TextField
-                    label="Precio"
+                    label="Precio menor o igual a"
                     fullWidth
                     variant="filled"
                     type="number"

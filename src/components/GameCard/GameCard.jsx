@@ -11,7 +11,7 @@ export function GameCard({ Game }) {
 
     useEffect(() => {
         handlePrecio()
-    }, [biblioteca]);
+    }, [biblioteca, Game]);
 
     const handlePrecio = () => {
         if (biblioteca.length && biblioteca.find((game) => game.videoGame.id === id)) {
